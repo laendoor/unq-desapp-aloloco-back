@@ -17,5 +17,5 @@ notifications:
     recipients:
       - alanmatkorsky@gmail.com
       - leandro.jdl@gmail.com
-    on_success: never
+    on_success: change
     on_failure: change
