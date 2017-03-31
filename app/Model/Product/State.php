@@ -16,4 +16,8 @@ abstract class State
     public function isPurchased(): bool {
         return false;
     }
+
+    public function isForDelivery(): bool {
+        return false;
+    }
 }

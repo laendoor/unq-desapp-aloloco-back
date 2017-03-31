@@ -14,7 +14,7 @@ class ProductStateTest extends TestCase
      * [new]--> Wished --[addedToCart]--> OnCart --[purchased]--> Purchased
      *
      * + Expected Flow 2: Send Product to Home
-     * [new]--> Wished --[addedToCart]--> OnCart --[addedToDelivery]--> ToDelivery
+     * [new]--> Wished --[addedToCart]--> OnCart --[addedForDelivery]--> ForDelivery
      *
      * + Expected Flow 3: Regret to put in the cart
      * [new]--> Wished --[addedToCart]--> OnCart --[removedFromCart]--> Wished
@@ -62,5 +62,41 @@ class ProductStateTest extends TestCase
         $coffee->purchased();
 
         $this->assertTrue($coffee->isPurchased());
+    }
+
+    /**
+     * @test
+     *
+     * Flow 2: Send Product to Home
+     * [new]--> Wished --[addedToCart]--> OnCart --[addedForDelivery]--> ForDelivery
+     *
+     * @return void
+     */
+    public function it_is_to_delivery_when_is_sent_to_home()
+    {
+        $coffee = ProductBuilder::new()->build();
+
+        $coffee->addedToCart();
+        $coffee->addedForDelivery();
+
+        $this->assertTrue($coffee->isForDelivery());
+    }
+
+    /**
+     * @test
+     *
+     * Flow 3: Regret to put in the cart
+     * [new]--> Wished --[addedToCart]--> OnCart --[removedFromCart]--> Wished
+     *
+     * @return void
+     */
+    public function it_is_wished_when_is_removed_from_cart()
+    {
+        $coffee = ProductBuilder::new()->build();
+
+        $coffee->addedToCart();
+        $coffee->removedFromCart();
+
+        $this->assertTrue($coffee->isWished());
     }
 }

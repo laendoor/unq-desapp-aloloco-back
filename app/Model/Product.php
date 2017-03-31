@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Product\State\OnCart;
 use App\Model\Product\State\Wished;
 use App\Model\Product\State\Purchased;
+use App\Model\Product\State\ForDelivery;
 
 class Product
 {
@@ -23,8 +24,16 @@ class Product
         $this->state = new OnCart;
     }
 
+    public function removedFromCart() {
+        $this->state = new Wished;
+    }
+
     public function purchased() {
         $this->state = new Purchased;
+    }
+
+    public function addedForDelivery() {
+        $this->state = new ForDelivery;
     }
 
     /*
@@ -41,6 +50,10 @@ class Product
 
     public function isPurchased(): bool {
         return $this->state->isPurchased();
+    }
+
+    public function isForDelivery(): bool {
+        return $this->state->isForDelivery();
     }
 
     /*
