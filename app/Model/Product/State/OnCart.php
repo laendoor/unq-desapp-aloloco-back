@@ -4,9 +4,9 @@ namespace App\Model\Product\State;
 
 use App\Model\Product\State;
 
-class Wished extends State
+class OnCart extends State
 {
-    public function isWished(): bool {
+    public function isOnCart(): bool {
         return true;
     }
 }

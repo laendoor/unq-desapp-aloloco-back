@@ -4,9 +4,9 @@ namespace App\Model\Product\State;
 
 use App\Model\Product\State;
 
-class Wished extends State
+class Purchased extends State
 {
-    public function isWished(): bool {
+    public function isPurchased(): bool {
         return true;
     }
 }
