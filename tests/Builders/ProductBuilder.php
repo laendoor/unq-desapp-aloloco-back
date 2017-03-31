@@ -6,18 +6,28 @@ use App\Model\Product;
 
 class ProductBuilder
 {
-    protected $product;
+    protected $code;
+    protected $name;
+    protected $brand;
+    protected $price;
 
     public function __construct() {
-        $this->product = new Product;
+        $this->name  = 'A Name';
+        $this->brand = 'A Brand';
     }
 
     public static function new(): self {
         return new self;
     }
 
+    public static function anyBuilt(): Product {
+        return self::new()->build();
+    }
+
     public function build(): Product {
-        return $this->product;
+        $product = new Product($this->name, $this->brand);
+
+        return $product;
     }
 
 //    public function withName($name): self {

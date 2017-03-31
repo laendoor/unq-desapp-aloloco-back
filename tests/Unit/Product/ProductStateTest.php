@@ -27,7 +27,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_wished_on_new()
     {
-        $coffee = ProductBuilder::new()->build();
+        $coffee = ProductBuilder::anyBuilt();
 
         $this->assertTrue($coffee->isWished());
     }
@@ -39,7 +39,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_on_cart_when_is_added()
     {
-        $coffee = ProductBuilder::new()->build();
+        $coffee = ProductBuilder::anyBuilt();
 
         $coffee->addedToCart();
 
@@ -56,7 +56,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_purchased_when_is_bought()
     {
-        $coffee = ProductBuilder::new()->build();
+        $coffee = ProductBuilder::anyBuilt();
 
         $coffee->addedToCart();
         $coffee->purchased();
@@ -74,7 +74,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_to_delivery_when_is_sent_to_home()
     {
-        $coffee = ProductBuilder::new()->build();
+        $coffee = ProductBuilder::anyBuilt();
 
         $coffee->addedToCart();
         $coffee->addedForDelivery();
@@ -92,7 +92,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_wished_when_is_removed_from_cart()
     {
-        $coffee = ProductBuilder::new()->build();
+        $coffee = ProductBuilder::anyBuilt();
 
         $coffee->addedToCart();
         $coffee->removedFromCart();

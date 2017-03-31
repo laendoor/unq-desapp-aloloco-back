@@ -9,10 +9,13 @@ use App\Model\Product\State\ForDelivery;
 
 class Product
 {
-    protected $code;
+    protected $name;
+    protected $brand;
     protected $state;
 
-    public function __construct() {
+    public function __construct(string $name, string $brand) {
+        $this->name  = $name;
+        $this->brand = $brand;
         $this->state = new Wished;
     }
 
@@ -60,8 +63,12 @@ class Product
      * Getters
      */
 
-    public function getCode(): string {
-        return $this->code;
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function getBrand(): string {
+        return $this->brand;
     }
 
     /*
@@ -69,6 +76,7 @@ class Product
      */
 
     public function equals(Product $another): bool {
-        return $this->getCode() == $another->getCode();
+        return $this->getName()  == $another->getName()
+            && $this->getBrand() == $another->getBrand();
     }
 }
