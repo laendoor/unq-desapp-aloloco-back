@@ -18,8 +18,7 @@ class ShoppingTest extends TestCase
     {
         $list = new ShoppingList;
 
-        $this->assertTrue($list->getWishProducts()->isEmpty());
-        $this->assertTrue($list->getMarketProducts()->isEmpty());
+        $this->assertTrue($list->getProducts()->isEmpty());
     }
 
     /**
@@ -27,15 +26,15 @@ class ShoppingTest extends TestCase
      *
      * @return void
      */
-    public function it_add_a_product_to_wish_list()
+    public function it_add_a_product_to_list()
     {
         $list   = new ShoppingList;
         $coffee = $this->createMock(Product::class);
 
         $list->addProduct($coffee);
 
-        $this->assertEquals(1, $list->getWishProducts()->count());
-        $this->assertEquals($coffee, $list->getWishProducts()->first());
+        $this->assertEquals(1, $list->getProducts()->count());
+        $this->assertEquals($coffee, $list->getProducts()->first());
     }
 
     /**
@@ -43,7 +42,7 @@ class ShoppingTest extends TestCase
      *
      * @return void
      */
-    public function it_remove_a_product_from_wish_list()
+    public function it_remove_a_product_from_list()
     {
         $list = new ShoppingList;
         $sugar  = $this->createMock(Product::class);
@@ -54,8 +53,8 @@ class ShoppingTest extends TestCase
         $list->addProduct($coffee);
         $list->removeProduct($coffee);
 
-        $this->assertEquals(1, $list->getWishProducts()->count());
-        $this->assertEquals($sugar, $list->getWishProducts()->first());
+        $this->assertEquals(1, $list->getProducts()->count());
+        $this->assertEquals($sugar, $list->getProducts()->first());
     }
 
     // TODO: depends of State

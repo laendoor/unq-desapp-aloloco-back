@@ -2,9 +2,11 @@
 
 # Comprando a Lo Loco
 
+Desarrollo de Aplicaciones :: UNQ
+
 ## Grupo E :: 2017.01
 
-[Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
+### [Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
 
 ### Diagrama UML
 

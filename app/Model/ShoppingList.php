@@ -7,42 +7,35 @@ use Illuminate\Support\Collection;
 
 class ShoppingList
 {
-    protected $wishProducts;
+    protected $products;
 
     /**
      * ShoppingList constructor.
      */
     public function __construct()
     {
-        $this->wishProducts = new Collection;
+        $this->products = new Collection;
     }
 
     /**
      * @return Collection
      */
-    public function getWishProducts(): Collection {
-        return $this->wishProducts;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getMarketProducts(): Collection {
-        return new Collection;
+    public function getProducts(): Collection {
+        return $this->products;
     }
 
     /**
      * @param $product
      */
     public function addProduct(Product $product): void {
-        $this->wishProducts->push($product);
+        $this->products->push($product);
     }
 
     /**
      * @param $product
      */
     public function removeProduct(Product $product): void {
-        $this->wishProducts = $this->wishProducts->reject(function (Product $item) use ($product) {
+        $this->products = $this->products->reject(function (Product $item) use ($product) {
             return $item->equals($product);
         });
     }
