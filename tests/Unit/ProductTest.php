@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Model\Product;
 
 class ProductTest extends TestCase
 {
@@ -11,8 +12,11 @@ class ProductTest extends TestCase
      *
      * @return void
      */
-    public function it_is_temp()
+    public function it_are_equals_when_have_same_name_and_brand()
     {
-        $this->assertTrue(true);
+        $coffee = new Product('Coffee', 'Cabrales');
+        $anotherCoffee = new Product('Coffee', 'Cabrales');
+
+        $this->assertTrue($coffee->equals($anotherCoffee));
     }
 }
