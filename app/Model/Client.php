@@ -61,4 +61,12 @@ class Client
         }
         // FIXME? throws exception if set not contains list??
     }
+
+    public function removeProduct(Product $product, ShoppingList $list): void {
+        $set   = $this->getSetOfLists();
+        $index = $set->indexOf($list);
+        if ($index !== false) {
+            $set->get($index)->removeProduct($product);
+        }
+    }
 }
