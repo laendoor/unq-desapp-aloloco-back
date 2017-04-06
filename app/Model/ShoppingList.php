@@ -1,11 +1,11 @@
 <?php
 namespace App\Model;
 
-use Illuminate\Support\Collection;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
 use App\Model\ShoppingList\State\DeliveryList;
 use App\Model\ShoppingList\State\PurchasedList;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ShoppingList
@@ -24,7 +24,7 @@ class ShoppingList
     public function __construct(string $name) {
         $this->name     = $name;
         $this->state    = new WishList;
-        $this->products = new Collection;
+        $this->products = new ArrayCollection;
     }
 
     /*
@@ -71,22 +71,22 @@ class ShoppingList
      * Products Manipulation
      */
 
-    public function getProducts(): Collection {
+    public function getProducts(): ArrayCollection {
         return $this->products;
     }
 
     public function addProduct(Product $product): void {
-        $this->products->push($product);
+        $this->products->add($product);
     }
 
     public function removeProduct(Product $product): void {
-        $this->products = $this->products->reject(function (Product $item) use ($product) {
-            return $item->equals($product);
-        });
+        $this->getProducts()->removeElement($product);
     }
 
-    public function addProducts(Collection $moreProducts): void {
-        $this->products->merge($moreProducts);
+    public function addProducts(ArrayCollection $moreProducts): void {
+        $moreProducts->forAll(function ($newProduct) {
+            $this->addProduct($newProduct);
+        });
     }
 
     /*

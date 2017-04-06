@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Product;
 
-use Tests\Builders\ShoppingListBuilder;
 use Tests\TestCase;
+use Tests\Builders\ShoppingListBuilder;
 
 class ShoppingListStateTest extends TestCase
 {

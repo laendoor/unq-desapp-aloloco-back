@@ -7,7 +7,7 @@ use App\Model\Market;
 use App\Model\Product;
 use App\Model\ShoppingList;
 use Tests\Builders\ClientBuilder;
-use Illuminate\Database\Eloquent\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ClientTest
@@ -74,7 +74,7 @@ class ClientTest extends TestCase
         $sugar = Mockery::mock(Product::class);
         $list  = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('addProduct')->with($sugar)->once();
-        $list->shouldReceive('getProducts')->andReturn(new Collection([$sugar]))->once();
+        $list->shouldReceive('getProducts')->andReturn(new ArrayCollection([$sugar]))->once();
         $jon = ClientBuilder::newWithMarketMocked()->withShoppingList($list)->build();
 
         // Act

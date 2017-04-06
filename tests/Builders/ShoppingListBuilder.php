@@ -3,7 +3,7 @@
 namespace Tests\Builders;
 
 use App\Model\ShoppingList;
-use Illuminate\Support\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ShoppingListBuilder
 {
@@ -12,7 +12,7 @@ class ShoppingListBuilder
 
     public function __construct() {
         $this->name = '';
-        $this->products = new Collection;
+        $this->products = new ArrayCollection;
     }
 
     public static function new(): self {
