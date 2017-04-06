@@ -15,9 +15,9 @@ class Client
     protected $market;
 
     /**
-     * @var ShoppingList
+     * @var Collection<ShoppingList>
      */
-    protected $lists;
+    protected $setOfLists;
 
     /**
      * Client constructor.
@@ -25,7 +25,7 @@ class Client
      */
     public function __construct(Market $market) {
         $this->market = $market;
-        $this->lists  = new Collection;
+        $this->setOfLists  = new Collection;
     }
 
     /**
@@ -39,13 +39,21 @@ class Client
      * @param ShoppingList $list
      */
     public function addList(ShoppingList $list): void {
-        $this->lists->push($list);
+        $this->setOfLists->push($list);
+    }
+
+    public function removeList(ShoppingList $listToRemove): void {
+        $this->setOfLists = $this->setOfLists->reject(
+            function (ShoppingList $list) use ($listToRemove) {
+                return $list->equals($listToRemove);
+            }
+        );
     }
 
     /**
      * @return Collection
      */
-    public function getLists(): Collection {
-        return $this->lists;
+    public function getSetOfLists(): Collection {
+        return $this->setOfLists;
     }
 }

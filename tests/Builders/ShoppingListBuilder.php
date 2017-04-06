@@ -7,9 +7,11 @@ use Illuminate\Support\Collection;
 
 class ShoppingListBuilder
 {
+    protected $name;
     protected $products;
 
     public function __construct() {
+        $this->name = '';
         $this->products = new Collection;
     }
 
@@ -22,10 +24,19 @@ class ShoppingListBuilder
     }
 
     public function build(): ShoppingList {
-        $list = new ShoppingList;
+        $list = new ShoppingList($this->name);
         $list->addProducts($this->products);
 
         return $list;
+    }
+
+    /*
+     * Withs
+     */
+
+    public function withName(string $name): self {
+        $this->name = $name;
+        return $this;
     }
 
 }

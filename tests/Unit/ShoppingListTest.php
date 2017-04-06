@@ -2,12 +2,28 @@
 
 namespace Tests\Unit;
 
+use Mockery;
 use Tests\TestCase;
 use App\Model\Product;
-use App\Model\ShoppingList;
+use Tests\Builders\ShoppingListBuilder;
 
 class ShoppingTest extends TestCase
 {
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_are_equals_when_have_same_name()
+    {
+        $l1 = ShoppingListBuilder::new()->withName('New List')->build();
+        $l2 = ShoppingListBuilder::new()->withName('New List')->build();
+        $l3 = ShoppingListBuilder::new()->withName('Old List')->build();
+
+        $this->assertTrue($l1->equals($l2));
+        $this->assertFalse($l2->equals($l3));
+    }
+
     /**
      * @test
      * New Shopping List has no products
@@ -16,7 +32,7 @@ class ShoppingTest extends TestCase
      */
     public function it_has_no_products_when_is_created()
     {
-        $list = new ShoppingList;
+        $list = ShoppingListBuilder::anyBuilt();
 
         $this->assertTrue($list->getProducts()->isEmpty());
     }
@@ -28,8 +44,8 @@ class ShoppingTest extends TestCase
      */
     public function it_add_a_product_to_list()
     {
-        $list   = new ShoppingList;
-        $coffee = $this->createMock(Product::class);
+        $list   = ShoppingListBuilder::anyBuilt();
+        $coffee = Mockery::mock(Product::class);
 
         $list->addProduct($coffee);
 
@@ -44,10 +60,9 @@ class ShoppingTest extends TestCase
      */
     public function it_remove_a_product_from_list()
     {
-        $list = new ShoppingList;
-        $sugar  = $this->createMock(Product::class);
-        $coffee = $this->createMock(Product::class);
-        $coffee->method('equals')->willReturn(true);
+        $list = ShoppingListBuilder::anyBuilt();
+        $sugar  = Mockery::mock(Product::class)->shouldReceive('equals')->andReturn(false)->getMock();
+        $coffee = Mockery::mock(Product::class)->shouldReceive('equals')->andReturn(true)->getMock();
 
         $list->addProduct($sugar);
         $list->addProduct($coffee);

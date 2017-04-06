@@ -13,13 +13,16 @@ use App\Model\ShoppingList\State\PurchasedList;
  */
 class ShoppingList
 {
+    protected $name;
     protected $state;
     protected $products;
 
     /**
      * ShoppingList constructor.
+     * @param string $name
      */
-    public function __construct() {
+    public function __construct(string $name) {
+        $this->name     = $name;
         $this->state    = new WishList;
         $this->products = new Collection;
     }
@@ -84,5 +87,17 @@ class ShoppingList
 
     public function addProducts(Collection $moreProducts): void {
         $this->products->merge($moreProducts);
+    }
+
+    /*
+     * Getters & Setters
+     */
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function equals(ShoppingList $another): bool {
+        return $this->getName() == $another->getName();
     }
 }

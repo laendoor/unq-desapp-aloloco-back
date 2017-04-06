@@ -38,6 +38,26 @@ class ClientTest extends TestCase
 
         $jon->addList($list);
 
-        $this->assertEquals($list, $jon->getLists()->first());
+        $this->assertEquals($list, $jon->getSetOfLists()->first());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_remove_a_shopping_list()
+    {
+        $listToKeep   = Mockery::mock(ShoppingList::class)->shouldReceive('equals')->andReturn(false)->getMock();
+        $listToRemove = Mockery::mock(ShoppingList::class)->shouldReceive('equals')->andReturn(true)->getMock();
+        $jon = ClientBuilder::newWithMarketMocked()
+            ->withShoppingList($listToKeep)
+            ->withShoppingList($listToRemove)
+            ->build();
+
+        $jon->removeList($listToRemove);
+
+        $this->assertEquals(1, $jon->getSetOfLists()->count());
+        $this->assertEquals($listToKeep, $jon->getSetOfLists()->first());
     }
 }
