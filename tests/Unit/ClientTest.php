@@ -2,9 +2,10 @@
 namespace Tests\Unit;
 
 use Mockery;
-use App\Model\Market;
-use Tests\Builders\ClientBuilder;
 use Tests\TestCase;
+use App\Model\Market;
+use App\Model\ShoppingList;
+use Tests\Builders\ClientBuilder;
 
 /**
  * Class ClientTest
@@ -23,5 +24,20 @@ class ClientTest extends TestCase
         $jon = ClientBuilder::new()->withMarket($market)->build();
 
         $this->assertEquals($market, $jon->getMarket());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_add_a_new_shopping_list()
+    {
+        $jon = ClientBuilder::anyBuiltWithMocks();
+        $list = Mockery::mock(ShoppingList::class);
+
+        $jon->addList($list);
+
+        $this->assertEquals($list, $jon->getLists()->first());
     }
 }
