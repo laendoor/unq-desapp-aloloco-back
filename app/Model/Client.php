@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Client
@@ -15,7 +15,7 @@ class Client
     protected $market;
 
     /**
-     * @var Collection<ShoppingList>
+     * @var ArrayCollection<ShoppingList>
      */
     protected $setOfLists;
 
@@ -25,7 +25,7 @@ class Client
      */
     public function __construct(Market $market) {
         $this->market = $market;
-        $this->setOfLists  = new Collection;
+        $this->setOfLists  = new ArrayCollection;
     }
 
     /**
@@ -39,21 +39,26 @@ class Client
      * @param ShoppingList $list
      */
     public function addList(ShoppingList $list): void {
-        $this->setOfLists->push($list);
+        $this->setOfLists->add($list);
     }
 
     public function removeList(ShoppingList $listToRemove): void {
-        $this->setOfLists = $this->setOfLists->reject(
-            function (ShoppingList $list) use ($listToRemove) {
-                return $list->equals($listToRemove);
-            }
-        );
+        $this->getSetOfLists()->removeElement($listToRemove);
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
-    public function getSetOfLists(): Collection {
+    public function getSetOfLists(): ArrayCollection {
         return $this->setOfLists;
+    }
+
+    public function addProduct(Product $product, ShoppingList $list): void {
+        $set   = $this->getSetOfLists();
+        $index = $set->indexOf($list);
+        if ($index !== false) {
+            $set->get($index)->addProduct($product);
+        }
+        // FIXME? throws exception if set not contains list??
     }
 }
