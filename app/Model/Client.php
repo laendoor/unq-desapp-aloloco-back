@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Model\Threshold\GeneralThreshold;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -20,12 +21,19 @@ class Client
     protected $setOfLists;
 
     /**
+     * @var GeneralThreshold
+     */
+    protected $generalThreshold;
+
+    /**
      * Client constructor.
      * @param Market $market
+     * @param GeneralThreshold $threshold
      */
-    public function __construct(Market $market) {
+    public function __construct(Market $market, GeneralThreshold $threshold) {
         $this->market = $market;
-        $this->setOfLists  = new ArrayCollection;
+        $this->generalThreshold = $threshold;
+        $this->setOfLists = new ArrayCollection;
     }
 
     /**
@@ -42,6 +50,9 @@ class Client
         $this->setOfLists->add($list);
     }
 
+    /**
+     * @param ShoppingList $listToRemove
+     */
     public function removeList(ShoppingList $listToRemove): void {
         $this->getSetOfLists()->removeElement($listToRemove);
     }
@@ -53,6 +64,10 @@ class Client
         return $this->setOfLists;
     }
 
+    /**
+     * @param Product $product
+     * @param ShoppingList $list
+     */
     public function addProduct(Product $product, ShoppingList $list): void {
         $set   = $this->getSetOfLists();
         $index = $set->indexOf($list);
@@ -62,11 +77,29 @@ class Client
         // FIXME? throws exception if set not contains list??
     }
 
+    /**
+     * @param Product $product
+     * @param ShoppingList $list
+     */
     public function removeProduct(Product $product, ShoppingList $list): void {
         $set   = $this->getSetOfLists();
         $index = $set->indexOf($list);
         if ($index !== false) {
             $set->get($index)->removeProduct($product);
         }
+    }
+
+    /**
+     * @param GeneralThreshold $threshold
+     */
+    public function setGeneralThreshold(GeneralThreshold $threshold): void {
+        $this->generalThreshold = $threshold;
+    }
+
+    /**
+     * @return GeneralThreshold
+     */
+    public function getGeneralThreshold(): GeneralThreshold {
+        return $this->generalThreshold;
     }
 }
