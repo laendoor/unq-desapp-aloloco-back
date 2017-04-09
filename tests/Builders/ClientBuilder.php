@@ -2,19 +2,18 @@
 namespace Tests\Builders;
 
 use Mockery;
-use App\Model\Market;
-use App\Model\Client;
+use App\Model\{Market, Client, Threshold, ShoppingList};
 use Illuminate\Support\Collection;
-use App\Model\Threshold\GeneralThreshold;
 
 class ClientBuilder
 {
     protected $market;
     protected $setOfLists;
-    protected $generalThreshold;
+    protected $thresholds;
 
     public function __construct() {
         $this->setOfLists = new Collection;
+        $this->thresholds = new Collection;
     }
 
     public static function new(): self {
@@ -23,8 +22,7 @@ class ClientBuilder
 
     public static function newWithMocks(): self {
         return self::new()
-            ->withMarket(Mockery::mock(Market::class))
-            ->withGeneralThreshold(Mockery::mock(GeneralThreshold::class));
+            ->withMarket(Mockery::mock(Market::class));
     }
 
     public static function anyBuiltWithMocks(): Client {
@@ -32,10 +30,14 @@ class ClientBuilder
     }
 
     public function build(): Client {
-        $client = new Client($this->market, $this->generalThreshold);
+        $client = new Client($this->market);
 
         $this->setOfLists->each(function ($list) use ($client) {
             $client->addList($list);
+        });
+
+        $this->thresholds->each(function ($th) use ($client) {
+            $client->addThreshold($th);
         });
 
         return $client;
@@ -50,13 +52,14 @@ class ClientBuilder
         return $this;
     }
 
-    public function withShoppingList($list): self {
+    public function withShoppingList(ShoppingList $list): self {
         $this->setOfLists->push($list);
         return $this;
     }
 
-    public function withGeneralThreshold(GeneralThreshold $threshold): self {
-        $this->generalThreshold = $threshold;
+    public function withThreshold(Threshold $threshold): self {
+        $this->thresholds->push($threshold);
         return $this;
     }
+
 }

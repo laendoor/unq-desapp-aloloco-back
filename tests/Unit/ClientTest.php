@@ -3,11 +3,9 @@ namespace Tests\Unit;
 
 use Mockery;
 use Tests\TestCase;
-use App\Model\Market;
-use App\Model\Product;
-use App\Model\ShoppingList;
-use App\Model\Threshold\GeneralThreshold;
 use Tests\Builders\ClientBuilder;
+use App\Model\{Market, Product, ShoppingList};
+use App\Model\Threshold\{GeneralThreshold, CategoryThreshold};
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -21,16 +19,13 @@ class ClientTest extends TestCase
      *
      * @return void
      */
-    public function it_is_initialized_with_a_market_and_a_general_threshold(): void {
-        $market    = Mockery::mock(Market::class);
-        $threshold = Mockery::mock(GeneralThreshold::class);
-        $jon = ClientBuilder::new()
-            ->withMarket($market)
-            ->withGeneralThreshold($threshold)
-            ->build();
+    public function it_is_initialized_with_a_market(): void {
+        // Arrange
+        $market = Mockery::mock(Market::class);
+        $jon = ClientBuilder::new()->withMarket($market)->build();
 
+        // Assert
         $this->assertEquals($market, $jon->getMarket());
-        $this->assertEquals($threshold, $jon->getGeneralThreshold());
     }
 
     /**
@@ -39,12 +34,15 @@ class ClientTest extends TestCase
      * @return void
      */
     public function it_can_add_a_new_shopping_list(): void {
+        // Arrange
         $jon = ClientBuilder::anyBuiltWithMocks();
         $list = Mockery::mock(ShoppingList::class);
 
+        // Act
         $jon->addList($list);
 
-        $this->assertEquals($list, $jon->getSetOfLists()->first());
+        // Assert
+        $this->assertContains($list, $jon->getSetOfLists());
     }
 
     /**
@@ -53,6 +51,7 @@ class ClientTest extends TestCase
      * @return void
      */
     public function it_can_remove_a_shopping_list(): void {
+        // Arrange
         $listToKeep   = Mockery::mock(ShoppingList::class)->shouldReceive('equals')->andReturn(false)->getMock();
         $listToRemove = Mockery::mock(ShoppingList::class)->shouldReceive('equals')->andReturn(true)->getMock();
         $jon = ClientBuilder::newWithMocks()
@@ -60,10 +59,12 @@ class ClientTest extends TestCase
             ->withShoppingList($listToRemove)
             ->build();
 
+        // Act
         $jon->removeList($listToRemove);
 
-        $this->assertEquals(1, $jon->getSetOfLists()->count());
-        $this->assertEquals($listToKeep, $jon->getSetOfLists()->first());
+        // Assert
+        $this->assertContains($listToKeep, $jon->getSetOfLists());
+        $this->assertNotContains($listToRemove, $jon->getSetOfLists());
     }
 
     /**
@@ -83,7 +84,7 @@ class ClientTest extends TestCase
         $jon->addProduct($sugar, $list);
 
         // Assert
-        $this->assertEquals($sugar, $jon->getSetOfLists()->first()->getProducts()->first());
+        $this->assertContains($sugar, $jon->getSetOfLists()->first()->getProducts());
     }
 
     /**
@@ -108,8 +109,8 @@ class ClientTest extends TestCase
         $jon->removeProduct($sugar, $list);
 
         // Assert
-        $this->assertEquals(1, $jon->getSetOfLists()->first()->getProducts()->count());
-        $this->assertEquals($coffee, $jon->getSetOfLists()->first()->getProducts()->first());
+        $this->assertContains($coffee, $jon->getSetOfLists()->first()->getProducts());
+        $this->assertNotContains($sugar, $jon->getSetOfLists()->first()->getProducts());
     }
 
     /**
@@ -117,15 +118,37 @@ class ClientTest extends TestCase
      *
      * @return void
      */
-    public function it_can_add_a_general_threshold(): void {
+    public function it_can_add_a_threshold(): void {
         // Arrange
         $threshold = Mockery::mock(GeneralThreshold::class);
         $jon = ClientBuilder::anyBuiltWithMocks();
 
         // Act
-        $jon->setGeneralThreshold($threshold);
+        $jon->addThreshold($threshold);
 
         // Assert
-        $this->assertEquals($threshold, $jon->getGeneralThreshold());
+        $this->assertContains($threshold, $jon->getThresholds());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_remove_a_threshold(): void {
+        // Arrange
+        $thresholdToKeep   = Mockery::mock(GeneralThreshold::class);
+        $thresholdToRemove = Mockery::mock(CategoryThreshold::class);
+        $jon = ClientBuilder::newWithMocks()
+            ->withThreshold($thresholdToKeep)
+            ->withThreshold($thresholdToRemove)
+            ->build();
+
+        // Act
+        $jon->removeThreshold($thresholdToRemove);
+
+        // Assert
+        $this->assertContains($thresholdToKeep, $jon->getThresholds());
+        $this->assertNotContains($thresholdToRemove, $jon->getThresholds());
     }
 }

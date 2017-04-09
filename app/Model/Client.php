@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
 
-use App\Model\Threshold\GeneralThreshold;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -21,18 +20,17 @@ class Client
     protected $setOfLists;
 
     /**
-     * @var GeneralThreshold
+     * @var ArrayCollection<GeneralThreshold>
      */
-    protected $generalThreshold;
+    protected $thresholds;
 
     /**
      * Client constructor.
      * @param Market $market
-     * @param GeneralThreshold $threshold
      */
-    public function __construct(Market $market, GeneralThreshold $threshold) {
+    public function __construct(Market $market) {
         $this->market = $market;
-        $this->generalThreshold = $threshold;
+        $this->thresholds = new ArrayCollection;
         $this->setOfLists = new ArrayCollection;
     }
 
@@ -90,16 +88,23 @@ class Client
     }
 
     /**
-     * @param GeneralThreshold $threshold
+     * @param Threshold $threshold
      */
-    public function setGeneralThreshold(GeneralThreshold $threshold): void {
-        $this->generalThreshold = $threshold;
+    public function addThreshold(Threshold $threshold): void {
+        $this->thresholds->add($threshold);
     }
 
     /**
-     * @return GeneralThreshold
+     * @param Threshold $threshold
      */
-    public function getGeneralThreshold(): GeneralThreshold {
-        return $this->generalThreshold;
+    public function removeThreshold(Threshold $threshold): void {
+        $this->getThresholds()->removeElement($threshold);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getThresholds(): ArrayCollection {
+        return $this->thresholds;
     }
 }
