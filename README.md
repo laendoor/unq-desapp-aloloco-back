@@ -16,6 +16,15 @@ Desarrollo de Aplicaciones :: UNQ
 
 [Ver en Draw.io][uml.io]
 
+### Mockups
+
+![Mockups][mockups]
+
+
+
+
 [uml]: https://raw.githubusercontent.com/alanmtk/Grupo-E-012017/master/doc/design.png
 
 [uml.io]: https://drive.google.com/file/d/0B5NnQ8dedsGLanVFOTV5SDVJcE0/view?ts=58d55080
+
+[mockups]: https://raw.githubusercontent.com/alanmtk/Grupo-E-012017/master/doc/mockups.png
