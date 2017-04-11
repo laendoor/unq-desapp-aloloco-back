@@ -1,25 +1,25 @@
 <?php
-namespace App\Model;
 
-use App\Model\Product\State\OnCart;
-use App\Model\Product\State\Wished;
-use App\Model\Product\State\Purchased;
+namespace Model\Product\State;
+use App\Model\Product\State;
 use App\Model\Product\State\ForDelivery;
+use App\Model\Product\State\OnCart;
+use App\Model\Product\State\Purchased;
+use App\Model\Product\State\Wished;
 
-class Product
+/**
+ * Trait ProductStateBehavior
+ * @package Model\Product\State
+ */
+trait ProductStateBehavior
 {
-    protected $name;
-    protected $brand;
+    /**
+     * @var State
+     */
     protected $state;
 
-    public function __construct(string $name, string $brand) {
-        $this->name  = $name;
-        $this->brand = $brand;
-        $this->state = new Wished;
-    }
-
     /*
-     * Actions
+     * Action has happened
      */
 
     public function addedToCart() {
@@ -56,26 +56,5 @@ class Product
 
     public function isForDelivery(): bool {
         return $this->state->isForDelivery();
-    }
-
-    /*
-     * Getters
-     */
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getBrand(): string {
-        return $this->brand;
-    }
-
-    /*
-     * Comparing
-     */
-
-    public function equals(Product $another): bool {
-        return $this->getName()  == $another->getName()
-            && $this->getBrand() == $another->getBrand();
     }
 }

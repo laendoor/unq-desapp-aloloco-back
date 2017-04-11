@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use Mockery;
 use Tests\TestCase;
 use Tests\Builders\ClientBuilder;
-use App\Model\{Market, Product, ShoppingList};
+use App\Model\{Market, WishedProduct, ShoppingList};
 use App\Model\Threshold\{GeneralThreshold, CategoryThreshold};
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -74,7 +74,7 @@ class ClientTest extends TestCase
      */
     public function it_can_add_a_product_to_a_shopping_list(): void {
         // Arrange
-        $sugar = Mockery::mock(Product::class);
+        $sugar = Mockery::mock(WishedProduct::class);
         $list  = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('addProduct')->with($sugar)->once();
         $list->shouldReceive('getProducts')->andReturn(new ArrayCollection([$sugar]))->once();
@@ -94,8 +94,8 @@ class ClientTest extends TestCase
      */
     public function it_can_remove_a_product_from_a_shopping_list(): void {
         // Arrange
-        $sugar  = Mockery::mock(Product::class);
-        $coffee = Mockery::mock(Product::class);
+        $sugar  = Mockery::mock(WishedProduct::class);
+        $coffee = Mockery::mock(WishedProduct::class);
         $list = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('addProduct')->with($sugar)->once();
         $list->shouldReceive('addProduct')->with($coffee)->once();

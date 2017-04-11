@@ -15,7 +15,7 @@ class ShoppingList
 {
     protected $name;
     protected $state;
-    protected $products;
+    protected $wish_products;
 
     /**
      * ShoppingList constructor.
@@ -24,7 +24,7 @@ class ShoppingList
     public function __construct(string $name) {
         $this->name     = $name;
         $this->state    = new WishList;
-        $this->products = new ArrayCollection;
+        $this->wish_products = new ArrayCollection;
     }
 
     /*
@@ -71,16 +71,16 @@ class ShoppingList
      * Products Manipulation
      */
 
-    public function getProducts(): ArrayCollection {
-        return $this->products;
+    public function getWishProducts(): ArrayCollection {
+        return $this->wish_products;
     }
 
-    public function addProduct(Product $product): void {
-        $this->products->add($product);
+    public function addProduct(WishedProduct $product): void {
+        $this->wish_products->add($product);
     }
 
-    public function removeProduct(Product $product): void {
-        $this->getProducts()->removeElement($product);
+    public function removeProduct(WishedProduct $product): void {
+        $this->getWishProducts()->removeElement($product);
     }
 
     public function addProducts(ArrayCollection $moreProducts): void {
