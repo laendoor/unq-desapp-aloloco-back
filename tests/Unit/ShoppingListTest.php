@@ -16,12 +16,12 @@ class ShoppingTest extends TestCase
      */
     public function it_are_equals_when_have_same_name()
     {
-        $l1 = ShoppingListBuilder::new()->withName('New List')->build();
-        $l2 = ShoppingListBuilder::new()->withName('New List')->build();
-        $l3 = ShoppingListBuilder::new()->withName('Old List')->build();
+        $list1 = ShoppingListBuilder::new()->withName('New List')->build();
+        $list2 = ShoppingListBuilder::new()->withName('New List')->build();
+        $list3 = ShoppingListBuilder::new()->withName('Old List')->build();
 
-        $this->assertTrue($l1->equals($l2));
-        $this->assertFalse($l2->equals($l3));
+        $this->assertTrue($list1->equals($list2));
+        $this->assertFalse($list2->equals($list3));
     }
 
     /**

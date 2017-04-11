@@ -29,10 +29,4 @@ class ProductBuilder
 
         return $product;
     }
-
-//    public function withName($name): self {
-//        $this->product->setName($name);
-//
-//        return $this;
-//    }
 }
