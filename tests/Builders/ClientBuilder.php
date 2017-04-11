@@ -2,7 +2,10 @@
 namespace Tests\Builders;
 
 use Mockery;
-use App\Model\{Market, Client, Threshold, ShoppingList};
+use App\Model\Market;
+use App\Model\Client;
+use App\Model\Threshold;
+use App\Model\ShoppingList;
 use Illuminate\Support\Collection;
 
 class ClientBuilder

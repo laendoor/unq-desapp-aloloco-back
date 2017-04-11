@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Model\Product\WishedProduct;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -63,10 +64,10 @@ class Client
     }
 
     /**
-     * @param Product $product
+     * @param WishedProduct $product
      * @param ShoppingList $list
      */
-    public function addProduct(Product $product, ShoppingList $list): void {
+    public function addProduct(WishedProduct $product, ShoppingList $list): void {
         $set   = $this->getSetOfLists();
         $index = $set->indexOf($list);
         if ($index !== false) {
@@ -76,10 +77,10 @@ class Client
     }
 
     /**
-     * @param Product $product
+     * @param WishedProduct $product
      * @param ShoppingList $list
      */
-    public function removeProduct(Product $product, ShoppingList $list): void {
+    public function removeProduct(WishedProduct $product, ShoppingList $list): void {
         $set   = $this->getSetOfLists();
         $index = $set->indexOf($list);
         if ($index !== false) {

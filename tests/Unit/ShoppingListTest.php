@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Mockery;
 use Tests\TestCase;
-use App\Model\Product;
+use App\Model\Product\WishedProduct;
 use Tests\Builders\ShoppingListBuilder;
 
 class ShoppingTest extends TestCase
@@ -30,11 +30,11 @@ class ShoppingTest extends TestCase
      *
      * @return void
      */
-    public function it_has_no_products_when_is_created()
+    public function it_has_no_wish_products_when_is_created()
     {
         $list = ShoppingListBuilder::anyBuilt();
 
-        $this->assertTrue($list->getProducts()->isEmpty());
+        $this->assertTrue($list->getWishProducts()->isEmpty());
     }
 
     /**
@@ -42,15 +42,15 @@ class ShoppingTest extends TestCase
      *
      * @return void
      */
-    public function it_add_a_product_to_list()
+    public function it_add_a_wish_product_to_list()
     {
         $list   = ShoppingListBuilder::anyBuilt();
-        $coffee = Mockery::mock(Product::class);
+        $coffee = Mockery::mock(WishedProduct::class);
 
         $list->addProduct($coffee);
 
-        $this->assertEquals(1, $list->getProducts()->count());
-        $this->assertEquals($coffee, $list->getProducts()->first());
+        $this->assertEquals(1, $list->getWishProducts()->count());
+        $this->assertEquals($coffee, $list->getWishProducts()->first());
     }
 
     /**
@@ -61,22 +61,15 @@ class ShoppingTest extends TestCase
     public function it_remove_a_product_from_list()
     {
         $list = ShoppingListBuilder::anyBuilt();
-        $sugar  = Mockery::mock(Product::class)->shouldReceive('equals')->andReturn(false)->getMock();
-        $coffee = Mockery::mock(Product::class)->shouldReceive('equals')->andReturn(true)->getMock();
+        $sugar  = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(false)->getMock();
+        $coffee = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(true)->getMock();
 
         $list->addProduct($sugar);
         $list->addProduct($coffee);
         $list->removeProduct($coffee);
 
-        $this->assertEquals(1, $list->getProducts()->count());
-        $this->assertEquals($sugar, $list->getProducts()->first());
+        $this->assertEquals(1, $list->getWishProducts()->count());
+        $this->assertEquals($sugar, $list->getWishProducts()->first());
     }
 
-    // TODO: depends of State
-    //+ addToCart(p:Product)
-    //+ removeFromCart(p:Product)
-    //+ markAsWish()
-    //+ markAsMarket()
-    //+ markAsDelivery()
-    //+ markAsPurchase()
 }

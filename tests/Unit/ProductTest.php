@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Model\Product;
+use Tests\Builders\ProductBuilder;
 
 class ProductTest extends TestCase
 {
@@ -14,8 +14,16 @@ class ProductTest extends TestCase
      */
     public function it_are_equals_when_have_same_name_and_brand()
     {
-        $coffee = new Product('Coffee', 'Cabrales');
-        $anotherCoffee = new Product('Coffee', 'Cabrales');
+        $coffee = ProductBuilder::new()
+            ->withName('Coffee')
+            ->withBrand('Cabrales')
+            ->withImage('http')
+            ->build();
+        $anotherCoffee = ProductBuilder::new()
+            ->withName('Coffee')
+            ->withBrand('Cabrales')
+            ->withImage('ftp')
+            ->build();
 
         $this->assertTrue($coffee->equals($anotherCoffee));
     }

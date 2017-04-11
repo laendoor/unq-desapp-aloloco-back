@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Product;
 
-use Tests\Builders\ProductBuilder;
 use Tests\TestCase;
+use Tests\Builders\ProductBuilder;
 
 class ProductStateTest extends TestCase
 {
@@ -27,7 +27,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_wished_on_new()
     {
-        $coffee = ProductBuilder::anyBuilt();
+        $coffee = ProductBuilder::anyBuiltWished();
 
         $this->assertTrue($coffee->isWished());
     }
@@ -39,7 +39,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_on_cart_when_is_added()
     {
-        $coffee = ProductBuilder::anyBuilt();
+        $coffee = ProductBuilder::anyBuiltWished();
 
         $coffee->addedToCart();
 
@@ -56,7 +56,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_purchased_when_is_bought()
     {
-        $coffee = ProductBuilder::anyBuilt();
+        $coffee = ProductBuilder::anyBuiltWished();
 
         $coffee->addedToCart();
         $coffee->purchased();
@@ -74,7 +74,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_to_delivery_when_is_sent_to_home()
     {
-        $coffee = ProductBuilder::anyBuilt();
+        $coffee = ProductBuilder::anyBuiltWished();
 
         $coffee->addedToCart();
         $coffee->addedForDelivery();
@@ -92,7 +92,7 @@ class ProductStateTest extends TestCase
      */
     public function it_is_wished_when_is_removed_from_cart()
     {
-        $coffee = ProductBuilder::anyBuilt();
+        $coffee = ProductBuilder::anyBuiltWished();
 
         $coffee->addedToCart();
         $coffee->removedFromCart();
