@@ -1,11 +1,7 @@
 <?php
+namespace App\Model\Product\State;
 
-namespace Model\Product\State;
 use App\Model\Product\State;
-use App\Model\Product\State\ForDelivery;
-use App\Model\Product\State\OnCart;
-use App\Model\Product\State\Purchased;
-use App\Model\Product\State\Wished;
 
 /**
  * Trait ProductStateBehavior

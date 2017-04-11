@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Mockery;
 use Tests\TestCase;
-use App\Model\WishedProduct;
+use App\Model\Product\WishedProduct;
 use Tests\Builders\ShoppingListBuilder;
 
 class ShoppingTest extends TestCase
@@ -72,11 +72,4 @@ class ShoppingTest extends TestCase
         $this->assertEquals($sugar, $list->getWishProducts()->first());
     }
 
-    // TODO: depends of State
-    //+ addToCart(p:Product)
-    //+ removeFromCart(p:Product)
-    //+ markAsWish()
-    //+ markAsMarket()
-    //+ markAsDelivery()
-    //+ markAsPurchase()
 }

@@ -4,8 +4,11 @@ namespace Tests\Unit;
 use Mockery;
 use Tests\TestCase;
 use Tests\Builders\ClientBuilder;
-use App\Model\{Market, WishedProduct, ShoppingList};
-use App\Model\Threshold\{GeneralThreshold, CategoryThreshold};
+use App\Model\Market;
+use App\Model\ShoppingList;
+use App\Model\Product\WishedProduct;
+use App\Model\Threshold\GeneralThreshold;
+use App\Model\Threshold\CategoryThreshold;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

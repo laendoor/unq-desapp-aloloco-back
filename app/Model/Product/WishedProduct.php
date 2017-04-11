@@ -1,9 +1,9 @@
 <?php
-namespace App\Model;
+namespace App\Model\Product;
 
-use App\Model\Product\Product;
+use App\Model\Price;
 use App\Model\Product\State\Wished;
-use Model\Product\State\ProductStateBehavior;
+use App\Model\Product\State\ProductStateBehavior;
 
 class WishedProduct extends Product
 {

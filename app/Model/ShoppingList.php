@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
 use App\Model\ShoppingList\State\DeliveryList;

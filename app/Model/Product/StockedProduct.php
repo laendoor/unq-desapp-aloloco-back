@@ -1,7 +1,7 @@
 <?php
-namespace App\Model;
+namespace App\Model\Product;
 
-use App\Model\Product\Product;
+use App\Model\Price;
 
 class StockedProduct extends Product
 {

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Product;
 
-use Tests\Builders\ProductBuilder;
 use Tests\TestCase;
+use Tests\Builders\ProductBuilder;
 
 class ProductStateTest extends TestCase
 {

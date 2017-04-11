@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Model\Product\WishedProduct;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

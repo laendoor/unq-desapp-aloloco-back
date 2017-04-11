@@ -2,10 +2,10 @@
 
 namespace Tests\Builders;
 
+use Mockery;
 use App\Model\Price;
 use App\Model\Product\Product;
-use App\Model\WishedProduct;
-use Mockery;
+use App\Model\Product\WishedProduct;
 
 class ProductBuilder
 {
