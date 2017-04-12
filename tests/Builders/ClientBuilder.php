@@ -15,7 +15,7 @@ class ClientBuilder
     protected $thresholds;
 
     public function __construct() {
-        $this->setOfLists = new Collection;
+        $this->setOfLists = new Collection; // fixme into arraycollection
         $this->thresholds = new Collection;
     }
 
