@@ -30,6 +30,9 @@ class ShoppingListStateTest extends TestCase
         $list = ShoppingListBuilder::anyBuilt();
 
         $this->assertTrue($list->isWishList());
+        $this->assertFalse($list->isMarketList());
+        $this->assertFalse($list->isDeliveryList());
+        $this->assertFalse($list->isPurchasedList());
     }
 
     /**
@@ -44,6 +47,9 @@ class ShoppingListStateTest extends TestCase
         $list->markAsMarket();
 
         $this->assertTrue($list->isMarketList());
+        $this->assertFalse($list->isWishList());
+        $this->assertFalse($list->isDeliveryList());
+        $this->assertFalse($list->isPurchasedList());
     }
 
     /**
@@ -62,6 +68,9 @@ class ShoppingListStateTest extends TestCase
         $list->markAsPurchased();
 
         $this->assertTrue($list->isPurchasedList());
+        $this->assertFalse($list->isWishList());
+        $this->assertFalse($list->isMarketList());
+        $this->assertFalse($list->isDeliveryList());
     }
 
     /**
@@ -80,6 +89,9 @@ class ShoppingListStateTest extends TestCase
         $list->markAsDelivery();
 
         $this->assertTrue($list->isDeliveryList());
+        $this->assertFalse($list->isWishList());
+        $this->assertFalse($list->isMarketList());
+        $this->assertFalse($list->isPurchasedList());
     }
 
     /**
@@ -98,5 +110,8 @@ class ShoppingListStateTest extends TestCase
         $list->markAsWish();
 
         $this->assertTrue($list->isWishList());
+        $this->assertFalse($list->isMarketList());
+        $this->assertFalse($list->isDeliveryList());
+        $this->assertFalse($list->isPurchasedList());
     }
 }

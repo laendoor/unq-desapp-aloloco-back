@@ -3,7 +3,7 @@
 namespace App\Model\ShoppingList;
 
 
-abstract class State
+abstract class ShoppingListState
 {
     public function isWishList(): bool {
         return false;
