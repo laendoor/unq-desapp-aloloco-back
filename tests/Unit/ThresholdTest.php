@@ -119,7 +119,7 @@ class ThresholdTest extends TestCase
         // Arrange
         $limit = Mockery::mock(Price::class);
         $value = Mockery::mock(Price::class);
-        $limit->shouldReceive('isLessThan')->with($value)->andReturn(true);
+        $limit->shouldReceive('isLesserThan')->with($value)->andReturn(true);
         $threshold = ThresholdBuilder::new()->withLimit($limit)->buildGeneral();
 
         // Act
@@ -138,7 +138,7 @@ class ThresholdTest extends TestCase
         // Arrange
         $limit = Mockery::mock(Price::class);
         $value = Mockery::mock(Price::class);
-        $limit->shouldReceive('isLessThan')->with($value)->andReturn(false);
+        $limit->shouldReceive('isLesserThan')->with($value)->andReturn(false);
         $threshold = ThresholdBuilder::new()->withLimit($limit)->buildGeneral();
 
         // Act

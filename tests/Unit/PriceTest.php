@@ -123,4 +123,47 @@ class PriceTest extends TestCase
         // Assert
         $this->assertSame(3.13, $div->getValue());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function a_price_could_be_lesser_than_another(): void {
+        // Arrange
+        $ten  = new Price(10);
+        $five = new Price(5.3);
+
+        // Assert
+        $this->assertTrue($five->isLesserThan($ten));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function a_price_could_be_greater_than_another(): void {
+        // Arrange
+        $ten  = new Price(10);
+        $five = new Price(5.3);
+
+        // Assert
+        $this->assertTrue($ten->isGreaterThan($five));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function two_prices_could_be_equals(): void {
+        // Arrange
+        $price1 = new Price(5);
+        $price2 = new Price(5.0);
+
+        // Assert
+        $this->assertTrue($price1->isEqualsThan($price2));
+    }
+
 }

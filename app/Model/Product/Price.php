@@ -22,8 +22,16 @@ class Price
         $this->digits = $digits;
     }
 
-    public function isLessThan(Price $another): bool {
+    public function isLesserThan(Price $another): bool {
         return $this->getValue() < $another->getValue();
+    }
+
+    public function isGreaterThan(Price $another): bool {
+        return $this->getValue() > $another->getValue();
+    }
+
+    public function isEqualsThan(Price $another): bool {
+        return $this->getValue() === $another->getValue();
     }
 
     public function add(Price $another): self {
