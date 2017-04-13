@@ -1,9 +1,11 @@
 <?php
 namespace Tests\Builders;
 
-use App\Model\Price;
-use App\Model\Threshold\GeneralThreshold;
 use Mockery;
+use App\Model\Price;
+use App\Model\Product\ProductCategory;
+use App\Model\Threshold\GeneralThreshold;
+use App\Model\Threshold\CategoryThreshold;
 
 /**
  * Class ThresholdBuilder
@@ -12,6 +14,7 @@ use Mockery;
 class ThresholdBuilder
 {
     protected $price;
+    protected $category;
 
     public function __construct() {
     }
@@ -22,7 +25,8 @@ class ThresholdBuilder
 
     public static function newWithMocks(): self {
         return self::new()
-            ->withPrice(Mockery::mock(Price::class));
+            ->withPrice(Mockery::mock(Price::class))
+            ->withCategory(Mockery::mock(ProductCategory::class));
     }
 
     public static function anyGeneralBuiltWithMocks(): GeneralThreshold {
@@ -33,12 +37,21 @@ class ThresholdBuilder
         return new GeneralThreshold($this->price);
     }
 
+    public function buildCategory(): CategoryThreshold {
+        return new CategoryThreshold($this->price, $this->category);
+    }
+
     /*
      * Withs
      */
 
     public function withPrice(Price $price): self {
         $this->price = $price;
+        return $this;
+    }
+
+    public function withCategory(ProductCategory $category): self {
+        $this->category = $category;
         return $this;
     }
 }

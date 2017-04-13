@@ -23,7 +23,7 @@ class ThresholdTest extends TestCase
     public function general_threshold_is_initialized_with_price_limit(): void {
         // Arrange
         $price = Mockery::mock(Price::class);
-        $threshold = new GeneralThreshold($price);
+        $threshold = ThresholdBuilder::new()->withPrice($price)->buildGeneral();
 
         // Assert
         $this->assertEquals($price, $threshold->getLimit());
@@ -38,7 +38,7 @@ class ThresholdTest extends TestCase
         // Arrange
         $price = Mockery::mock(Price::class);
         $category = Mockery::mock(ProductCategory::class);
-        $threshold = new CategoryThreshold($price, $category);
+        $threshold = ThresholdBuilder::new()->withPrice($price)->withCategory($category)->buildCategory();
 
         // Assert
         $this->assertEquals($price, $threshold->getLimit());
