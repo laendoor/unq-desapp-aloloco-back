@@ -17,11 +17,6 @@ class ThresholdStateEnabled extends ThresholdState
         return false;
     }
 
-    /**
-     * @SuppressWarnings("PMD.StaticAccess")
-     * @param Price $value
-     * @return bool
-     */
     public function isExceededWith(Price $value): bool {
         return $this->limit->isLessThan($value);
     }
