@@ -9,6 +9,15 @@ use App\Model\Price;
  */
 abstract class ThresholdState
 {
+    /**
+     * @var Price
+     */
+    protected $limit;
+
+    public function __construct(Price $limit) {
+        $this->limit = $limit;
+    }
+
     abstract public function isEnabled(): bool;
 
     abstract public function isDisabled(): bool;

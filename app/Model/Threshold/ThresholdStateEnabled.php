@@ -19,6 +19,6 @@ class ThresholdStateEnabled extends ThresholdState
 
     public function isExceededWith(Price $value): bool
     {
-        // TODO: Implement isExceededWith() method.
+        return $this->limit->isLessThan($value);
     }
 }

@@ -26,11 +26,11 @@ abstract class Threshold
     }
 
     public function enable(): void {
-        $this->state = new ThresholdStateEnabled;
+        $this->state = new ThresholdStateEnabled($this->limit);
     }
 
     public function disable(): void {
-        $this->state = new ThresholdStateDisabled;
+        $this->state = new ThresholdStateDisabled($this->limit);
     }
 
     public function getLimit(): Price {

@@ -109,4 +109,42 @@ class ThresholdTest extends TestCase
         // Assert
         $this->assertFalse($threshold->isExceededWith($value));
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_is_exceeded_on_enabled_when_limit_is_less_than_value(): void {
+        // Arrange
+        $limit = Mockery::mock(Price::class);
+        $value = Mockery::mock(Price::class);
+        $limit->shouldReceive('isLessThan')->with($value)->andReturn(true);
+        $threshold = ThresholdBuilder::new()->withLimit($limit)->buildGeneral();
+
+        // Act
+        $threshold->enable();
+
+        // Assert
+        $this->assertTrue($threshold->isExceededWith($value));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_is_not_exceeded_on_enabled_when_limit_is_greater_or_equals_than_value(): void {
+        // Arrange
+        $limit = Mockery::mock(Price::class);
+        $value = Mockery::mock(Price::class);
+        $limit->shouldReceive('isLessThan')->with($value)->andReturn(false);
+        $threshold = ThresholdBuilder::new()->withLimit($limit)->buildGeneral();
+
+        // Act
+        $threshold->enable();
+
+        // Assert
+        $this->assertFalse($threshold->isExceededWith($value));
+    }
 }
