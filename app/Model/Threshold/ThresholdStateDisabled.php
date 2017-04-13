@@ -13,7 +13,7 @@ class ThresholdStateDisabled extends ThresholdState
         return false;
     }
 
-    function isDisabled(): bool {
+    public function isDisabled(): bool {
         return true;
     }
 

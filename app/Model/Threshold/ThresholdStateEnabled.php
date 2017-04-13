@@ -9,7 +9,7 @@ use App\Model\Price;
  */
 class ThresholdStateEnabled extends ThresholdState
 {
-    function isEnabled(): bool {
+    public function isEnabled(): bool {
         return true;
     }
 
