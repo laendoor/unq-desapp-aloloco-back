@@ -58,4 +58,39 @@ class ThresholdTest extends TestCase
         $this->assertTrue($threshold->isDisabled());
         $this->assertFalse($threshold->isEnabled());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_be_enabled(): void {
+        // Arrange
+        $threshold = ThresholdBuilder::anyGeneralBuiltWithMocks();
+
+        // Act
+        $threshold->enable();
+
+        // Assert
+        $this->assertTrue($threshold->isEnabled());
+        $this->assertFalse($threshold->isDisabled());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_switch_between_enabled_and_disabled(): void {
+        // Arrange
+        $threshold = ThresholdBuilder::anyGeneralBuiltWithMocks();
+
+        // Act
+        $threshold->enable();
+        $threshold->disable();
+
+        // Assert
+        $this->assertTrue($threshold->isDisabled());
+        $this->assertFalse($threshold->isEnabled());
+    }
 }

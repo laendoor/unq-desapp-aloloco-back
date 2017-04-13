@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Model\Threshold\ThresholdState;
+use App\Model\Threshold\ThresholdStateEnabled;
 use App\Model\Threshold\ThresholdStateDisabled;
 
 /**
@@ -21,6 +22,14 @@ abstract class Threshold
 
     public function __construct(Price $limit) {
         $this->limit = $limit;
+        $this->disable();
+    }
+
+    public function enable(): void {
+        $this->state = new ThresholdStateEnabled;
+    }
+
+    public function disable(): void {
         $this->state = new ThresholdStateDisabled;
     }
 
