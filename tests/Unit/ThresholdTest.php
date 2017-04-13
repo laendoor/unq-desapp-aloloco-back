@@ -3,6 +3,7 @@ namespace Tests\Unit;
 
 use Mockery;
 use Tests\TestCase;
+use Tests\Builders\ThresholdBuilder;
 use App\Model\Price;
 use App\Model\Product\ProductCategory;
 use App\Model\Threshold\GeneralThreshold;
@@ -42,5 +43,19 @@ class ThresholdTest extends TestCase
         // Assert
         $this->assertEquals($price, $threshold->getLimit());
         $this->assertEquals($category, $threshold->getCategory());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_is_disabled_by_default(): void {
+        // Arrange
+        $threshold = ThresholdBuilder::anyGeneralBuiltWithMocks();
+
+        // Assert
+        $this->assertTrue($threshold->isDisabled());
+        $this->assertFalse($threshold->isEnabled());
     }
 }

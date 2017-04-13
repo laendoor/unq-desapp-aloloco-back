@@ -7,5 +7,11 @@ namespace App\Model\Threshold;
  */
 abstract class ThresholdState
 {
+    function isEnabled(): bool {
+        return false;
+    }
 
+    function isDisabled(): bool {
+        return false;
+    }
 }
