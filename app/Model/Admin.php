@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Admin
@@ -16,5 +17,16 @@ class Admin extends User
      */
     public function __construct(Market $market, string $email) {
         parent::__construct($market, $email);
+    }
+
+    public function updateStock(ArrayCollection $stock): void {
+        $this->market->cleanStock();
+        $stock->forAll(function ($key, $product) {
+            $this->market->addProduct($product);
+        });
+    }
+
+    public function getStock(): ArrayCollection {
+        return $this->market->getStock();
     }
 }
