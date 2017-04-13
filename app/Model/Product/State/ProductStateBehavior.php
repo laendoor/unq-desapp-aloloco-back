@@ -1,7 +1,7 @@
 <?php
 namespace App\Model\Product\State;
 
-use App\Model\Product\State;
+use App\Model\Product\ProductState;
 
 /**
  * Trait ProductStateBehavior
@@ -10,7 +10,7 @@ use App\Model\Product\State;
 trait ProductStateBehavior
 {
     /**
-     * @var State
+     * @var ProductState
      */
     protected $state;
 

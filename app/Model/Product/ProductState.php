@@ -3,7 +3,7 @@
 namespace App\Model\Product;
 
 
-abstract class State
+abstract class ProductState
 {
     public function isWished(): bool {
         return false;
