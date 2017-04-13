@@ -30,6 +30,9 @@ class ProductStateTest extends TestCase
         $coffee = ProductBuilder::anyBuiltWished();
 
         $this->assertTrue($coffee->isWished());
+        $this->assertFalse($coffee->isOnCart());
+        $this->assertFalse($coffee->isPurchased());
+        $this->assertFalse($coffee->isForDelivery());
     }
 
     /**
@@ -44,6 +47,9 @@ class ProductStateTest extends TestCase
         $coffee->addedToCart();
 
         $this->assertTrue($coffee->isOnCart());
+        $this->assertFalse($coffee->isWished());
+        $this->assertFalse($coffee->isPurchased());
+        $this->assertFalse($coffee->isForDelivery());
     }
 
     /**
@@ -62,6 +68,9 @@ class ProductStateTest extends TestCase
         $coffee->purchased();
 
         $this->assertTrue($coffee->isPurchased());
+        $this->assertFalse($coffee->isWished());
+        $this->assertFalse($coffee->isOnCart());
+        $this->assertFalse($coffee->isForDelivery());
     }
 
     /**
@@ -80,6 +89,9 @@ class ProductStateTest extends TestCase
         $coffee->addedForDelivery();
 
         $this->assertTrue($coffee->isForDelivery());
+        $this->assertFalse($coffee->isWished());
+        $this->assertFalse($coffee->isOnCart());
+        $this->assertFalse($coffee->isPurchased());
     }
 
     /**
@@ -98,5 +110,8 @@ class ProductStateTest extends TestCase
         $coffee->removedFromCart();
 
         $this->assertTrue($coffee->isWished());
+        $this->assertFalse($coffee->isOnCart());
+        $this->assertFalse($coffee->isPurchased());
+        $this->assertFalse($coffee->isForDelivery());
     }
 }
