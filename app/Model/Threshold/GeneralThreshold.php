@@ -9,5 +9,4 @@ use App\Model\Threshold;
  */
 class GeneralThreshold extends Threshold
 {
-
 }

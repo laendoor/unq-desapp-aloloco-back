@@ -9,4 +9,10 @@ namespace App\Model;
 class Price
 {
 
+    public function isLessThan(Price $another): bool {
+        return $this->getValue() < $another->getValue();
+    }
+
+    public function getValue(): float {
+    }
 }
