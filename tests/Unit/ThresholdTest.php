@@ -6,8 +6,6 @@ use Tests\TestCase;
 use Tests\Builders\ThresholdBuilder;
 use App\Model\Price;
 use App\Model\Product\ProductCategory;
-use App\Model\Threshold\GeneralThreshold;
-use App\Model\Threshold\CategoryThreshold;
 
 /**
  * Class ThresholdTest
@@ -23,7 +21,7 @@ class ThresholdTest extends TestCase
     public function general_threshold_is_initialized_with_price_limit(): void {
         // Arrange
         $price = Mockery::mock(Price::class);
-        $threshold = ThresholdBuilder::new()->withPrice($price)->buildGeneral();
+        $threshold = ThresholdBuilder::new()->withLimit($price)->buildGeneral();
 
         // Assert
         $this->assertEquals($price, $threshold->getLimit());
@@ -38,7 +36,7 @@ class ThresholdTest extends TestCase
         // Arrange
         $price = Mockery::mock(Price::class);
         $category = Mockery::mock(ProductCategory::class);
-        $threshold = ThresholdBuilder::new()->withPrice($price)->withCategory($category)->buildCategory();
+        $threshold = ThresholdBuilder::new()->withLimit($price)->withCategory($category)->buildCategory();
 
         // Assert
         $this->assertEquals($price, $threshold->getLimit());
@@ -92,5 +90,23 @@ class ThresholdTest extends TestCase
         // Assert
         $this->assertTrue($threshold->isDisabled());
         $this->assertFalse($threshold->isEnabled());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_is_never_exceeded_when_is_disabled(): void {
+        // Arrange
+        $limit = Mockery::mock(Price::class);
+        $value = Mockery::mock(Price::class);
+        $threshold = ThresholdBuilder::new()->withLimit($limit)->buildGeneral();
+
+        // Act
+        $threshold->disable();
+
+        // Assert
+        $this->assertFalse($threshold->isExceededWith($value));
     }
 }

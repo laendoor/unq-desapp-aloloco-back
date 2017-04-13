@@ -13,7 +13,7 @@ use App\Model\Threshold\CategoryThreshold;
  */
 class ThresholdBuilder
 {
-    protected $price;
+    protected $limit;
     protected $category;
 
     public function __construct() {
@@ -25,7 +25,7 @@ class ThresholdBuilder
 
     public static function newWithMocks(): self {
         return self::new()
-            ->withPrice(Mockery::mock(Price::class))
+            ->withLimit(Mockery::mock(Price::class))
             ->withCategory(Mockery::mock(ProductCategory::class));
     }
 
@@ -34,19 +34,19 @@ class ThresholdBuilder
     }
 
     public function buildGeneral(): GeneralThreshold {
-        return new GeneralThreshold($this->price);
+        return new GeneralThreshold($this->limit);
     }
 
     public function buildCategory(): CategoryThreshold {
-        return new CategoryThreshold($this->price, $this->category);
+        return new CategoryThreshold($this->limit, $this->category);
     }
 
     /*
      * Withs
      */
 
-    public function withPrice(Price $price): self {
-        $this->price = $price;
+    public function withLimit(Price $limit): self {
+        $this->limit = $limit;
         return $this;
     }
 

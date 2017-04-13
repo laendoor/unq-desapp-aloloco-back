@@ -44,4 +44,8 @@ abstract class Threshold
     public function isDisabled(): bool {
         return $this->state->isDisabled();
     }
+
+    public function isExceededWith(Price $value): bool {
+        return $this->state->isExceededWith($value);
+    }
 }

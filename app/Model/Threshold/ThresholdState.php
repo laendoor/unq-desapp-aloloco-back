@@ -1,17 +1,17 @@
 <?php
 namespace App\Model\Threshold;
 
+use App\Model\Price;
+
 /**
  * Class ThresholdState
  * @package App\Model\Threshold
  */
 abstract class ThresholdState
 {
-    function isEnabled(): bool {
-        return false;
-    }
+    abstract public function isEnabled(): bool;
 
-    function isDisabled(): bool {
-        return false;
-    }
+    abstract public function isDisabled(): bool;
+
+    abstract public function isExceededWith(Price $value): bool;
 }
