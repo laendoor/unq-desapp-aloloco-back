@@ -8,13 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Class Client
  * @package App\Model
  */
-class Client
+class Client extends User
 {
-    /**
-     * @var Market
-     */
-    protected $market;
-
     /**
      * @var ArrayCollection<ShoppingList>
      */
@@ -30,16 +25,9 @@ class Client
      * @param Market $market
      */
     public function __construct(Market $market) {
-        $this->market = $market;
+        parent::__construct($market);
         $this->thresholds = new ArrayCollection;
         $this->setOfLists = new ArrayCollection;
-    }
-
-    /**
-     * @return Market
-     */
-    public function getMarket(): Market {
-        return $this->market;
     }
 
     /**
