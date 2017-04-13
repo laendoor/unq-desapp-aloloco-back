@@ -55,4 +55,72 @@ class PriceTest extends TestCase
         // Assert
         $this->assertSame($expected_value, $price->getValue());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function two_prices_can_be_added(): void {
+        // Arrange
+        $ten  = new Price(10);
+        $five = new Price(5.3);
+
+        // Act
+        $sum = $ten->add($five);
+
+        // Assert
+        $this->assertSame(15.30, $sum->getValue());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function two_prices_can_be_subtracted(): void {
+        // Arrange
+        $ten  = new Price(10.5);
+        $five = new Price(5.3);
+
+        // Act
+        $sub = $ten->sub($five);
+
+        // Assert
+        $this->assertSame(5.20, $sub->getValue());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function a_price_can_be_multiplied_by_scalar_number(): void {
+        // Arrange
+        $scalar = 7;
+        $price  = new Price(8.7);
+
+        // Act
+        $mul = $price->multiply($scalar);
+
+        // Assert
+        $this->assertSame(60.90, $mul->getValue());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function a_price_can_be_divided_by_scalar_number(): void {
+        // Arrange
+        $scalar = 4;
+        $price  = new Price(12.5);
+
+        // Act
+        $div = $price->divide($scalar);
+
+        // Assert
+        $this->assertSame(3.13, $div->getValue());
+    }
 }

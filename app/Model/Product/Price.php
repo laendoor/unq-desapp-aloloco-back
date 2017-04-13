@@ -26,6 +26,34 @@ class Price
         return $this->getValue() < $another->getValue();
     }
 
+    public function add(Price $another): self {
+        $sum = $this->getValue() + $another->getValue();
+
+        return new self($sum, $this->digits);
+    }
+
+    public function sub(Price $another): self {
+        $sub = $this->getValue() - $another->getValue();
+
+        return new self($sub, $this->digits);
+    }
+
+    public function multiply(int $scalar): self {
+        $mul = $this->getValue() * $scalar;
+
+        return new self($mul, $this->digits);
+    }
+
+    public function divide(int $scalar): self {
+        $div = $this->getValue() / $scalar;
+
+        return new self($div, $this->digits);
+    }
+
+    /*
+     * Getters && Setters
+     */
+
     public function getValue(): float {
         return float_formatted($this->value, $this->digits);
     }
