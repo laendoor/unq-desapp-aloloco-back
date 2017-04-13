@@ -23,9 +23,10 @@ class Client extends User
     /**
      * Client constructor.
      * @param Market $market
+     * @param string $email
      */
-    public function __construct(Market $market) {
-        parent::__construct($market);
+    public function __construct(Market $market, string $email) {
+        parent::__construct($market, $email);
         $this->thresholds = new ArrayCollection;
         $this->setOfLists = new ArrayCollection;
     }

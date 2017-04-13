@@ -2,21 +2,24 @@
 namespace Tests\Builders;
 
 use Mockery;
+use App\Model\Admin;
 use App\Model\Market;
 use App\Model\Client;
 use App\Model\Threshold;
 use App\Model\ShoppingList;
-use Illuminate\Support\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
-class ClientBuilder
+class UserBuilder
 {
+    protected $email;
     protected $market;
     protected $setOfLists;
     protected $thresholds;
 
     public function __construct() {
-        $this->setOfLists = new Collection; // fixme into arraycollection
-        $this->thresholds = new Collection;
+        $this->email = 'none';
+        $this->setOfLists = new ArrayCollection;
+        $this->thresholds = new ArrayCollection;
     }
 
     public static function new(): self {
@@ -28,22 +31,26 @@ class ClientBuilder
             ->withMarket(Mockery::mock(Market::class));
     }
 
-    public static function anyBuiltWithMocks(): Client {
-        return self::newWithMocks()->build();
+    public static function anyClientBuiltWithMocks(): Client {
+        return self::newWithMocks()->buildClient();
     }
 
-    public function build(): Client {
-        $client = new Client($this->market);
+    public function buildClient(): Client {
+        $client = new Client($this->market, $this->email);
 
-        $this->setOfLists->each(function ($list) use ($client) {
+        $this->setOfLists->forAll(function ($key, $list) use ($client) {
             $client->addList($list);
         });
 
-        $this->thresholds->each(function ($th) use ($client) {
+        $this->thresholds->forAll(function ($key, $th) use ($client) {
             $client->addThreshold($th);
         });
 
         return $client;
+    }
+
+    public function buildAdmin(): Admin {
+        return new Admin($this->market, $this->email);
     }
 
     /*
@@ -55,13 +62,18 @@ class ClientBuilder
         return $this;
     }
 
+    public function withEmail(string $email): self {
+        $this->email = $email;
+        return $this;
+    }
+
     public function withShoppingList(ShoppingList $list): self {
-        $this->setOfLists->push($list);
+        $this->setOfLists->add($list);
         return $this;
     }
 
     public function withThreshold(Threshold $threshold): self {
-        $this->thresholds->push($threshold);
+        $this->thresholds->add($threshold);
         return $this;
     }
 
