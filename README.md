@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Grupo-E-012017/aloloco.svg?branch=master)](https://travis-ci.org/Grupo-E-012017/aloloco)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/80716585d03d4c6fa1eded88cfa4dec1)](https://www.codacy.com/app/Grupo-E-012017/aLoLoco?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Grupo-E-012017/aloloco&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/80716585d03d4c6fa1eded88cfa4dec1)](https://www.codacy.com/app/Grupo-E-012017/aLoLoco?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Grupo-E-012017/aloloco&amp;utm_campaign=Badge_Coverage)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=aloloco-grupo-e&style=flat)](https://aloloco-grupo-e.herokuapp.com/)
 
 # Comprando a Lo Loco
 
