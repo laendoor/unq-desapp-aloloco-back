@@ -23,8 +23,9 @@
 #### Modelo
 
  - Existen dos tipos de _User_: Client & Admin.
-   * Client puede administrar listas, productos umbrales
-   * Admin puede establecer stock
+   * Client puede administrar listas, productos umbrales. Pueden ir al supermercado con una lista
+     y tildar y destildar productos de esa lista.
+   * Admin puede establecer stock.
  - Las listas de compras están establecidas por _ShoppingList_ con estado (ver UML)
  - Los _Product_ pueden ser:
     * _Wished_ (aquellos administrador por el Client)
@@ -32,6 +33,10 @@
  - Cada _WishedProduct_ tiene un estado similara las ShoppingList (ver UML)
  - Los _Threshold_ definen los umbrales en base a un precio
  - El _Price_ encapsula el comportamiento del valor del producto para evitar errores de manipulación de valores flotantes
+ - El _Market_ permite administrar el stock y agregar Cajas de pago. También puede calcular
+   el tiempo estimado de espera en base al tiempo promedio de espera de cada caja.
+ - Cada _Box_ cuenta con una lista de _BoxTime_ que permite abstraer la lógica del tiempo que tardó cada cliente
+   en esa caja. Cada _BoxTime_ registra la fecha-hora de comienzo de atención y el tiempo que duró la operación.
 
 #### Testing
 
@@ -42,9 +47,8 @@
 
  - El Client no cuenta con todo el comportamiento deseado. Si bien puede administrar
    sus elementos (listas, umbrales, productos), no establece el comportamiento con
-   respecto a sus actividades: ir al supermercado, agregar producto al carrito,
-   pedir turno en caja, pagar lista, pedir delivery, etc.
- - El Market no cuenta con su comportamiento propio
- - Las Box no cuentan con su comportamiento propio
- - No está generado el algoritmo de calculo de tiempo estimado de espera al solicitar caja
- - Las Offers no cuentan con su comportamiento propio
+   respecto a las siguientes actividades: pedir turno en caja, pagar lista, pedir delivery.
+ - Si bien el Market cuenta con su comportamiento deseado, no está completamente testeado.
+ - Al Market le falta el comportamiento correspondiente a las ofertas.
+ - Si bien el Box cuenta con su comportamiento, no está exhaustivamente testeado por unos inconvenientes con los Mocks.
+ - Las Offers no cuentan con su comportamiento propio.
