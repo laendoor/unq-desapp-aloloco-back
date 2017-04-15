@@ -6,6 +6,10 @@ use App\Model\BoxTime;
 use Carbon\Carbon;
 use Tests\TestCase;
 
+/**
+ * Class BoxTimeTest
+ * @package Tests\Unit
+ */
 class BoxTimeTest extends TestCase
 {
     /**
