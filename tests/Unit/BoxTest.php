@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\Model\Box;
 use App\Model\BoxTime;
 use Carbon\Carbon;
-use Mockery;
 use Tests\TestCase;
 
 class BoxTest extends TestCase
@@ -69,7 +68,7 @@ class BoxTest extends TestCase
         $box = new Box(1, true);
 
         // Act
-        // Fixme: no puedo pasarle el mock al addBoxTime. $boxTime = Mockery::mock(BoxTime::class)->shouldReceive('getTime')->andReturn(50)->getMock();
+        // Fixme: no puedo pasarle el mock al addBoxTime. $boxTime = Mockery::mock(BoxTime::class)->shouldReceive('estimatedWaitingTime')->andReturn(50)->getMock();
         $box->addBoxTime(new BoxTime(Carbon::now(), 20));
         $box->addBoxTime(new BoxTime(Carbon::now(), 50));
 
