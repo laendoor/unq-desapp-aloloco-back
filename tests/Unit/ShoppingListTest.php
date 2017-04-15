@@ -16,10 +16,12 @@ class ShoppingTest extends TestCase
      */
     public function it_are_equals_when_have_same_name()
     {
+        // Arrange
         $list1 = ShoppingListBuilder::new()->withName('New List')->build();
         $list2 = ShoppingListBuilder::new()->withName('New List')->build();
         $list3 = ShoppingListBuilder::new()->withName('Old List')->build();
 
+        // Assert
         $this->assertTrue($list1->equals($list2));
         $this->assertFalse($list2->equals($list3));
     }
@@ -32,8 +34,10 @@ class ShoppingTest extends TestCase
      */
     public function it_has_no_wish_products_when_is_created()
     {
+        // Arrange
         $list = ShoppingListBuilder::anyBuilt();
 
+        // Assert
         $this->assertTrue($list->getWishProducts()->isEmpty());
     }
 
@@ -44,11 +48,14 @@ class ShoppingTest extends TestCase
      */
     public function it_add_a_wish_product_to_list()
     {
+        // Arrange
         $list   = ShoppingListBuilder::anyBuilt();
         $coffee = Mockery::mock(WishedProduct::class);
 
+        // Act
         $list->addProduct($coffee);
 
+        // Assert
         $this->assertEquals(1, $list->getWishProducts()->count());
         $this->assertEquals($coffee, $list->getWishProducts()->first());
     }
@@ -60,14 +67,17 @@ class ShoppingTest extends TestCase
      */
     public function it_remove_a_product_from_list()
     {
+        // Arrange
         $list = ShoppingListBuilder::anyBuilt();
         $sugar  = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(false)->getMock();
         $coffee = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(true)->getMock();
 
+        // Act
         $list->addProduct($sugar);
         $list->addProduct($coffee);
         $list->removeProduct($coffee);
 
+        // Assert
         $this->assertEquals(1, $list->getWishProducts()->count());
         $this->assertEquals($sugar, $list->getWishProducts()->first());
     }

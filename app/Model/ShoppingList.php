@@ -90,6 +90,14 @@ class ShoppingList
         });
     }
 
+    public function addToCart(WishedProduct $product): void {
+        $product->addedToCart();
+    }
+
+    public function removeFromCart(WishedProduct $product): void {
+        $product->removedFromCart();
+    }
+
     /*
      * Getters & Setters
      */

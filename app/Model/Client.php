@@ -62,7 +62,6 @@ class Client extends User
         if ($index !== false) {
             $set->get($index)->addProduct($product);
         }
-        // FIXME? throws exception if set not contains list??
     }
 
     /**
@@ -96,5 +95,17 @@ class Client extends User
      */
     public function getThresholds(): ArrayCollection {
         return $this->thresholds;
+    }
+
+    public function goToTheMarket(ShoppingList $list): void {
+        $list->markAsMarket();
+    }
+
+    public function checkProduct(WishedProduct $product, ShoppingList $list): void {
+        $list->addToCart($product);
+    }
+
+    public function uncheckProduct(WishedProduct $product, ShoppingList $list): void {
+        $list->removeFromCart($product);
     }
 }

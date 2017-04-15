@@ -156,4 +156,75 @@ class ClientTest extends TestCase
         $this->assertContains($thresholdToKeep, $jon->getThresholds());
         $this->assertNotContains($thresholdToRemove, $jon->getThresholds());
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_go_to_the_market_with_a_wished_shopping_list(): void {
+        // Arrange
+        $list = Mockery::mock(ShoppingList::class);
+        $list->shouldReceive('markAsMarket')->once();
+        $list->shouldReceive('isMarketList')->once()->andReturn(true);
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+
+        // Act
+        $jon->goToTheMarket($list);
+
+        // Assert
+        $this->assertTrue($jon->getSetOfLists()->first()->isMarketList());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_check_product_from_list_when_is_at_market(): void {
+        // Arrange
+        $coffee = Mockery::mock(WishedProduct::class);
+        $coffee->shouldReceive('isOnCart')->andReturn(true)->once();
+        $list = Mockery::mock(ShoppingList::class);
+        $list->shouldReceive('markAsMarket')->once();
+        $list->shouldReceive('addProduct')->with($coffee)->once();
+        $list->shouldReceive('addToCart')->with($coffee)->once();
+        $list->shouldReceive('getWishProducts')->andReturn(new ArrayCollection([$coffee]))->once();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+
+        // Act
+        $jon->addProduct($coffee, $list);
+        $jon->goToTheMarket($list);
+        $jon->checkProduct($coffee, $list);
+
+        // Assert
+        $this->assertTrue($jon->getSetOfLists()->first()->getWishProducts()->first()->isOnCart());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_uncheck_product_from_list_when_is_at_market(): void {
+        // Arrange
+        $coffee = Mockery::mock(WishedProduct::class);
+        $coffee->shouldReceive('isWished')->andReturn(true)->once();
+        $list = Mockery::mock(ShoppingList::class);
+        $list->shouldReceive('markAsMarket')->once();
+        $list->shouldReceive('addProduct')->with($coffee)->once();
+        $list->shouldReceive('addToCart')->with($coffee)->once();
+        $list->shouldReceive('removeFromCart')->with($coffee)->once();
+        $list->shouldReceive('getWishProducts')->andReturn(new ArrayCollection([$coffee]))->once();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+
+        // Act
+        $jon->addProduct($coffee, $list);
+        $jon->goToTheMarket($list);
+        $jon->checkProduct($coffee, $list);
+        $jon->uncheckProduct($coffee, $list);
+
+        // Assert
+        $this->assertTrue($jon->getSetOfLists()->first()->getWishProducts()->first()->isWished());
+    }
 }
