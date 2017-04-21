@@ -2,11 +2,13 @@
 
 namespace Tests\Unit;
 
-use App\Model\Box;
-use App\Model\BoxTime;
-use App\Model\Market;
+use Mockery;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\Model\Box;
+use App\Model\Market;
+use App\Model\BoxTime;
+use App\Model\ShoppingList;
 
 class MarketTest extends TestCase
 {
@@ -15,26 +17,29 @@ class MarketTest extends TestCase
      *
      * @return void
      */
-    public function it_has_an_estimated_waiting_time(): void
-    {
+    public function it_has_an_estimated_waiting_time(): void {
         // Arrange
-        $market = new Market();
-        // Fixme: no puedo pasarle el mock al addBox. $a_disabled_box = Mockery::mock(Box::class)->shouldReceive('isEnabled')->andReturn(false)->getMock();
-        $a_disabled_box = new Box(1, false);
-        $an_enabled_box = new Box(1, true);
-        $another_enabled_box = new Box(2, true);
+        $market = new Market;
+        $a_list = Mockery::mock(ShoppingList::class);
+        $a_disabled_box = Mockery::mock(Box::class);
+        $an_enabled_box = Mockery::mock(Box::class);
+        $another_enabled_box = Mockery::mock(Box::class);
+
+        $a_disabled_box->shouldReceive('isEnabled')->once()->andReturn(false);
+        $an_enabled_box->shouldReceive('isEnabled')->once()->andReturn(true);
+        $another_enabled_box->shouldReceive('isEnabled')->once()->andReturn(true);
+
+        $a_disabled_box->shouldReceive('estimatedWaitingTime')->never();
+        $an_enabled_box->shouldReceive('estimatedWaitingTime')->once()->andReturn(15);
+        $another_enabled_box->shouldReceive('estimatedWaitingTime')->once()->andReturn(25);
 
         // Act
         $market->addBox($a_disabled_box);
         $market->addBox($an_enabled_box);
         $market->addBox($another_enabled_box);
-
-        $a_disabled_box->addBoxTime(new BoxTime(Carbon::now(), 20));
-        $an_enabled_box->addBoxTime(new BoxTime(Carbon::now(), 15));
-        $another_enabled_box->addBoxTime(new BoxTime(Carbon::now(), 20));
-        $another_enabled_box->addBoxTime(new BoxTime(Carbon::now(), 30));
+        $estimated_time = $market->estimatedWaitingTime($a_list);
 
         // Assert
-        $this->assertEquals(20, $market->estimatedWaitingTime());
+        $this->assertEquals(20, $estimated_time);
     }
 }

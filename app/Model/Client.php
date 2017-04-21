@@ -108,4 +108,8 @@ class Client extends User
     public function uncheckProduct(WishedProduct $product, ShoppingList $list): void {
         $list->removeFromCart($product);
     }
+
+    public function requestBox(ShoppingList $list): int {
+        return $this->market->estimatedWaitingTime($list);
+    }
 }

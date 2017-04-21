@@ -63,9 +63,10 @@ class Market
     }
 
     /**
+     * @param ShoppingList $list
      * @return int
      */
-    public function estimatedWaitingTime(): int
+    public function estimatedWaitingTime(ShoppingList $list): int
     {
         $enabled_boxes = $this->boxes->filter(function (Box $box) {
             return $box->isEnabled();

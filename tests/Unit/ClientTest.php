@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Unit;
 
+use Carbon\Carbon;
 use Mockery;
 use Tests\TestCase;
 use Tests\Builders\UserBuilder;
@@ -226,5 +227,24 @@ class ClientTest extends TestCase
 
         // Assert
         $this->assertTrue($jon->getSetOfLists()->first()->getWishProducts()->first()->isWished());
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_request_for_a_box_when_is_ready_and_get_estimated_time(): void {
+        // Arrange
+        $list   = Mockery::mock(ShoppingList::class);
+        $market = Mockery::mock(Market::class);
+        $market->shouldReceive('estimatedWaitingTime')->with($list)->andReturn(5);
+        $jon = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+
+        // Act
+        $time = $jon->requestBox($list);
+
+        // Assert
+        $this->assertEquals(5, $time); // minutes
     }
 }
