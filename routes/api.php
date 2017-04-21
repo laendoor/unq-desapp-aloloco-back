@@ -26,7 +26,5 @@ $params = [
 
 $api->group($params, function(Router $api) {
 
-    $api->get('/{idUser}/shopping-lists', function () {
-        return "hello dingo!";
-    });
+    $api->get('client/{id}', 'ClientController@info');
 });
