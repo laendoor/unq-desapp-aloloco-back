@@ -112,4 +112,22 @@ class Client extends User
     public function requestBox(ShoppingList $list): int {
         return $this->market->estimatedWaitingTime($list);
     }
+
+    public function goToTheBox(Box $box, ShoppingList $list): void {
+        $this->market->goingToBox($box, $this, $list);
+    }
+
+    public function buyList(Box $box, ShoppingList $list): void {
+        $this->removeList($list);
+        $list->markAsPurchased();
+        $this->addList($list);
+        $this->market->purchaseMade($box, $this, $list);
+    }
+
+    public function requestForDelivery(Box $box, ShoppingList $list): void {
+        $this->removeList($list);
+        $list->markAsDelivery();
+        $this->addList($list);
+        $this->market->deliveryRequest($box, $this, $list);
+    }
 }

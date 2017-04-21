@@ -1,10 +1,10 @@
 <?php
 namespace Tests\Unit;
 
-use Carbon\Carbon;
 use Mockery;
 use Tests\TestCase;
 use Tests\Builders\UserBuilder;
+use App\Model\Box;
 use App\Model\Market;
 use App\Model\ShoppingList;
 use App\Model\Product\WishedProduct;
@@ -246,5 +246,67 @@ class ClientTest extends TestCase
 
         // Assert
         $this->assertEquals(5, $time); // minutes
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_go_to_the_box_when_is_called(): void {
+        // Arrange
+        $box    = Mockery::mock(Box::class);
+        $market = Mockery::mock(Market::class);
+        $list   = Mockery::mock(ShoppingList::class);
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+        $market->shouldReceive('goingToBox')->once()->withArgs([$box, $jon, $list]);
+
+        // Act
+        $jon->goToTheBox($box, $list);
+
+        // Assert
+        // mmm... nothing to assert?
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_buy_a_list(): void {
+        // Arrange
+        $box    = Mockery::mock(Box::class);
+        $market = Mockery::mock(Market::class);
+        $list   = Mockery::mock(ShoppingList::class);
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+        $list->shouldReceive('markAsPurchased')->once()->withNoArgs();
+        $market->shouldReceive('purchaseMade')->once()->withArgs([$box, $jon, $list]);
+
+        // Act
+        $jon->buyList($box, $list);
+
+        // Assert
+        // mmm... nothing to assert?
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_can_request_list_for_delivery(): void {
+        // Arrange
+        $box    = Mockery::mock(Box::class);
+        $market = Mockery::mock(Market::class);
+        $list   = Mockery::mock(ShoppingList::class);
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+        $list->shouldReceive('markAsDelivery')->once()->withNoArgs();
+        $market->shouldReceive('deliveryRequest')->once()->withArgs([$box, $jon, $list]);
+
+        // Act
+        $jon->requestForDelivery($box, $list);
+
+        // Assert
+        // mmm... nothing to assert?
     }
 }

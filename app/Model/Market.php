@@ -20,8 +20,7 @@ class Market
      */
     protected $products;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->boxes = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
@@ -29,16 +28,14 @@ class Market
     /**
      * @return ArrayCollection<StockedProduct>
      */
-    public function getStock(): ArrayCollection
-    {
+    public function getStock(): ArrayCollection {
         return $this->products;
     }
 
     /**
      * @return void
      */
-    public function cleanStock(): void
-    {
+    public function cleanStock(): void {
         $this->products->clear();
     }
 
@@ -47,8 +44,7 @@ class Market
      *
      * @return void
      */
-    public function addProduct(StockedProduct $product): void
-    {
+    public function addProduct(StockedProduct $product): void {
         $this->products->add($product);
     }
 
@@ -57,8 +53,7 @@ class Market
      *
      * @return void
      */
-    public function addBox(Box $box): void
-    {
+    public function addBox(Box $box): void {
         $this->boxes->add($box);
     }
 
@@ -66,8 +61,7 @@ class Market
      * @param ShoppingList $list
      * @return int
      */
-    public function estimatedWaitingTime(ShoppingList $list): int
-    {
+    public function estimatedWaitingTime(ShoppingList $list): int {
         $enabled_boxes = $this->boxes->filter(function (Box $box) {
             return $box->isEnabled();
         });
@@ -77,5 +71,14 @@ class Market
         })->toArray();
 
         return array_sum($box_times) / count($box_times);
+    }
+
+    public function goingToBox(Box $box, Client $client, ShoppingList $list): void {
+    }
+
+    public function purchaseMade(Box $box, Client $client, ShoppingList $list): void {
+    }
+
+    public function deliveryRequest(Box $box, Client $client, ShoppingList $list): void {
     }
 }
