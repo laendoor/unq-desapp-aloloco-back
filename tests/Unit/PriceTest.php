@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Model\Product\Price;
 use Tests\TestCase;
-use App\Model\Price;
 
 /**
  * Class PriceTest
@@ -16,7 +16,8 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_is_initialized_with_a_float_value(): void {
+    public function a_price_is_initialized_with_a_float_value(): void
+    {
         // Arrange
         $value = 10.0;
         $price = new Price($value);
@@ -30,9 +31,10 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_has_two_decimal_digits_by_default(): void {
+    public function a_price_has_two_decimal_digits_by_default(): void
+    {
         // Arrange
-        $value  = 10.1234;
+        $value = 10.1234;
         $expected_value = 10.12;
         $price = new Price($value);
 
@@ -45,10 +47,11 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_can_be_initialized_with_custom_digits_format(): void {
+    public function a_price_can_be_initialized_with_custom_digits_format(): void
+    {
         // Arrange
         $digits = 4;
-        $value  = 10.23456;
+        $value = 10.23456;
         $expected_value = 10.2346;
         $price = new Price($value, $digits);
 
@@ -61,9 +64,10 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function two_prices_can_be_added(): void {
+    public function two_prices_can_be_added(): void
+    {
         // Arrange
-        $ten  = new Price(10);
+        $ten = new Price(10);
         $five = new Price(5.3);
 
         // Act
@@ -78,9 +82,10 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function two_prices_can_be_subtracted(): void {
+    public function two_prices_can_be_subtracted(): void
+    {
         // Arrange
-        $ten  = new Price(10.5);
+        $ten = new Price(10.5);
         $five = new Price(5.3);
 
         // Act
@@ -95,10 +100,11 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_can_be_multiplied_by_scalar_number(): void {
+    public function a_price_can_be_multiplied_by_scalar_number(): void
+    {
         // Arrange
         $scalar = 7;
-        $price  = new Price(8.7);
+        $price = new Price(8.7);
 
         // Act
         $mul = $price->multiply($scalar);
@@ -112,10 +118,11 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_can_be_divided_by_scalar_number(): void {
+    public function a_price_can_be_divided_by_scalar_number(): void
+    {
         // Arrange
         $scalar = 4;
-        $price  = new Price(12.5);
+        $price = new Price(12.5);
 
         // Act
         $div = $price->divide($scalar);
@@ -129,9 +136,10 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_could_be_lesser_than_another(): void {
+    public function a_price_could_be_lesser_than_another(): void
+    {
         // Arrange
-        $ten  = new Price(10);
+        $ten = new Price(10);
         $five = new Price(5.3);
 
         // Assert
@@ -143,9 +151,10 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function a_price_could_be_greater_than_another(): void {
+    public function a_price_could_be_greater_than_another(): void
+    {
         // Arrange
-        $ten  = new Price(10);
+        $ten = new Price(10);
         $five = new Price(5.3);
 
         // Assert
@@ -157,7 +166,8 @@ class PriceTest extends TestCase
      *
      * @return void
      */
-    public function two_prices_could_be_equals(): void {
+    public function two_prices_could_be_equals(): void
+    {
         // Arrange
         $price1 = new Price(5);
         $price2 = new Price(5.0);
