@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
+use App\Model\Price;
 use Tests\Builders\ProductBuilder;
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
