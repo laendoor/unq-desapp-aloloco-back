@@ -181,6 +181,7 @@ return [
          * Vendors Service Providers...
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
 
     ],
 
@@ -196,6 +197,12 @@ return [
     */
 
     'aliases' => [
+        /*
+         * Go! Aspect Service Provider: Make sure that this service provider is the
+         * first item in this list. This is required for the AOP engine to work
+         * correctly.
+         */
+        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -231,6 +238,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Vendors Facades...
+         */
+        'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
+        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
+        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
     ],
 
 ];
