@@ -19,18 +19,19 @@ class DoctrineTest extends TestCase
         // Arrange
         $price = new Price(44, 50);
         $lays_fries = new Product('Papas Fritas', 'Lays', $price, 'lays.jpg');
+        $products_repository = EntityManager::getRepository(Product::class);
 
         // Act
         EntityManager::persist($lays_fries);
         EntityManager::flush();
+        $database_products = $products_repository->findAll();
 
         // Assert
-        $database_product = EntityManager::find(Product::class, 1);
-        $this->assertEquals('Papas Fritas', $database_product->getName());
-        $this->assertEquals('Lays', $database_product->getBrand());
+        $this->assertEquals('Papas Fritas', $database_products[0]->getName());
+        $this->assertEquals('Lays', $database_products[0]->getBrand());
 
         // Fixme: Esto deberia borrarse automaticamente como suele hacerse usando el trait DatabaseTransaction que en este caso con Doctrine es totalmente ignorado
-        EntityManager::remove($database_product);
+        EntityManager::remove($database_products[0]);
         EntityManager::flush();
     }
 }
