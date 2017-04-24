@@ -2,10 +2,10 @@
 
 namespace Tests\Builders;
 
-use Mockery;
-use App\Model\Price;
+use App\Model\Product\Price;
 use App\Model\Product\Product;
 use App\Model\Product\WishedProduct;
+use Mockery;
 
 class ProductBuilder
 {
@@ -16,8 +16,9 @@ class ProductBuilder
     protected $stock;
     protected $quantity;
 
-    public function __construct() {
-        $this->name  = 'A Name';
+    public function __construct()
+    {
+        $this->name = 'A Name';
         $this->brand = 'A Brand';
         $this->price = Mockery::mock(Price::class);
         $this->image = 'url';
@@ -25,15 +26,18 @@ class ProductBuilder
         $this->quantity = 0;
     }
 
-    public static function new(): self {
+    public static function new(): self
+    {
         return new self;
     }
 
-    public static function anyBuiltWished(): WishedProduct {
+    public static function anyBuiltWished(): WishedProduct
+    {
         return self::new()->buildWished();
     }
 
-    public function build(): Product {
+    public function build(): Product
+    {
         return new Product(
             $this->name,
             $this->brand,
@@ -43,7 +47,8 @@ class ProductBuilder
         );
     }
 
-    public function buildWished(): WishedProduct {
+    public function buildWished(): WishedProduct
+    {
         return new WishedProduct(
             $this->name,
             $this->brand,
@@ -53,18 +58,24 @@ class ProductBuilder
         );
     }
 
-    public function withName(string $name): self {
+    public function withName(string $name): self
+    {
         $this->name = $name;
+
         return $this;
     }
 
-    public function withBrand(string $brand): self {
+    public function withBrand(string $brand): self
+    {
         $this->brand = $brand;
+
         return $this;
     }
 
-    public function withImage(string $image): self {
+    public function withImage(string $image): self
+    {
         $this->image = $image;
+
         return $this;
     }
 

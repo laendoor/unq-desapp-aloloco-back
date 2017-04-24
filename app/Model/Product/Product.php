@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Product;
 
-use App\Model\Product\Price;
 use Doctrine\ORM\Mapping as ORM;
 
 

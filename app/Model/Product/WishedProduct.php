@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Product;
 
-use App\Model\Price;
 use App\Model\Product\State\Wished;
 use App\Model\Product\State\ProductStateBehavior;
 
