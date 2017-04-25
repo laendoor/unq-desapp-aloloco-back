@@ -136,6 +136,13 @@ return [
     */
 
     'providers' => [
+        /*
+         * Go! Aspect Service Provider: Make sure that this service provider is the
+         * first item in this list. This is required for the AOP engine to work
+         * correctly.
+         */
+        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
+//        \App\Providers\AopServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...
@@ -197,13 +204,6 @@ return [
     */
 
     'aliases' => [
-        /*
-         * Go! Aspect Service Provider: Make sure that this service provider is the
-         * first item in this list. This is required for the AOP engine to work
-         * correctly.
-         */
-        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -242,8 +242,8 @@ return [
          * Vendors Facades...
          */
         'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
-        'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
-        'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+        'Registry' => LaravelDoctrine\ORM\Facades\Registry::class,
+        'Doctrine' => LaravelDoctrine\ORM\Facades\Doctrine::class,
     ],
 
 ];
