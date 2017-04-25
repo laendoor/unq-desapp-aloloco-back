@@ -141,7 +141,7 @@ return [
          * first item in this list. This is required for the AOP engine to work
          * correctly.
          */
-        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
+//        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
 //        \App\Providers\AopServiceProvider::class,
 
         /*
