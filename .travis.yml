@@ -3,11 +3,6 @@ language: php
 php:
   - 7.1
 
-addons:
-  apt:
-    packages:
-    - sqlite3
-
 before_script:
   - mv .env.travis .env
   - touch database/database.sqlite database/phpunit.sqlite
