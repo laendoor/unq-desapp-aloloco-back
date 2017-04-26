@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "grupo-e/aloloco",
+    "description": "ALoLoco App :: UNQ",
+    "keywords": ["tpi", "unq"],
     "license": "MIT",
     "type": "project",
     "require": {
