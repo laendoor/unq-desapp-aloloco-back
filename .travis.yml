@@ -3,8 +3,10 @@ language: php
 php:
   - 7.1
 
-services:
-  - sqlite3
+addons:
+  apt:
+    packages:
+    - sqlite3
 
 before_script:
   - mv .env.travis .env
