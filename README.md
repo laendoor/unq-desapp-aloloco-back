@@ -9,6 +9,30 @@ Desarrollo de Aplicaciones :: UNQ
 
 ## Grupo E :: 2017.01
 
+### Requerimientos
+
+ Tener corriendo una VM con [Homestead](https://laravel.com/docs/5.4/homestead) o un entorno con:
+
+ * Apache / Nginx
+ * PHP 7.1
+ * Composer
+ * SQLite
+ * Git
+
+### Instalación
+
+```
+$ git clone https://github.com/Grupo-E-012017/aloloco.git
+$ cd aloloco
+$ touch database/database.sqlite database/phpunit.sqlite
+$ composer install
+```
+
+```
+# correr los tests para verificar que todo ande bien
+$ vendor/bin/phpunit tests/
+```
+
 ### [Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
 
 ### Diagrama UML
