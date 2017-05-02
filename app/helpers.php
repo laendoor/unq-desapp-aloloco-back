@@ -24,6 +24,11 @@ function test_secure(){
         return 'no';
 }
 
+function test_server()
+{
+    dump($_SERVER);
+}
+
 function isSecure() {
     return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
 }

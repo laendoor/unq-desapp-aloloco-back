@@ -131,5 +131,6 @@
         console.log('blabla');
         console.log('{{ test_secure() }}');
     </script>
+    {{ test_server() }}
 </body>
 </html>
