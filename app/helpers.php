@@ -18,7 +18,7 @@ function my_asset($path) {
 }
 
 function test_secure(){
-    if (request()->secure())
+    if (request()->isSecure())
         return 'si';
     else
         return 'no';
