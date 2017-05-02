@@ -14,12 +14,16 @@ function float_formatted($value, int $digits = 2): float {
 }
 
 function my_asset($path) {
-    return asset($path, request()->isSecure());
+    return asset($path, isSecure());
 }
 
 function test_secure(){
-    if (request()->isSecure())
+    if (isSecure())
         return 'si';
     else
         return 'no';
+}
+
+function isSecure() {
+    return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
 }
