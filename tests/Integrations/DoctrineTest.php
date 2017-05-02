@@ -1,13 +1,11 @@
 <?php
-
 namespace Tests\Integrations;
 
 use App\Model\Product\Price;
 use App\Model\Product\Product;
 use LaravelDoctrine\ORM\Facades\EntityManager;
-use Tests\TestCase;
 
-class DoctrineTest extends TestCase
+class DoctrineTest extends IntegrationsTestCase
 {
     /**
      * @test
