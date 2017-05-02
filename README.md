@@ -53,3 +53,4 @@ $ vendor/bin/phpunit tests/
 [uml.io]: https://drive.google.com/file/d/0B5NnQ8dedsGLanVFOTV5SDVJcE0/view?ts=58d55080
 
 [mockups]: https://raw.githubusercontent.com/Grupo-E-012017/aloloco/master/doc/mockups.png
+
