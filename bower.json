@@ -1,5 +1,5 @@
 {
-  "name": "Compando a lo loco",
+  "name": "Comprando a lo loco",
   "homepage": "https://github.com/Grupo-E-012017/aloloco",
   "description": "",
   "main": "",
@@ -7,7 +7,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "public/bower_components",
     "test",
     "tests"
   ],
