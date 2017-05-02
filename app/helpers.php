@@ -14,7 +14,7 @@ function float_formatted($value, int $digits = 2): float {
 }
 
 function my_asset($path) {
-    return asset($path, isSecure());
+    return asset($path, request()->isSecure());
 }
 
 function test_secure(){
