@@ -126,6 +126,6 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key={{ config('google-maps.api-key') }}"
             async defer></script>
-    <script src="{{ asset('bower_components/angular/angular.js') }}"></script>
+    <script src="{{ my_asset('bower_components/angular/angular.js') }}"></script>
 </body>
 </html>
