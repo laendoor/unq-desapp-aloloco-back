@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" ng-app>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,7 +57,7 @@
             margin-bottom: 30px;
         }
 
-        #distance{
+        #distance {
             font-size: 50px;
         }
     </style>
@@ -81,6 +81,8 @@
             </div>
             <div id="map" class="m-b-md"></div>
             <div id="distance"></div>
+            <input type="text" ng-model="yourName" placeholder="Ingresa tu nombre">
+            <p>Hola @{{ yourName }}!</p>
         </div>
     </div>
     <script>
@@ -124,5 +126,6 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key={{ config('google-maps.api-key') }}"
             async defer></script>
+    <script src="{{ asset('bower_components/angular/angular.js') }}"></script>
 </body>
 </html>
