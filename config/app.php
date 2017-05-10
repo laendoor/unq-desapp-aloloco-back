@@ -189,6 +189,7 @@ return [
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
