@@ -6,7 +6,7 @@ use App\Model\Product\Product;
 $factory->define(Product::class, function(Faker $faker, array $attributes = []) {
     $name  = $attributes['name']  ?? $faker->sentence(2);
     $brand = $attributes['brand'] ?? $faker->sentence(2);
-    $image = $attributes['image'] ?? $faker->imageUrl(300, 400, 'food', true, "$name $brand");
+    $image = $attributes['image'] ?? $faker->imageUrl(300, 400, 'food');
 
     return compact('name', 'brand', 'image');
 });
