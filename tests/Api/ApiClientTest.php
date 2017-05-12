@@ -5,10 +5,10 @@ namespace Api;
 use Tests\Api\ApiTestCase;
 
 /**
- * Class ClientApiTest
+ * Class ApiClientTest
  * @package Api
  */
-class ClientApiTest extends ApiTestCase
+class ApiClientTest extends ApiTestCase
 {
     /**
      * @test
