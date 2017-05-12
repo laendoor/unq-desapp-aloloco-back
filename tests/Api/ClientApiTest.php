@@ -18,7 +18,8 @@ class ClientApiTest extends ApiTestCase
     public function it_get_client_info()
     {
         // Act
-        $response = $this->json('GET', '/api/client/1');
+        $response = $this->json('GET', apiRoute('client', ['id' => 1]));
+
 
         // Assert
         $response

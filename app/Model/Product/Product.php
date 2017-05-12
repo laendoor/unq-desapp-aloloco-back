@@ -63,6 +63,11 @@ class Product
         return $this->brand;
     }
 
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
     /*
      * Comparing
      */

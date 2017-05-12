@@ -32,4 +32,32 @@ class DoctrineTest extends IntegrationsTestCase
         EntityManager::remove($database_products[0]);
         EntityManager::flush();
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_stores_and_reads_a_model_from_the_database_using_factories(): void
+    {
+        // Arrange
+        $repository = EntityManager::getRepository(Product::class);
+        entity(Product::class)->create([
+            'name'  => 'Papas Fritas',
+            'brand' => 'Lays',
+            'image' => 'lays.jpg'
+        ]);
+
+        // Act
+        $product = $repository->findOneByBrand('Lays');
+
+        // Assert
+        $this->assertEquals('Papas Fritas', $product->getName());
+        $this->assertEquals('Lays', $product->getBrand());
+        $this->assertEquals('lays.jpg', $product->getImage());
+
+        // Fixme: Esto deberia borrarse automaticamente como suele hacerse usando el trait DatabaseTransaction que en este caso con Doctrine es totalmente ignorado
+        EntityManager::remove($product);
+        EntityManager::flush();
+    }
 }

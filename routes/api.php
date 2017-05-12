@@ -26,7 +26,7 @@ $params = [
 
 $api->group($params, function(Router $api) {
 
-    $api->get('client/{id}', 'ClientController@info');
+    $api->get('client/{id}', ['as' => 'client', 'uses' => 'ClientController@info']);
 
     $api->get('products', 'ProductsController@index');
 });
