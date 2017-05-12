@@ -27,10 +27,6 @@ class DoctrineTest extends IntegrationsTestCase
         // Assert
         $this->assertEquals('Papas Fritas', $database_products[0]->getName());
         $this->assertEquals('Lays', $database_products[0]->getBrand());
-
-        // Fixme: Esto deberia borrarse automaticamente como suele hacerse usando el trait DatabaseTransaction que en este caso con Doctrine es totalmente ignorado
-        EntityManager::remove($database_products[0]);
-        EntityManager::flush();
     }
 
     /**
@@ -52,12 +48,9 @@ class DoctrineTest extends IntegrationsTestCase
         $product = $repository->findOneByBrand('Lays');
 
         // Assert
+        $this->assertEquals(1, count($repository->findAll()));
         $this->assertEquals('Papas Fritas', $product->getName());
         $this->assertEquals('Lays', $product->getBrand());
         $this->assertEquals('lays.jpg', $product->getImage());
-
-        // Fixme: Esto deberia borrarse automaticamente como suele hacerse usando el trait DatabaseTransaction que en este caso con Doctrine es totalmente ignorado
-        EntityManager::remove($product);
-        EntityManager::flush();
     }
 }
