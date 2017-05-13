@@ -37,6 +37,22 @@ $ vendor/bin/phpunit tests/
 
 ### [Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
 
+### API REST Methods
+
+#### Home
+
+ * `GET /`: Show API info
+
+#### Client
+
+ * `GET /client`: Show client logged information
+ * `GET /client/wishlists`: Show client wish lists
+
+#### Stock
+
+ * `GET /stock`: List products in stock
+ * `POST|PUT /stock`: Store received csv file into stock
+
 ### Diagrama UML
 
 ![Diagrama UML][uml]

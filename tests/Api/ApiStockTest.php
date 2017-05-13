@@ -32,4 +32,21 @@ class ApiStockTest extends ApiTestCase
         // Assert
         $response->assertJsonFragment($productData);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_store_stock_from_csv_file()
+    {
+        // Act
+        $response = $this->put(apiRoute('stock.store'));
+
+        // Assert
+        $response->assertJson([
+            'error' => '400',
+            'description' => 'TODO'
+        ]);
+    }
 }

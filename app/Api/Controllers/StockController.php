@@ -36,4 +36,19 @@ class StockController extends ApiBaseController
 
         return $this->response->collection(collect($products), $transformer);
     }
+
+    /**
+     * Receive and save new stock
+     *
+     * @Put("/")
+     * @Post("/")
+     *
+     * @return Response
+     */
+    public function store(): Response {
+        return $this->response->array([
+            'error' => '400',
+            'description' => 'TODO'
+        ]);
+    }
 }

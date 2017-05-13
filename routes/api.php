@@ -28,8 +28,10 @@ $api->group($params, function(Router $api) {
 
     $api->get('', ['as' => 'info', 'uses' => 'HomeController@info']);
 
+    // FIXME: it group will need auth client middleware
     $api->group(['prefix' => 'client', 'as' => 'client'], function (Router $api) {
-        $api->get('{id}', ['as' => 'info', 'uses' => 'ClientController@info']);
+        $api->get('', ['as' => 'info', 'uses' => 'ClientController@info']);
+        $api->get('/wishlists', ['as' => 'wishlists', 'uses' => 'ClientController@wishLists']);
     });
 
     $api->group(['prefix' => 'stock', 'as' => 'stock'], function (Router $api) {

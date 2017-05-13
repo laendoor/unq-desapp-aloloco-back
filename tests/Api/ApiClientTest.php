@@ -18,11 +18,28 @@ class ApiClientTest extends ApiTestCase
     public function it_get_client_info()
     {
         // Act
-        $response = $this->get(apiRoute('client.info', ['id' => 1]));
+        $response = $this->get(apiRoute('client.info'));
 
         // Assert
         $response->assertJson([
             'name' => 'Jon',
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_client_wish_lists()
+    {
+        // Act
+        $response = $this->get(apiRoute('client.wishlists'));
+
+        // Assert
+        $response->assertJson([
+            'error' => '400',
+            'description' => 'TODO'
         ]);
     }
 }
