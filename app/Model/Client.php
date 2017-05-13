@@ -14,7 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Client extends User
 {
     /**
-     * @var ArrayCollection<ShoppingList>
+     * One Client has Many ShoppingLists
+     * @var ArrayCollection|ShoppingList[]
+     * @ORM\OneToMany(targetEntity="ShoppingList", mappedBy="client")
      */
     protected $shoppingLists;
 
@@ -37,7 +39,7 @@ class Client extends User
     /**
      * @param ShoppingList $list
      */
-    public function addList(ShoppingList $list): void {
+    public function addShoppingList(ShoppingList $list): void {
         $this->shoppingLists->add($list);
     }
 
@@ -123,14 +125,14 @@ class Client extends User
     public function buyList(Box $box, ShoppingList $list): void {
         $this->removeList($list);
         $list->markAsPurchased();
-        $this->addList($list);
+        $this->addShoppingList($list);
         $this->market->purchaseMade($box, $this, $list);
     }
 
     public function requestForDelivery(Box $box, ShoppingList $list): void {
         $this->removeList($list);
         $list->markAsDelivery();
-        $this->addList($list);
+        $this->addShoppingList($list);
         $this->market->deliveryRequest($box, $this, $list);
     }
 }

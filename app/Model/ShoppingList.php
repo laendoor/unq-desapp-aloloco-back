@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
@@ -11,12 +12,28 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Class ShoppingList
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 class ShoppingList
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
     protected $name;
     protected $state;
     protected $wish_products;
+
+    /**
+     * Many ShoppingLists have One Client
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="shoppingLists")
+     * @var Client
+     */
+    protected $client;
 
     /**
      * ShoppingList constructor.
@@ -105,6 +122,24 @@ class ShoppingList
     public function getName(): string {
         return $this->name;
     }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client): void {
+        $this->client = $client;
+    }
+
+    /*
+     *
+     */
 
     public function equals(ShoppingList $another): bool {
         return $this->getName() == $another->getName();

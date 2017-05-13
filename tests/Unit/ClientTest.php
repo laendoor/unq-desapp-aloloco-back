@@ -45,7 +45,7 @@ class ClientTest extends TestCase
         $list = Mockery::mock(ShoppingList::class);
 
         // Act
-        $jon->addList($list);
+        $jon->addShoppingList($list);
 
         // Assert
         $this->assertContains($list, $jon->getShoppingLists());

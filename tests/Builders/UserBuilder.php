@@ -39,7 +39,7 @@ class UserBuilder
         $client = new Client($this->market, $this->email);
 
         $this->setOfLists->forAll(function ($key, $list) use ($client) {
-            $client->addList($list);
+            $client->addShoppingList($list);
         });
 
         $this->thresholds->forAll(function ($key, $th) use ($client) {
