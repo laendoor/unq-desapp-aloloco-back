@@ -27,10 +27,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->doctrineObjectRepoContextualBindings();
+    }
+
+    protected function doctrineObjectRepoContextualBindings(): void
+    {
+        // StockController needs Products
         $this->app
             ->when(StockController::class)
             ->needs(ObjectRepository::class)
-            ->give(function() {
+            ->give(function () {
                 return EntityManager::getRepository(Product::class);
             });
     }

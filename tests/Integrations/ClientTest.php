@@ -1,13 +1,25 @@
 <?php
-namespace Tests\ORM;
+namespace Tests\Integrations;
 
 use App\Model\Client;
 use Tests\Builders\UserBuilder;
 use LaravelDoctrine\ORM\Facades\EntityManager;
-use Tests\Integrations\IntegrationsTestCase;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 class ClientTest extends IntegrationsTestCase
 {
+    /**
+     * @var ObjectRepository
+     */
+    private $repo;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->repo = EntityManager::getRepository(Client::class);
+    }
+
     /**
      * @test
      *
@@ -20,12 +32,10 @@ class ClientTest extends IntegrationsTestCase
             ->withEmail('mother.of.dragons@seven-kingdoms.org')
             ->buildClient();
 
-        $repo = EntityManager::getRepository(Client::class);
-
         // Act
         EntityManager::persist($dany);
         EntityManager::flush();
-        $dany_db = collect($repo->findAll())->first();
+        $dany_db = collect($this->repo->findAll())->first();
 
         // Assert
         $this->assertEquals('mother.of.dragons@seven-kingdoms.org', $dany_db->getEmail());

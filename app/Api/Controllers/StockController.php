@@ -3,6 +3,9 @@ namespace App\Api\Controllers;
 
 use Dingo\Api\Http\Response;
 use App\Transformers\ProductTransformer;
+use Dingo\Blueprint\Annotation\Resource;
+use Dingo\Blueprint\Annotation\Method\Get;
+use Dingo\Blueprint\Annotation\Method\Put;
 use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
@@ -41,7 +44,6 @@ class StockController extends ApiBaseController
      * Receive and save new stock
      *
      * @Put("/")
-     * @Post("/")
      *
      * @return Response
      */
