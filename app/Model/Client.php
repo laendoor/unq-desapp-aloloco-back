@@ -16,7 +16,7 @@ class Client extends User
     /**
      * @var ArrayCollection<ShoppingList>
      */
-    protected $setOfLists;
+    protected $shoppingLists;
 
     /**
      * @var ArrayCollection<GeneralThreshold>
@@ -31,28 +31,28 @@ class Client extends User
     public function __construct(Market $market, string $email) {
         parent::__construct($market, $email);
         $this->thresholds = new ArrayCollection;
-        $this->setOfLists = new ArrayCollection;
+        $this->shoppingLists = new ArrayCollection;
     }
 
     /**
      * @param ShoppingList $list
      */
     public function addList(ShoppingList $list): void {
-        $this->setOfLists->add($list);
+        $this->shoppingLists->add($list);
     }
 
     /**
      * @param ShoppingList $listToRemove
      */
     public function removeList(ShoppingList $listToRemove): void {
-        $this->getSetOfLists()->removeElement($listToRemove);
+        $this->getShoppingLists()->removeElement($listToRemove);
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getSetOfLists(): ArrayCollection {
-        return $this->setOfLists;
+    public function getShoppingLists(): ArrayCollection {
+        return $this->shoppingLists;
     }
 
     /**
@@ -60,7 +60,7 @@ class Client extends User
      * @param ShoppingList $list
      */
     public function addProduct(WishedProduct $product, ShoppingList $list): void {
-        $set   = $this->getSetOfLists();
+        $set   = $this->getShoppingLists();
         $index = $set->indexOf($list);
         if ($index !== false) {
             $set->get($index)->addProduct($product);
@@ -72,7 +72,7 @@ class Client extends User
      * @param ShoppingList $list
      */
     public function removeProduct(WishedProduct $product, ShoppingList $list): void {
-        $set   = $this->getSetOfLists();
+        $set   = $this->getShoppingLists();
         $index = $set->indexOf($list);
         if ($index !== false) {
             $set->get($index)->removeProduct($product);

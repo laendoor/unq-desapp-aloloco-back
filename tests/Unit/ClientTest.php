@@ -48,7 +48,7 @@ class ClientTest extends TestCase
         $jon->addList($list);
 
         // Assert
-        $this->assertContains($list, $jon->getSetOfLists());
+        $this->assertContains($list, $jon->getShoppingLists());
     }
 
     /**
@@ -69,8 +69,8 @@ class ClientTest extends TestCase
         $jon->removeList($listToRemove);
 
         // Assert
-        $this->assertContains($listToKeep, $jon->getSetOfLists());
-        $this->assertNotContains($listToRemove, $jon->getSetOfLists());
+        $this->assertContains($listToKeep, $jon->getShoppingLists());
+        $this->assertNotContains($listToRemove, $jon->getShoppingLists());
     }
 
     /**
@@ -90,7 +90,7 @@ class ClientTest extends TestCase
         $jon->addProduct($sugar, $list);
 
         // Assert
-        $this->assertContains($sugar, $jon->getSetOfLists()->first()->getProducts());
+        $this->assertContains($sugar, $jon->getShoppingLists()->first()->getProducts());
     }
 
     /**
@@ -115,8 +115,8 @@ class ClientTest extends TestCase
         $jon->removeProduct($sugar, $list);
 
         // Assert
-        $this->assertContains($coffee, $jon->getSetOfLists()->first()->getProducts());
-        $this->assertNotContains($sugar, $jon->getSetOfLists()->first()->getProducts());
+        $this->assertContains($coffee, $jon->getShoppingLists()->first()->getProducts());
+        $this->assertNotContains($sugar, $jon->getShoppingLists()->first()->getProducts());
     }
 
     /**
@@ -174,7 +174,7 @@ class ClientTest extends TestCase
         $jon->goToTheMarket($list);
 
         // Assert
-        $this->assertTrue($jon->getSetOfLists()->first()->isMarketList());
+        $this->assertTrue($jon->getShoppingLists()->first()->isMarketList());
     }
 
     /**
@@ -199,7 +199,7 @@ class ClientTest extends TestCase
         $jon->checkProduct($coffee, $list);
 
         // Assert
-        $this->assertTrue($jon->getSetOfLists()->first()->getWishProducts()->first()->isOnCart());
+        $this->assertTrue($jon->getShoppingLists()->first()->getWishProducts()->first()->isOnCart());
     }
 
     /**
@@ -226,7 +226,7 @@ class ClientTest extends TestCase
         $jon->uncheckProduct($coffee, $list);
 
         // Assert
-        $this->assertTrue($jon->getSetOfLists()->first()->getWishProducts()->first()->isWished());
+        $this->assertTrue($jon->getShoppingLists()->first()->getWishProducts()->first()->isWished());
     }
 
     /**
