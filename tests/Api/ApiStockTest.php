@@ -6,10 +6,10 @@ use Tests\Api\ApiTestCase;
 use App\Model\Product\Product;
 
 /**
- * Class ClientApiTest
+ * Class ApiStockTest
  * @package Api
  */
-class ApiProductsTest extends ApiTestCase
+class ApiStockTest extends ApiTestCase
 {
     /**
      * @test
@@ -27,7 +27,7 @@ class ApiProductsTest extends ApiTestCase
         entity(Product::class)->create($productData);
 
         // Act
-        $response = $this->json('GET', apiRoute('products'));
+        $response = $this->get(apiRoute('stock.get'));
 
         // Assert
         $response->assertJsonFragment($productData);

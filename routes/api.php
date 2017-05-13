@@ -26,7 +26,14 @@ $params = [
 
 $api->group($params, function(Router $api) {
 
-    $api->get('client/{id}', ['as' => 'client', 'uses' => 'ClientController@info']);
+    $api->get('', ['as' => 'info', 'uses' => 'HomeController@info']);
 
-    $api->get('products', ['as' => 'products', 'uses' => 'ProductsController@index']);
+    $api->group(['prefix' => 'client', 'as' => 'client'], function (Router $api) {
+        $api->get('{id}', ['as' => 'info', 'uses' => 'ClientController@info']);
+    });
+
+    $api->group(['prefix' => 'stock', 'as' => 'stock'], function (Router $api) {
+        $api->get('', ['as' => 'get', 'uses' => 'StockController@get']);
+        $api->match(['post', 'put'], '', ['as' => 'store', 'uses' => 'StockController@store']);
+    });
 });

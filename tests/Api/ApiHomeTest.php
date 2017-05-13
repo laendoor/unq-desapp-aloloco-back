@@ -1,28 +1,27 @@
 <?php
-
 namespace Api;
 
 use Tests\Api\ApiTestCase;
 
 /**
- * Class ApiClientTest
+ * Class ApiHomeTest
  * @package Api
  */
-class ApiClientTest extends ApiTestCase
+class ApiHomeTest extends ApiTestCase
 {
     /**
      * @test
      *
      * @return void
      */
-    public function it_get_client_info()
+    public function it_get_api_info()
     {
         // Act
-        $response = $this->get(apiRoute('client.info', ['id' => 1]));
+        $response = $this->get(apiRoute('info'));
 
         // Assert
         $response->assertJson([
-            'name' => 'Jon',
+            'api' => 'aLoLoco',
         ]);
     }
 }

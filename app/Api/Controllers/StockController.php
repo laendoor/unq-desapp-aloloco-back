@@ -6,12 +6,12 @@ use App\Transformers\ProductTransformer;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
 /**
- * Class ProductsController
+ * Class StockController
  * @package App\Api\Controllers
  */
-class ProductsController extends ApiBaseController
+class StockController extends ApiBaseController
 {
-    public function index(ProductTransformer $transformer) {
+    public function get(ProductTransformer $transformer) {
         // FIXME Inject with IoC
         $repository = EntityManager::getRepository(Product::class);
         $products = $repository->findAll();
