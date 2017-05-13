@@ -2,7 +2,16 @@
 
 use Dingo\Api\Routing\UrlGenerator;
 
-function apiRoute($name, array $params = [], $v = 'v1')
-{
-return app(UrlGenerator::class)->version($v)->route($name, $params);
+/**
+ * Create api route
+ *
+ * @param $name
+ * @param array $params
+ * @param string $version
+ * @return string
+ */
+function apiRoute($name, array $params = [], $version = 'v1'): string {
+    return app(UrlGenerator::class)
+        ->version($version)
+        ->route($name, $params);
 }
