@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Model\Product\WishedProduct;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,13 +16,13 @@ class Client extends User
 {
     /**
      * One Client has Many ShoppingLists
-     * @var ArrayCollection|ShoppingList[]
-     * @ORM\OneToMany(targetEntity="ShoppingList", mappedBy="client")
+     * @var Collection|ShoppingList[]
+     * @ORM\OneToMany(targetEntity="ShoppingList", mappedBy="client", cascade={"persist"})
      */
     protected $shoppingLists;
 
     /**
-     * @var ArrayCollection<GeneralThreshold>
+     * @var Collection<GeneralThreshold>
      */
     protected $thresholds;
 
@@ -40,6 +41,7 @@ class Client extends User
      * @param ShoppingList $list
      */
     public function addShoppingList(ShoppingList $list): void {
+        $list->setClient($this);
         $this->shoppingLists->add($list);
     }
 
@@ -51,9 +53,9 @@ class Client extends User
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getShoppingLists(): ArrayCollection {
+    public function getShoppingLists(): Collection {
         return $this->shoppingLists;
     }
 
@@ -96,9 +98,9 @@ class Client extends User
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getThresholds(): ArrayCollection {
+    public function getThresholds(): Collection {
         return $this->thresholds;
     }
 
