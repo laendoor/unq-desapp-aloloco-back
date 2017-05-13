@@ -28,7 +28,6 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app/Model</directory>
-            <directory suffix=".php">./app/Api/Controllers</directory>
         </whitelist>
     </filter>
     <logging>
