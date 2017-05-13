@@ -3,10 +3,13 @@ namespace App\Model;
 
 use App\Model\Product\WishedProduct;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Client
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 class Client extends User
 {

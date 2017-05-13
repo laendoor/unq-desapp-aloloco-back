@@ -5,7 +5,7 @@ use App\Model\Product\Price;
 use App\Model\Product\Product;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
-class DoctrineTest extends IntegrationsTestCase
+class ProductTest extends IntegrationsTestCase
 {
     /**
      * @test
