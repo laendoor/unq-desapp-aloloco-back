@@ -1,20 +1,38 @@
 <?php
 namespace App\Api\Controllers;
 
-use App\Model\Product\Product;
+use Dingo\Api\Http\Response;
 use App\Transformers\ProductTransformer;
-use LaravelDoctrine\ORM\Facades\EntityManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * Class StockController
  * @package App\Api\Controllers
+ *
+ * @Resource("Stock", uri="/stock")
  */
 class StockController extends ApiBaseController
 {
-    public function get(ProductTransformer $transformer) {
-        // FIXME Inject with IoC
-        $repository = EntityManager::getRepository(Product::class);
-        $products = $repository->findAll();
+    /**
+     * @var ObjectRepository
+     */
+    protected $repoStock;
+
+    public function __construct(ObjectRepository $repoStock)
+    {
+        $this->repoStock = $repoStock;
+    }
+
+    /**
+     * List products in stock
+     *
+     * @Get("/")
+     *
+     * @param ProductTransformer $transformer
+     * @return Response
+     */
+    public function get(ProductTransformer $transformer): Response {
+        $products = $this->repoStock->findAll();
 
         return $this->response->collection(collect($products), $transformer);
     }
