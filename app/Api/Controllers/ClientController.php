@@ -1,7 +1,11 @@
 <?php
 namespace App\Api\Controllers;
 
+use App\Repository\WishListRepository;
+use App\Transformers\WishListTransformer;
 use Dingo\Api\Http\Response;
+use Dingo\Blueprint\Annotation\Resource;
+use Dingo\Blueprint\Annotation\Method\Get;
 
 /**
  * Class ClientController
@@ -27,12 +31,14 @@ class ClientController extends ApiBaseController
      *
      * @Get("/wishlists")
      *
+     * @param WishListRepository $repo
+     * @param WishListTransformer $transformer
      * @return Response
      */
-    public function wishLists(): Response {
-        return $this->response->array([
-            'error' => '400',
-            'description' => 'TODO'
-        ]);
+    public function wishLists(WishListRepository $repo, WishListTransformer $transformer): Response
+    {
+        $wishlists = $repo->findByClientId(1);
+
+        return $this->response->collection(collect($wishlists), $transformer);
     }
 }

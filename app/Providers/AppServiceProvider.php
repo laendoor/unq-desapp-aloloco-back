@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Model\ShoppingList;
 use App\Model\Product\Product;
 use App\Api\Controllers\StockController;
+use App\Repository\WishListRepository;
+use App\Repository\DoctrineWishListRepository;
 use Illuminate\Support\ServiceProvider;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -27,17 +30,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->doctrineObjectRepoContextualBindings();
+        $this->repositoryInjection(StockController::class, Product::class);
+
+        $this->app->bind(WishListRepository::class, function ($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new DoctrineWishListRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(ShoppingList::class)
+            );
+        });
     }
 
-    protected function doctrineObjectRepoContextualBindings(): void
+    /**
+     * @param string $receiver
+     * @param string $repo
+     */
+    protected function repositoryInjection(string $receiver, string $repo): void
     {
-        // StockController needs Products
         $this->app
-            ->when(StockController::class)
+            ->when($receiver)
             ->needs(ObjectRepository::class)
-            ->give(function () {
-                return EntityManager::getRepository(Product::class);
+            ->give(function () use ($repo) {
+                return EntityManager::getRepository($repo);
             });
     }
 }

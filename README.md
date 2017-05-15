@@ -41,17 +41,46 @@ $ vendor/bin/phpunit tests/
 
 #### Home
 
- * `GET /`: Show API info
+##### `GET /`
+API info
+
+```json
+{
+  "api": "aLoLoco"
+}
+```
 
 #### Client
 
- * `GET /client`: Show client logged information
- * `GET /client/wishlists`: Show client wish lists
+##### `GET /client`
+Retrieve auth user basic data
+
+##### `GET /client/wishlists`
+Show client wish lists
 
 #### Stock
 
- * `GET /stock`: List products in stock
- * `POST|PUT /stock`: Store received csv file into stock
+##### `GET /stock`
+List products in stock
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Dicta iusto fuga.",
+      "brand": "Dolores soluta dolor.",
+      "image": "http://lorempixel.com/300/400/food/?76408"
+    }
+    /* ... */
+  ]
+}
+```
+
+##### `POST|PUT /stock`
+Store received csv file into stock
+
+**_TODO_**
 
 ### Diagrama UML
 

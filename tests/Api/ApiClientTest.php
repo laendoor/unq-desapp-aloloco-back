@@ -33,13 +33,15 @@ class ApiClientTest extends ApiTestCase
      */
     public function it_get_client_wish_lists()
     {
+        // Arrange
+        // TODO make a list
+
         // Act
         $response = $this->get(apiRoute('client.wishlists'));
 
         // Assert
         $response->assertJson([
-            'error' => '400',
-            'description' => 'TODO'
+            'data' => []
         ]);
     }
 }
