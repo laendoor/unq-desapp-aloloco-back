@@ -24,7 +24,16 @@ class ShoppingList
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug = 'none'; // FIXME
+
     protected $state;
     protected $wish_products;
 
@@ -90,7 +99,7 @@ class ShoppingList
      */
 
     public function getWishProducts(): ArrayCollection {
-        return $this->wish_products;
+        return $this->wish_products ?? new ArrayCollection;
     }
 
     public function addProduct(WishedProduct $product): void {
@@ -119,6 +128,16 @@ class ShoppingList
      * Getters & Setters
      */
 
+    /**
+     * @return int
+     */
+    public function getId(): int {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
     public function getName(): string {
         return $this->name;
     }

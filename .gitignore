@@ -10,3 +10,4 @@ Homestead.yaml
 .env
 /build
 _ide_helper.php
+storage/proxies/

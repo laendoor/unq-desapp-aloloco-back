@@ -2,7 +2,10 @@
 
 namespace Api;
 
+use App\Model\Client;
+use App\Model\ShoppingList;
 use Tests\Api\ApiTestCase;
+use LaravelDoctrine\ORM\Facades\EntityManager;
 
 /**
  * Class ApiClientTest
@@ -34,14 +37,17 @@ class ApiClientTest extends ApiTestCase
     public function it_get_client_wish_lists()
     {
         // Arrange
-        // TODO make a list
+        $jon  = entity(Client::class)->create();
+        $list = entity(ShoppingList::class, 'wish-list')->create([
+            'client' => $jon
+        ]);
 
         // Act
         $response = $this->get(apiRoute('client.wishlists'));
 
         // Assert
-        $response->assertJson([
-            'data' => []
+        $response->assertJsonFragment([
+            'id' => $list->getId()
         ]);
     }
 }
