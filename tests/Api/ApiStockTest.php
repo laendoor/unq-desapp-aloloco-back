@@ -2,6 +2,8 @@
 
 namespace Api;
 
+use App\Model\Product\Price;
+use App\Model\Product\StockedProduct;
 use Tests\Api\ApiTestCase;
 use App\Model\Product\Product;
 
@@ -24,13 +26,24 @@ class ApiStockTest extends ApiTestCase
             'brand' => 'Lays',
             'image' => 'lays.jpg'
         ];
-        entity(Product::class)->create($productData);
+        $product = entity(Product::class)->create($productData);
+        entity(StockedProduct::class)->create([
+            'name' => $product->getName(),
+            'brand' => $product->getBrand(),
+            'image' => $product->getImage(),
+            'stock' => 10,
+        ]);
 
         // Act
         $response = $this->get(apiRoute('stock.get'));
 
         // Assert
-        $response->assertJsonFragment($productData);
+        $response->assertJsonFragment([
+            'name'  => 'Papas Fritas',
+            'brand' => 'Lays',
+            'image' => 'lays.jpg',
+            'stock' => 10
+        ]);
     }
 
     /**

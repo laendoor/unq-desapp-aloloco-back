@@ -1,7 +1,6 @@
 <?php
 
-use App\Model\Product\Product;
-use App\Model\Product\WishedProduct;
+use App\Model\Product\StockedProduct;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
@@ -13,12 +12,79 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Generic Fakers
-        entity(Product::class, 2)->create();
-
         // Custom
-        entity(Product::class, 'french-fries', 2)->create();
-        entity(Product::class, 'soda', 2)->create();
-        entity(Product::class, 'milk', 2)->create();
+        entity(StockedProduct::class)->create([
+            'name'  => 'Papas Fritas',
+            'brand' => 'Lays',
+            'stock' => 10,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Aceite',
+            'brand' => 'Natura',
+            'stock' => 10,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Jabón en Polvo',
+            'brand' => 'Zorro',
+            'stock' => 2,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Porotos',
+            'brand' => 'Arcor',
+            'stock' => 1,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Cerveza',
+            'brand' => 'Quilmes',
+            'stock' => 50,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Tapa de Tarta',
+            'brand' => 'La Salteña',
+            'stock' => 12,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Azúcar',
+            'brand' => 'Chango',
+            'stock' => 14,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Desodorante',
+            'brand' => 'Rexona',
+            'stock' => 3,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Algodón',
+            'brand' => 'Estrella',
+            'stock' => 14,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Jabón',
+            'brand' => 'Suave',
+            'stock' => 1,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Leche',
+            'brand' => 'Sancor',
+            'stock' => 50,
+        ]);
+
+        entity(StockedProduct::class)->create([
+            'name'  => 'Vino Tinto',
+            'brand' => 'Uvita',
+            'stock' => 55,
+        ]);
+
+
     }
 }

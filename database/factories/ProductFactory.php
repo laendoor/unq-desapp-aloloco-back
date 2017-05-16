@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Product\StockedProduct;
 use App\Model\Product\WishedProduct;
 use Faker\Generator as Faker;
 use App\Model\Product\Product;
@@ -25,12 +26,22 @@ $factory->defineAs(Product::class, 'milk', function () use ($factory) {
 });
 
 /*
- * Wished Products
+ * Stocked Products
  */
 
 $factory->define(WishedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
     return array_merge($factory->raw(Product::class), [
-            'quantity' => $attributes['quantity'] ?? $faker->numberBetween(1, 6)
+        'stock' => $attributes['stock'] ?? $faker->numberBetween(1, 10)
+    ]);
+});
+
+/*
+ * Wished Products
+ */
+
+$factory->define(StockedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
+    return array_merge($factory->raw(Product::class), [
+        'quantity' => $attributes['quantity'] ?? $faker->numberBetween(1, 6)
     ]);
 });
 

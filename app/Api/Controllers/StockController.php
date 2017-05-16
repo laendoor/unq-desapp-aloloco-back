@@ -1,8 +1,10 @@
 <?php
 namespace App\Api\Controllers;
 
+use App\Repository\ProductRepository;
+use App\Repository\StockedProductRepository;
+use App\Transformers\StockTransformer;
 use Dingo\Api\Http\Response;
-use App\Transformers\ProductTransformer;
 use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
 use Dingo\Blueprint\Annotation\Method\Put;
@@ -17,25 +19,16 @@ use Doctrine\Common\Persistence\ObjectRepository;
 class StockController extends ApiBaseController
 {
     /**
-     * @var ObjectRepository
-     */
-    protected $repoStock;
-
-    public function __construct(ObjectRepository $repoStock)
-    {
-        $this->repoStock = $repoStock;
-    }
-
-    /**
      * List products in stock
      *
      * @Get("/")
      *
-     * @param ProductTransformer $transformer
+     * @param StockedProductRepository $repoProduct
+     * @param StockTransformer $transformer
      * @return Response
      */
-    public function get(ProductTransformer $transformer): Response {
-        $products = $this->repoStock->findAll();
+    public function get(StockedProductRepository $repoProduct, StockTransformer $transformer): Response {
+        $products = $repoProduct->findAll();
 
         return $this->response->collection(collect($products), $transformer);
     }

@@ -22,6 +22,14 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('stocked_products', function (Blueprint $table) {
+            $table->integer('id');
+            $table->integer('stock');
+            $table->timestamps();
+
+            $table->foreign('id')->references('id')->on('products');
+        });
+
         Schema::create('wished_products', function (Blueprint $table) {
             $table->integer('id');
             $table->integer('quantity');
@@ -41,6 +49,7 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('wished_products');
+        Schema::dropIfExists('stocked_products');
         Schema::dropIfExists('products');
     }
 }

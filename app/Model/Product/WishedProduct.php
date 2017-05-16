@@ -54,4 +54,20 @@ class WishedProduct extends Product
         return $this->getName();
     }
 
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity(int $quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
 }

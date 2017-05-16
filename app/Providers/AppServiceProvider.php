@@ -2,14 +2,16 @@
 
 namespace App\Providers;
 
+use App\Model\Product\StockedProduct;
 use App\Model\ShoppingList;
 use App\Model\Product\Product;
-use App\Api\Controllers\StockController;
+use App\Repository\DoctrineStockedProductRepository;
+use App\Repository\ProductRepository;
 use App\Repository\WishListRepository;
+use App\Repository\StockedProductRepository;
+use App\Repository\DoctrineProductRepository;
 use App\Repository\DoctrineWishListRepository;
 use Illuminate\Support\ServiceProvider;
-use LaravelDoctrine\ORM\Facades\EntityManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +32,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->repositoryInjection(StockController::class, Product::class);
+        $this->app->bind(StockedProductRepository::class, function ($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new DoctrineStockedProductRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(StockedProduct::class)
+            );
+        });
 
         $this->app->bind(WishListRepository::class, function ($app) {
             // This is what Doctrine's EntityRepository needs in its constructor.
@@ -39,19 +47,13 @@ class AppServiceProvider extends ServiceProvider
                 $app['em']->getClassMetaData(ShoppingList::class)
             );
         });
-    }
 
-    /**
-     * @param string $receiver
-     * @param string $repo
-     */
-    protected function repositoryInjection(string $receiver, string $repo): void
-    {
-        $this->app
-            ->when($receiver)
-            ->needs(ObjectRepository::class)
-            ->give(function () use ($repo) {
-                return EntityManager::getRepository($repo);
-            });
+        $this->app->bind(ProductRepository::class, function ($app) {
+            // This is what Doctrine's EntityRepository needs in its constructor.
+            return new DoctrineProductRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(Product::class)
+            );
+        });
     }
 }
