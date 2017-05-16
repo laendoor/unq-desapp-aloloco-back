@@ -79,4 +79,11 @@ class ProductBuilder
         return $this;
     }
 
+    public function withQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
 }

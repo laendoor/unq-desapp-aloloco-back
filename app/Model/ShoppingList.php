@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList\State\WishList;
@@ -35,7 +36,13 @@ class ShoppingList
     protected $slug = 'none'; // FIXME
 
     protected $state;
-    protected $wish_products;
+
+    /**
+     * One ShoppingList has Many WishedProducts
+     * @var Collection|WishedProduct[]
+     * @ORM\OneToMany(targetEntity="\App\Model\Product\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
+     */
+    protected $wishedProducts;
 
     /**
      * Many ShoppingLists have One Client
@@ -51,7 +58,7 @@ class ShoppingList
     public function __construct(string $name) {
         $this->name     = $name;
         $this->state    = new WishList;
-        $this->wish_products = new ArrayCollection;
+        $this->wishedProducts = new ArrayCollection;
     }
 
     /*
@@ -98,21 +105,22 @@ class ShoppingList
      * Products Manipulation
      */
 
-    public function getWishProducts(): ArrayCollection {
-        return $this->wish_products ?? new ArrayCollection;
+    public function getWishedProducts(): Collection {
+        return $this->wishedProducts ?? new ArrayCollection;
     }
 
-    public function addProduct(WishedProduct $product): void {
-        $this->wish_products->add($product);
+    public function addWishedProduct(WishedProduct $product): void {
+        $this->wishedProducts->add($product);
+        $product->setShoppingList($this);
     }
 
-    public function removeProduct(WishedProduct $product): void {
-        $this->getWishProducts()->removeElement($product);
+    public function removeWishedProduct(WishedProduct $product): void {
+        $this->getWishedProducts()->removeElement($product);
     }
 
-    public function addProducts(ArrayCollection $moreProducts): void {
+    public function addWishedProducts(ArrayCollection $moreProducts): void {
         $moreProducts->forAll(function ($newProduct) {
-            $this->addProduct($newProduct);
+            $this->addWishedProduct($newProduct);
         });
     }
 

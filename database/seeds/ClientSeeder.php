@@ -1,8 +1,10 @@
 <?php
 
 use App\Model\Client;
+use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList;
 use Illuminate\Database\Seeder;
+use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class ClientSeeder extends Seeder
 {
@@ -18,11 +20,17 @@ class ClientSeeder extends Seeder
             'email' => 'the.king.in.the.north@seven-kingdoms.org'
         ]);
 
-        dump($jon->getId());
 
         // Wish Lists
-        entity(ShoppingList::class, 'wish-list', 2)->create([
-            'client' => $jon
+        $lists = entity(ShoppingList::class, 'wish-list', 2)->make([
+            'client' => $jon,
         ]);
+
+        $lists->each(function ($list) {
+            $list->addWishedProduct(entity(WishedProduct::class)->make());
+            EntityManager::persist($list);
+        });
+
+        EntityManager::flush();
     }
 }

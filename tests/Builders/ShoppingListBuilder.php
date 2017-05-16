@@ -25,7 +25,7 @@ class ShoppingListBuilder
 
     public function build(): ShoppingList {
         $list = new ShoppingList($this->name);
-        $list->addProducts($this->products);
+        $list->addWishedProducts($this->products);
 
         return $list;
     }

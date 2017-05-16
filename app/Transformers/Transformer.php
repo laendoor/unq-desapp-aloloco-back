@@ -5,7 +5,7 @@ use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\ResourceAbstract;
 use League\Fractal\Serializer\ArraySerializer;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class Transformer
@@ -26,11 +26,11 @@ abstract class Transformer extends TransformerAbstract
     }
 
     /**
-     * @param ArrayCollection $collection
+     * @param Collection $collection
      * @param TransformerAbstract $transformer
      * @return array
      */
-    public function serializeCollection(ArrayCollection $collection, TransformerAbstract $transformer)
+    public function serializeCollection(Collection $collection, TransformerAbstract $transformer)
     {
         if ($collection->isEmpty()) return [];
 

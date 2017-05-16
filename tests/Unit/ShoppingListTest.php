@@ -38,7 +38,7 @@ class ShoppingTest extends TestCase
         $list = ShoppingListBuilder::anyBuilt();
 
         // Assert
-        $this->assertTrue($list->getWishProducts()->isEmpty());
+        $this->assertTrue($list->getWishedProducts()->isEmpty());
     }
 
     /**
@@ -51,13 +51,14 @@ class ShoppingTest extends TestCase
         // Arrange
         $list   = ShoppingListBuilder::anyBuilt();
         $coffee = Mockery::mock(WishedProduct::class);
+        $coffee->shouldReceive('setShoppingList')->andReturnNull();
 
         // Act
-        $list->addProduct($coffee);
+        $list->addWishedProduct($coffee);
 
         // Assert
-        $this->assertEquals(1, $list->getWishProducts()->count());
-        $this->assertEquals($coffee, $list->getWishProducts()->first());
+        $this->assertEquals(1, $list->getWishedProducts()->count());
+        $this->assertEquals($coffee, $list->getWishedProducts()->first());
     }
 
     /**
@@ -71,15 +72,17 @@ class ShoppingTest extends TestCase
         $list = ShoppingListBuilder::anyBuilt();
         $sugar  = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(false)->getMock();
         $coffee = Mockery::mock(WishedProduct::class)->shouldReceive('equals')->andReturn(true)->getMock();
+        $sugar->shouldReceive('setShoppingList')->andReturnNull();
+        $coffee->shouldReceive('setShoppingList')->andReturnNull();
 
         // Act
-        $list->addProduct($sugar);
-        $list->addProduct($coffee);
-        $list->removeProduct($coffee);
+        $list->addWishedProduct($sugar);
+        $list->addWishedProduct($coffee);
+        $list->removeWishedProduct($coffee);
 
         // Assert
-        $this->assertEquals(1, $list->getWishProducts()->count());
-        $this->assertEquals($sugar, $list->getWishProducts()->first());
+        $this->assertEquals(1, $list->getWishedProducts()->count());
+        $this->assertEquals($sugar, $list->getWishedProducts()->first());
     }
 
 }
