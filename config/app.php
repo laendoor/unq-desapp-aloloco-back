@@ -190,6 +190,7 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -245,6 +246,7 @@ return [
         'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
         'Registry' => LaravelDoctrine\ORM\Facades\Registry::class,
         'Doctrine' => LaravelDoctrine\ORM\Facades\Doctrine::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

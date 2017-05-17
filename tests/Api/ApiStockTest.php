@@ -4,6 +4,8 @@ namespace Api;
 
 use App\Model\Product\Price;
 use App\Model\Product\StockedProduct;
+use App\Repository\StockedProductRepository;
+use Illuminate\Http\UploadedFile;
 use Tests\Api\ApiTestCase;
 use App\Model\Product\Product;
 
@@ -51,15 +53,25 @@ class ApiStockTest extends ApiTestCase
      *
      * @return void
      */
-    public function it_store_stock_from_csv_file()
-    {
+    public function it_store_stock_from_csv_file(): void {
+        // Arrange
+        $path = base_path('doc/Productos.csv');
+        $name = 'Productos.csv';
+        $file = new UploadedFile($path, $name, filesize($path), 'text/csv', null, true);
+
         // Act
-        $response = $this->put(apiRoute('stock.store'));
+        $response = $this->put(apiRoute('stock.store'), [
+            'file' => $file
+        ]);
 
         // Assert
         $response->assertJson([
-            'error' => '400',
-            'description' => 'TODO'
+            'store' => true,
+        ]);
+
+        $this->assertDatabaseHas('products', [
+            'name' => 'Bizcochos',
+            'brand' => 'Don Satur',
         ]);
     }
 }
