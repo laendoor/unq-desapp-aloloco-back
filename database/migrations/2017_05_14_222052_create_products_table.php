@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
         });
 
         Schema::create('stocked_products', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('id')->unique();
             $table->integer('stock');
             $table->timestamps();
 
@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
         });
 
         Schema::create('wished_products', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('id')->unique();
             $table->integer('quantity');
             $table->integer('shopping_list_id');
             $table->timestamps();
