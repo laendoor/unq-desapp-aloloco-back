@@ -10,12 +10,12 @@
  - [x] Configuración en [Travis](https://travis-ci.org/Grupo-E-012017/aloloco)
  - [x] Estado de build en verde
  - [x] Configrar el proyecto en [codacy](https://www.codacy.com/app/Grupo-E-012017/aLoLoco/dashboard)
- - [ ] Coverage al 90% (_REVISAR ANTES DE TAGGEAR_)
+ - [x] Coverage al 90%
  - [x] [Diagrama UML](https://raw.githubusercontent.com/Grupo-E-012017/aloloco/master/doc/design.png)
  - [x] 2 [Mockup](https://raw.githubusercontent.com/Grupo-E-012017/aloloco/master/doc/mockups.png) de las ventanas de la aplicación
  - [x] [Pantalla prototipo](https://aloloco-grupo-e.herokuapp.com/) del uso de la API de gmaps
  - [x] Deploy automático utlizando Heroku
- - [ ] TAG en GitHub (_TODO_)
+ - [x] TAG en GitHub
  - [x] Confeccionar Release Notes de entrega 1
  - [x] Clean Code según la materia (todo en Ingles)
  - [x] Testing según las pautas de la materia
@@ -92,3 +92,25 @@ el guardado y falta mejorar la UX.
 - Mapa: Integración con Google Maps para mostrar el camino de un punto a otro y la distancia entre estos. 
 - Carga por Batch: Formulario con un input para realizar la carga de productos desde un CSV.
  
+#### Back End
+
+ - La aplicación de backend cumple ahora el rol de API REST. Se establecieron las siguientes rutas:
+
+ * `GET /`: Retorna información de la aplicación.
+ * `GET /client`: Retorna datos del usuario autenticado.
+ * `GET /client/wishlists`: Retorna las listas de compras del usuario autenticado;
+    cada lista despliega los productos de la misma.
+ * `GET /stock`: Retorna la lista de productos en stock
+ * `POST|PUT /stock`: Recibe el archivo csv de productos y actualiza el stock
+
+ - Se logró incorporar correctamente Doctrine como ORM, aplicándolo en las clases de usuario, cliente, listas y productos.
+ 
+ - Se generaron los test necesarios para verificar el funcionamiento del ORM en las clases descriptas.
+ 
+ - Se generaron servicios _bindeados_ que cumplen con _Repository Pattern_ para la manipulación de los objetos
+   persistentes, a la vez que fueron incorporados al IoC para permitir la inyección de los mismos en los Controladores.
+   
+ - Se establecieron _Seeders_ con valores de prueba para lograr contar con una aplicación funcional.
+ 
+ - Se logró configurar correctamente el servidor en Heroku, permitiendo la correcta comunicación entre
+   el frontend y el backend.
