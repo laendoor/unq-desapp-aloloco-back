@@ -25,8 +25,9 @@ class ProductTest extends IntegrationsTestCase
         $database_products = $products_repository->findAll();
 
         // Assert
-        $this->assertEquals('Papas Fritas', $database_products[0]->getName());
+        $this->assertEquals(1, $database_products[0]->getId());
         $this->assertEquals('Lays', $database_products[0]->getBrand());
+        $this->assertEquals('Papas Fritas', $database_products[0]->getName());
     }
 
     /**

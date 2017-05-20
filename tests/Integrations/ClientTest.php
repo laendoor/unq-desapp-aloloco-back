@@ -40,6 +40,7 @@ class ClientTest extends IntegrationsTestCase
         $dany_db = collect($this->repo->findAll())->first();
 
         // Assert
+        $this->assertEquals(1, $dany_db->getId());
         $this->assertEquals('mother.of.dragons@seven-kingdoms.org', $dany_db->getEmail());
     }
 
