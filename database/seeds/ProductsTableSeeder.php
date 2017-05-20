@@ -1,6 +1,5 @@
 <?php
 
-use Faker\Factory;
 use Illuminate\Database\Seeder;
 use App\Model\Product\StockedProduct;
 

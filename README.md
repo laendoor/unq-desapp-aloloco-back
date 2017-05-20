@@ -7,7 +7,8 @@
 
 Desarrollo de Aplicaciones :: UNQ
 
-[Ir al Frontend](https://github.com/Grupo-E-012017/aloloco-front)
+ - [Frontend Repo](https://github.com/Grupo-E-012017/aloloco-front)
+ - [App Heroku](https://aloloco-grupo-e-front.herokuapp.com)
 
 ## Grupo E :: 2017.01
 
@@ -28,6 +29,7 @@ $ git clone https://github.com/Grupo-E-012017/aloloco.git
 $ cd aloloco
 $ touch database/database.sqlite database/phpunit.sqlite
 $ composer install
+$ cp .env.example .env      # setear las variables de entorno necesarias
 ```
 
 ```
@@ -35,14 +37,17 @@ $ composer install
 $ vendor/bin/phpunit tests/
 ```
 
+```
+# probar la aplicación
+$ php artisan migrate
+$ php artisan db:seed
+```
+
 ### [Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
 
 ### API REST Methods
 
-#### Home
-
-##### `GET /`
-API info
+#### `GET /`: API info
 
 ```json
 {
@@ -50,18 +55,37 @@ API info
 }
 ```
 
-#### Client
+#### `GET /client`: Retrieve auth user basic data
 
-##### `GET /client`
-Retrieve auth user basic data
+#### `GET /client/wishlists`: Show client wish lists
 
-##### `GET /client/wishlists`
-Show client wish lists
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Asado del Domingo",
+      "client": {
+        "id": 1,
+        "email": "the.king.in.the.north@seven-kingdoms.org"
+      },
+      "products": [
+        {
+          "id": 13,
+          "name": "Cerveza",
+          "brand": "Quilmes",
+          "image": "http://lorempixel.com/400/400/food/?15065",
+          "quantity": 10
+        },
+        "..."
+      ],
+      "..."
+    }
+  ]
+}
+```
 
-#### Stock
-
-##### `GET /stock`
-List products in stock
+#### `GET /stock`: List products in stock
 
 ```json
 {
@@ -71,16 +95,13 @@ List products in stock
       "name": "Dicta iusto fuga.",
       "brand": "Dolores soluta dolor.",
       "image": "http://lorempixel.com/300/400/food/?76408"
-    }
-    /* ... */
+    },
+    "..."
   ]
 }
 ```
 
-##### `POST|PUT /stock`
-Store received csv file into stock
-
-**_TODO_**
+#### `POST|PUT /stock`: Store received csv file into stock
 
 ### Diagrama UML
 

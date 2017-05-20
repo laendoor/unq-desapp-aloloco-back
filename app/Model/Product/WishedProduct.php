@@ -37,37 +37,10 @@ class WishedProduct extends Product
     }
 
     /**
-     * @return ShoppingList
-     */
-    public function getShoppingList(): ShoppingList {
-        return $this->shoppingList;
-    }
-
-    /**
      * @param ShoppingList $shoppingList
      */
     public function setShoppingList(ShoppingList $shoppingList):void {
         $this->shoppingList = $shoppingList;
-    }
-
-    public function __toString() {
-        return $this->getName();
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param int $quantity
-     */
-    public function setQuantity(int $quantity)
-    {
-        $this->quantity = $quantity;
     }
 
 }
