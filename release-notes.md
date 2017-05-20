@@ -84,19 +84,15 @@ El framework integrado para desarrollar la aplicación fue Angular, principalmen
 e integramos Restangular para interactuar con la API Rest del back end (todos los datos que se pueden ver 
 en la aplicacion servidos por el back end. Para darle estilos al front end utilizamos Bootstrap y Fontawesome. 
 La aplicación ya cuenta con un gran soporte para dispositivos móviles aunque no en su totalidad. Se integró angular-i18n
-el cual se encargar del formateo y traduccion de distintas cuestiones como los días y formatos de hora y fechas entre otras.
+el cual se encarga del formateo y traduccion de distintas cuestiones como los días y formatos de hora y fechas entre otras.
 
 Las vistas desarrolladas para esta entrega son:
 
 - Home: Permite ver el listado de wishlists del usuario (asumimos que ya se encuentra logeado).
-
 - Wishlist: Vista interna de una wishlist desde la cual se pueden ver los productos de la misma.
-
 - Creación de wishlists: Permite asignar un nombre y productos para la creación de nuevas wishlists, todavía no 
 se persiste y falta mejorar la UX. 
-
 - Mapa: Integración con Google Maps para mostrar el camino de un punto a otro y la distancia entre estos. 
-
 - Carga por Batch: Formulario con un input para realizar la carga de productos desde un CSV.
  
 #### Back End
