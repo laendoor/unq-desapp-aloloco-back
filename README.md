@@ -37,12 +37,6 @@ $ cp .env.example .env      # setear las variables de entorno necesarias
 $ vendor/bin/phpunit tests/
 ```
 
-```
-# probar la aplicación
-$ php artisan migrate
-$ php artisan db:seed
-```
-
 ### [Enunciado](https://docs.google.com/document/d/12mQ0RNt8awqc2ow6FsQvsXm-AQiGmC-xlM9b2A_OPRA/edit)
 
 ### API REST Methods

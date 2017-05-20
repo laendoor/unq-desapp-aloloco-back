@@ -4,6 +4,7 @@ namespace Tests\Builders;
 
 use App\Model\Product\Price;
 use App\Model\Product\Product;
+use App\Model\Product\StockedProduct;
 use App\Model\Product\WishedProduct;
 use Mockery;
 
@@ -36,13 +37,17 @@ class ProductBuilder
         return self::new()->buildWished();
     }
 
+    public static function anyBuiltStocked(): StockedProduct
+    {
+        return self::new()->buildStocked();
+    }
+
     public function build(): Product
     {
         return new Product(
             $this->name,
             $this->brand,
             $this->price,
-            $this->quantity,
             $this->image
         );
     }
@@ -54,6 +59,17 @@ class ProductBuilder
             $this->brand,
             $this->price,
             $this->quantity,
+            $this->image
+        );
+    }
+
+    public function buildStocked(): StockedProduct
+    {
+        return new StockedProduct(
+            $this->name,
+            $this->brand,
+            $this->price,
+            $this->stock,
             $this->image
         );
     }
@@ -82,6 +98,13 @@ class ProductBuilder
     public function withQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function withStock(int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }
