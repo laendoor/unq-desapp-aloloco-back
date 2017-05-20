@@ -43,4 +43,12 @@ class WishedProduct extends Product
         $this->shoppingList = $shoppingList;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
 }
