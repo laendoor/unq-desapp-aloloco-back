@@ -76,7 +76,7 @@
  #### Front End
  
 Se creó un nuevo proyecto para desarrollar el front end, el repositorio del mismo se encuentra en 
-https://github.com/Grupo-E-012017/aloloco-front y la aplicación se puede utilizar en https://aloloco-grupo-e-front.herokuapp.com/. 
+https://github.com/Grupo-E-012017/aloloco-front y la aplicación se puede utilizar desde https://aloloco-grupo-e-front.herokuapp.com/. 
 
 Para gestionar las dependencias de desarrollo utilizamos Npm y para las del front end, Bower. 
 
