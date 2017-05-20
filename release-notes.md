@@ -58,38 +58,45 @@
  #### Checklist de la entrega
  
  ##### Core 
- - [ ] Estado de build en "Verde"
- - [ ] Memory SQLite
- - [ ] Datos "fake" para probar la aplicación
+ - [x] Estado de build en "Verde"
+ - [x] Memory SQLite
+ - [x] Datos "fake" para probar la aplicación
  - [ ] I18n- US_ES
- - [ ] Implementación de Layout de backend según la arquitectura definida
- - [ ] Implementación del tier de Presentación como aplicación independiente (que levante)
- - [ ] TAG en GitHub
- - [ ] Confeccionar Release Notes de entrega 1 (https://drive.google.com/file/d/0BxyNm_rQ4Q8vZU52eF9QeXR4X3M/view)
+ - [x] Implementación de Layout de backend según la arquitectura definida
+ - [x] Implementación del tier de Presentación como aplicación independiente (que levante)
+ - [x] TAG en GitHub
+ - [x] Confeccionar Release Notes de entrega 1 (https://drive.google.com/file/d/0BxyNm_rQ4Q8vZU52eF9QeXR4X3M/view)
  
  ##### Funcionalidad
  - [x] Listar productos
- - [ ] Agregar productos al carrito de compras 
- - [ ] Encolar Pedido para su posterior pago
+ - [x] Agregar productos al carrito de compras 
+ - [x] Encolar Pedido para su posterior pago
  - [x] Subir archivo de productos Batch <ID, Nombre, Marca, Stock, Precio, Imagen>
  
  #### Front End
  
-Se creó un nuevo proyecto para desarrollar el front end, el repositorio del mismo se encuentra en <url>. 
+Se creó un nuevo proyecto para desarrollar el front end, el repositorio del mismo se encuentra en 
+https://github.com/Grupo-E-012017/aloloco-front y la aplicación se puede utilizar en https://aloloco-grupo-e-front.herokuapp.com/. 
+
 Para gestionar las dependencias de desarrollo utilizamos Npm y para las del front end, Bower. 
 
 El framework integrado para desarrollar la aplicación fue Angular, principalmente hicimos uso del router 
-e integramos Restangular para interactuar con la API Rest del back end. Para darle estilos al front end
-utilizamos Bootstrap y Fontawesome. Si bien no en su totalidad, la aplicación ya cuenta con un gran 
-soporte para dispositivos moviles. 
+e integramos Restangular para interactuar con la API Rest del back end (todos los datos que se pueden ver 
+en la aplicacion servidos por el back end. Para darle estilos al front end utilizamos Bootstrap y Fontawesome. 
+La aplicación ya cuenta con un gran soporte para dispositivos móviles aunque no en su totalidad. Se integró angular-i18n
+el cual se encargar del formateo y traduccion de distintas cuestiones como los días y formatos de hora y fechas entre otras.
 
 Las vistas desarrolladas para esta entrega son:
 
 - Home: Permite ver el listado de wishlists del usuario (asumimos que ya se encuentra logeado).
+
 - Wishlist: Vista interna de una wishlist desde la cual se pueden ver los productos de la misma.
-- Creación de wishlists: Permite asignar un nombre y productos para la creacion de nuevas wishlists, aun no se realiza
-el guardado y falta mejorar la UX. 
+
+- Creación de wishlists: Permite asignar un nombre y productos para la creación de nuevas wishlists, todavía no 
+se persiste y falta mejorar la UX. 
+
 - Mapa: Integración con Google Maps para mostrar el camino de un punto a otro y la distancia entre estos. 
+
 - Carga por Batch: Formulario con un input para realizar la carga de productos desde un CSV.
  
 #### Back End
