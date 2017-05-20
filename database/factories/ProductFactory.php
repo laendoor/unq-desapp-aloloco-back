@@ -29,7 +29,7 @@ $factory->defineAs(Product::class, 'milk', function () use ($factory) {
  * Stocked Products
  */
 
-$factory->define(WishedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
+$factory->define(StockedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
     return array_merge($factory->raw(Product::class), [
         'stock' => $attributes['stock'] ?? $faker->numberBetween(1, 10)
     ]);
@@ -39,7 +39,7 @@ $factory->define(WishedProduct::class, function (Faker $faker, array $attributes
  * Wished Products
  */
 
-$factory->define(StockedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
+$factory->define(WishedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
     return array_merge($factory->raw(Product::class), [
         'quantity' => $attributes['quantity'] ?? $faker->numberBetween(1, 6)
     ]);

@@ -1,7 +1,8 @@
 <?php
 
-use App\Model\Product\StockedProduct;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use App\Model\Product\StockedProduct;
 
 class ProductsTableSeeder extends Seeder
 {
