@@ -61,7 +61,7 @@
  - [x] Estado de build en "Verde"
  - [x] Memory SQLite
  - [x] Datos "fake" para probar la aplicación
- - [ ] I18n- US_ES
+ - [x] I18n- US_ES
  - [x] Implementación de Layout de backend según la arquitectura definida
  - [x] Implementación del tier de Presentación como aplicación independiente (que levante)
  - [x] TAG en GitHub
