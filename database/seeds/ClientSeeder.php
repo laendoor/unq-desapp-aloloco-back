@@ -77,8 +77,7 @@ class ClientSeeder extends Seeder
         $repo = resolve(ProductRepository::class);
 
         $product = $repo->findByNameAndBrand($name, $brand);
-        $product = new WishedProduct($product->getName(), $product->getBrand(),
-            new Price(0), $quantity, $product->getImage());
+        $product = new WishedProduct($product, $quantity);
 
         $list->addWishedProduct($product);
 
