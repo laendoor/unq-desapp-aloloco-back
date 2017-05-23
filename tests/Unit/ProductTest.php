@@ -19,13 +19,26 @@ class ProductTest extends TestCase
             ->withName('Coffee')
             ->withBrand('Cabrales')
             ->withImage('http')
-            ->build();
+            ->buildProduct();
         $anotherCoffee = ProductBuilder::new()
             ->withName('Coffee')
             ->withBrand('Cabrales')
             ->withImage('ftp')
-            ->build();
+            ->buildProduct();
 
         $this->assertTrue($coffee->equals($anotherCoffee));
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_is_created_as_product_but_with_stock_value()
+    {
+        $coffee = ProductBuilder::anyBuiltProduct();
+        $coffee->setStock(10);
+
+        $this->assertEquals(10, $coffee->getStock());
     }
 }

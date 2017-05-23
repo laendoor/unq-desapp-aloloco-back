@@ -32,14 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(StockedProductRepository::class, function ($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
-            return new DoctrineStockedProductRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(StockedProduct::class)
-            );
-        });
-
         $this->app->bind(WishListRepository::class, function ($app) {
             // This is what Doctrine's EntityRepository needs in its constructor.
             return new DoctrineWishListRepository(

@@ -18,25 +18,18 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('brand');
             $table->string('image');
-            $table->string('discr');
-            $table->timestamps();
-        });
-
-        Schema::create('stocked_products', function (Blueprint $table) {
-            $table->integer('id')->unique();
             $table->integer('stock');
             $table->timestamps();
-
-            $table->foreign('id')->references('id')->on('products');
         });
 
         Schema::create('wished_products', function (Blueprint $table) {
-            $table->integer('id')->unique();
+            $table->increments('id');
+            $table->integer('product_id');
             $table->integer('quantity');
             $table->integer('shopping_list_id');
             $table->timestamps();
 
-            $table->foreign('id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('shopping_list_id')->references('id')->on('shopping_lists');
         });
     }
@@ -49,7 +42,6 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('wished_products');
-        Schema::dropIfExists('stocked_products');
         Schema::dropIfExists('products');
     }
 }

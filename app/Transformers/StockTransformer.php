@@ -1,6 +1,7 @@
 <?php
 namespace App\Transformers;
 
+use App\Model\Product\Product;
 use App\Model\Product\StockedProduct;
 
 /**
@@ -9,7 +10,7 @@ use App\Model\Product\StockedProduct;
  */
 class StockTransformer extends Transformer
 {
-    public function transform(StockedProduct $product): array {
+    public function transform(Product $product): array {
         return [
             'id'    => $product->getId(),
             'name'  => $product->getName(),

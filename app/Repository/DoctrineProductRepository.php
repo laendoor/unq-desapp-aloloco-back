@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use App\Model\Product\Product;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -11,10 +12,17 @@ class DoctrineProductRepository
     extends EntityRepository
     implements ProductRepository {
 
-    public function findByNameAndBrand(string $name, string $brand) {
+    public function findByNameAndBrand(string $name, string $brand)
+    {
         return $this->findOneBy([
             'name' => $name,
             'brand' => $brand
         ]);
+    }
+
+    public function save(Product $product)
+    {
+        $this->_em->persist($product);
+        $this->_em->flush();
     }
 }

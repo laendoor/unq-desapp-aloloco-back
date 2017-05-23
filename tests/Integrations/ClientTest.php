@@ -84,6 +84,7 @@ class ClientTest extends IntegrationsTestCase
         $dany = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
 
         // Act
+        EntityManager::persist($milk->getProduct());
         EntityManager::persist($dany);
         EntityManager::flush();
 

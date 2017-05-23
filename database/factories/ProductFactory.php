@@ -9,8 +9,9 @@ $factory->define(Product::class, function(Faker $faker, array $attributes = []) 
     $name  = $attributes['name']  ?? $faker->sentence(2);
     $brand = $attributes['brand'] ?? $faker->sentence(2);
     $image = $attributes['image'] ?? $faker->imageUrl(400, 400, 'food');
+    $stock = $attributes['stock'] ?? $faker->numberBetween(1, 10);
 
-    return compact('name', 'brand', 'image');
+    return compact('name', 'brand', 'stock', 'image');
 });
 
 $factory->defineAs(Product::class, 'french-fries', function () use ($factory) {
@@ -26,22 +27,13 @@ $factory->defineAs(Product::class, 'milk', function () use ($factory) {
 });
 
 /*
- * Stocked Products
- */
-
-$factory->define(StockedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
-    return array_merge($factory->raw(Product::class), [
-        'stock' => $attributes['stock'] ?? $faker->numberBetween(1, 10)
-    ]);
-});
-
-/*
  * Wished Products
  */
 
 $factory->define(WishedProduct::class, function (Faker $faker, array $attributes = []) use ($factory) {
-    return array_merge($factory->raw(Product::class), [
-        'quantity' => $attributes['quantity'] ?? $faker->numberBetween(1, 6)
-    ]);
+    $product  = $attributes['product'] ?? $factory->raw(Product::class);
+    $quantity = $attributes['quantity'] ?? $faker->numberBetween(1, 10);
+
+    return compact('product', 'quantity');
 });
 

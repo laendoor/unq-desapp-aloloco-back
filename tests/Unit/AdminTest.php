@@ -5,7 +5,7 @@ use Mockery;
 use Tests\TestCase;
 use Tests\Builders\UserBuilder;
 use App\Model\Market;
-use App\Model\Product\StockedProduct;
+use App\Model\Product\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -37,9 +37,9 @@ class AdminTest extends TestCase
      */
     public function it_can_update_market_stock(): void {
         // Arrange
-        $coffee = Mockery::mock(StockedProduct::class);
-        $sugar  = Mockery::mock(StockedProduct::class);
-        $milk   = Mockery::mock(StockedProduct::class);
+        $coffee = Mockery::mock(Product::class);
+        $sugar  = Mockery::mock(Product::class);
+        $milk   = Mockery::mock(Product::class);
         $stock  = new ArrayCollection([$coffee, $sugar, $milk]);
         $market = Mockery::mock(Market::class);
         $market->shouldReceive('getStock')->once()->andReturn($stock);
