@@ -97,4 +97,12 @@ class WishedProduct
         return $this->getProduct()->getName();
     }
 
+    public function getBrand(): string {
+        return $this->getProduct()->getBrand();
+    }
+
+    public function getImage(): string {
+        return $this->getProduct()->getImage();
+    }
+
 }
