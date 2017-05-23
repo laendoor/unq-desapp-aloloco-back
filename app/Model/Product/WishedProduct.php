@@ -12,9 +12,23 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  */
-class WishedProduct extends Product
+class WishedProduct
 {
     use ProductStateBehavior;
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @var Product
+     * Many WishedProducts have One Product
+     * @ORM\ManyToOne(targetEntity="\App\Model\Product\Product", inversedBy="wishedProducts")
+     */
+    private $product;
 
     /**
      * @ORM\Column(type="integer")
@@ -27,12 +41,10 @@ class WishedProduct extends Product
      */
     protected $shoppingList;
 
-    public function __construct(string $name, string $brand,
-                                Price $price, int $quantity, string $image = '')
+    public function __construct(Product $product, int $quantity)
     {
-        parent::__construct($name, $brand, $price, $image);
-
         $this->state    = new Wished;
+        $this->product  = $product;
         $this->quantity = $quantity;
     }
 
@@ -49,6 +61,40 @@ class WishedProduct extends Product
     public function getQuantity()
     {
         return $this->quantity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return Product
+     */
+    public function getProduct(): Product {
+        return $this->product;
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function setProduct(Product $product) {
+        $this->product = $product;
+    }
+
+    public function getName(): string {
+        return $this->getProduct()->getName();
     }
 
 }

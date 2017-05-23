@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-use App\Model\Product\StockedProduct;
+use App\Model\Product\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -26,7 +26,7 @@ class Market
     }
 
     /**
-     * @return ArrayCollection<StockedProduct>
+     * @return ArrayCollection<Product>
      */
     public function getStock(): ArrayCollection {
         return $this->products;
@@ -40,11 +40,11 @@ class Market
     }
 
     /**
-     * @param StockedProduct $product
+     * @param Product $product
      *
      * @return void
      */
-    public function addProduct(StockedProduct $product): void {
+    public function addProduct(Product $product): void {
         $this->products->add($product);
     }
 

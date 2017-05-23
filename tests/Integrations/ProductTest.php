@@ -16,7 +16,7 @@ class ProductTest extends IntegrationsTestCase
     {
         // Arrange
         $price = new Price(44, 50);
-        $lays_fries = new Product('Papas Fritas', 'Lays', $price, 'lays.jpg');
+        $lays_fries = new Product('Papas Fritas', 'Lays', $price, 10, 'lays.jpg');
         $products_repository = EntityManager::getRepository(Product::class);
 
         // Act

@@ -37,59 +37,34 @@ class ProductBuilder
         return self::new()->buildWished();
     }
 
-    public static function anyBuiltStocked(): StockedProduct
+    public static function anyBuiltProduct(): Product
     {
-        return self::new()->buildStocked();
+        return self::new()->buildProduct();
     }
 
-    public function build(): Product
+    public function buildProduct(): Product
     {
-        return new Product(
-            $this->name,
-            $this->brand,
-            $this->price,
-            $this->image
-        );
+        return new Product($this->name, $this->brand, $this->price, $this->stock, $this->image);
     }
 
     public function buildWished(): WishedProduct
     {
-        return new WishedProduct(
-            $this->name,
-            $this->brand,
-            $this->price,
-            $this->quantity,
-            $this->image
-        );
+        return new WishedProduct($this->buildProduct(), $this->quantity);
     }
 
-    public function buildStocked(): StockedProduct
-    {
-        return new StockedProduct(
-            $this->name,
-            $this->brand,
-            $this->price,
-            $this->stock,
-            $this->image
-        );
-    }
-
-    public function withName(string $name): self
-    {
+    public function withName(string $name): self {
         $this->name = $name;
 
         return $this;
     }
 
-    public function withBrand(string $brand): self
-    {
+    public function withBrand(string $brand): self {
         $this->brand = $brand;
 
         return $this;
     }
 
-    public function withImage(string $image): self
-    {
+    public function withImage(string $image): self {
         $this->image = $image;
 
         return $this;

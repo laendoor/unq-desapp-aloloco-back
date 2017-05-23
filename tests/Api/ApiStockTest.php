@@ -23,16 +23,10 @@ class ApiStockTest extends ApiTestCase
     public function it_get_all_products()
     {
         // Arrange
-        $productData = [
+        entity(Product::class)->create([
             'name'  => 'Papas Fritas',
             'brand' => 'Lays',
-            'image' => 'lays.jpg'
-        ];
-        $product = entity(Product::class)->create($productData);
-        entity(StockedProduct::class)->create([
-            'name' => $product->getName(),
-            'brand' => $product->getBrand(),
-            'image' => $product->getImage(),
+            'image' => 'lays.jpg',
             'stock' => 10,
         ]);
 

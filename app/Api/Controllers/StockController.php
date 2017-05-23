@@ -1,13 +1,14 @@
 <?php
 namespace App\Api\Controllers;
 
-use Maatwebsite\Excel\Facades\Excel;
-use App\Model\Product\Price;
-use App\Model\Product\StockedProduct;
-use App\Repository\StockedProductRepository;
-use App\Transformers\StockTransformer;
 use Dingo\Api\Http\Request;
 use Dingo\Api\Http\Response;
+use App\Model\Product\Price;
+use App\Model\Product\Product;
+use App\Model\Product\StockedProduct;
+use App\Repository\ProductRepository;
+use App\Transformers\StockTransformer;
+use Maatwebsite\Excel\Facades\Excel;
 use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
 use Dingo\Blueprint\Annotation\Method\Put;
@@ -25,11 +26,11 @@ class StockController extends ApiBaseController
      *
      * @Get("/")
      *
-     * @param StockedProductRepository $repoProduct
+     * @param ProductRepository $repoProduct
      * @param StockTransformer $transformer
      * @return Response
      */
-    public function get(StockedProductRepository $repoProduct, StockTransformer $transformer): Response {
+    public function get(ProductRepository $repoProduct, StockTransformer $transformer): Response {
         $products = $repoProduct->findAll();
 
         return $this->response->collection(collect($products), $transformer);
@@ -40,11 +41,11 @@ class StockController extends ApiBaseController
      *
      * @Put("/")
      *
-     * @param StockedProductRepository $repo
+     * @param ProductRepository $repo
      * @param Request $request
      * @return Response
      */
-    public function store(StockedProductRepository $repo, Request $request): Response
+    public function store(ProductRepository $repo, Request $request): Response
     {
         $file = $request->file('file');
         Excel::load($file->getPathname(), function ($reader) use ($repo) {
@@ -57,7 +58,7 @@ class StockController extends ApiBaseController
                     $product_db->setStock(intval($product['stock']));
                     $repo->save($product_db);
                 } else {
-                    $product = new StockedProduct($product['nombre'], $product['marca'],
+                    $product = new Product($product['nombre'], $product['marca'],
                         new Price(2), intval($product['stock']), $product['imagen']);
                     $repo->save($product);
                 }
