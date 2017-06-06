@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Product;
 
+use App\Model\Product;
 use App\Model\ShoppingList;
 use App\Model\Product\State\Wished;
 use App\Model\Product\State\ProductStateBehavior;
@@ -26,7 +27,7 @@ class WishedProduct
     /**
      * @var Product
      * Many WishedProducts have One Product
-     * @ORM\ManyToOne(targetEntity="\App\Model\Product\Product", inversedBy="wishedProducts")
+     * @ORM\ManyToOne(targetEntity="\App\Model\Product", inversedBy="wishedProducts")
      */
     private $product;
 

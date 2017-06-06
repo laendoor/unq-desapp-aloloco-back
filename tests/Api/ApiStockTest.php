@@ -1,13 +1,11 @@
 <?php
 
-namespace Api;
+namespace Tests\Api;
 
-use App\Model\Product\Price;
 use App\Model\Product\StockedProduct;
 use App\Repository\StockedProductRepository;
 use Illuminate\Http\UploadedFile;
-use Tests\Api\ApiTestCase;
-use App\Model\Product\Product;
+use App\Model\Product;
 
 /**
  * Class ApiStockTest

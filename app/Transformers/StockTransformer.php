@@ -1,7 +1,7 @@
 <?php
 namespace App\Transformers;
 
-use App\Model\Product\Product;
+use App\Model\Product;
 use App\Model\Product\StockedProduct;
 
 /**

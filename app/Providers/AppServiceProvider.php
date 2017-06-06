@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Model\User;
 use App\Model\ShoppingList;
-use App\Model\Product\Product;
+use App\Model\Product;
 use App\Model\Product\StockedProduct;
 use App\Repository\UserRepository;
 use App\Repository\ProductRepository;

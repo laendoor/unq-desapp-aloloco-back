@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Integrations;
 
+use App\Model\Product;
 use App\Model\Product\Price;
-use App\Model\Product\Product;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class ProductTest extends IntegrationsTestCase

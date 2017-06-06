@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Tests\Api;
 
 use App\Model\Client;
 use App\Model\ShoppingList;

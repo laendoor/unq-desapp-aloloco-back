@@ -5,7 +5,7 @@ use Mockery;
 use Tests\TestCase;
 use Tests\Builders\UserBuilder;
 use App\Model\Market;
-use App\Model\Product\Product;
+use App\Model\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

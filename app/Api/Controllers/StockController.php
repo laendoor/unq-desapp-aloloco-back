@@ -3,8 +3,8 @@ namespace App\Api\Controllers;
 
 use Dingo\Api\Http\Request;
 use Dingo\Api\Http\Response;
+use App\Model\Product;
 use App\Model\Product\Price;
-use App\Model\Product\Product;
 use App\Model\Product\StockedProduct;
 use App\Repository\ProductRepository;
 use App\Transformers\StockTransformer;

@@ -1,11 +1,9 @@
 <?php
 
-namespace Api;
+namespace Tests\Api;
 
 use App\Model\Client;
 use App\Model\ShoppingList;
-use Tests\Api\ApiTestCase;
-use LaravelDoctrine\ORM\Facades\EntityManager;
 
 /**
  * Class ApiClientTest

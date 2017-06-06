@@ -1,7 +1,7 @@
 <?php
 namespace App\Repository;
 
-use App\Model\Product\Product;
+use App\Model\Product;
 
 /**
  * Interface ProductRepository

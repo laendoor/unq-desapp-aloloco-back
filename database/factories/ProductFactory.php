@@ -3,7 +3,7 @@
 use App\Model\Product\StockedProduct;
 use App\Model\Product\WishedProduct;
 use Faker\Generator as Faker;
-use App\Model\Product\Product;
+use App\Model\Product;
 
 $factory->define(Product::class, function(Faker $faker, array $attributes = []) {
     $name  = $attributes['name']  ?? $faker->sentence(2);

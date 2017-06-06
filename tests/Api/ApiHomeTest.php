@@ -1,7 +1,5 @@
 <?php
-namespace Api;
-
-use Tests\Api\ApiTestCase;
+namespace Tests\Api;
 
 /**
  * Class ApiHomeTest
