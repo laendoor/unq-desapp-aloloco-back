@@ -28,6 +28,8 @@ $api->group($params, function(Router $api) {
 
     $api->get('', ['as' => 'info', 'uses' => 'HomeController@info']);
 
+    $api->post('/user/auth', ['as' => 'user.auth', 'uses' => 'UserController@checkToken']);
+
     // FIXME: it group will need auth client middleware
     $api->group(['prefix' => 'client', 'as' => 'client'], function (Router $api) {
         $api->get('', ['as' => 'info', 'uses' => 'ClientController@info']);

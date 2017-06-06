@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  */
-abstract class User
+class User
 {
     /**
      * @ORM\Id
@@ -29,15 +29,21 @@ abstract class User
      * @ORM\Column(type="string")
      */
     private $email;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $google_id;
 
     /**
      * Client constructor.
      * @param Market $market
      * @param string $email
+     * @param string $google_id
      */
-    public function __construct(Market $market, string $email) {
+    public function __construct(Market $market, string $email, string $google_id = '') {
         $this->email  = $email;
         $this->market = $market;
+        $this->google_id = $google_id;
     }
 
     /*
