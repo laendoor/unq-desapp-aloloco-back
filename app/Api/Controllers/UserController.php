@@ -1,15 +1,12 @@
 <?php
 namespace App\Api\Controllers;
 
+use Google_Client;
 use App\Repository\UserRepository;
-use App\Repository\WishListRepository;
-use App\Transformers\WishListTransformer;
 use Dingo\Api\Http\Request;
 use Dingo\Api\Http\Response;
 use Dingo\Blueprint\Annotation\Method\Post;
 use Dingo\Blueprint\Annotation\Resource;
-use Dingo\Blueprint\Annotation\Method\Get;
-use Google_Client;
 
 /**
  * Class UserController

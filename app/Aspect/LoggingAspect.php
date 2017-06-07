@@ -4,8 +4,7 @@ namespace App\Aspect;
 
 use Go\Aop\Aspect;
 use Go\Aop\Intercept\MethodInvocation;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
+use Go\Lang\Annotation\Before;
 use Psr\Log\LoggerInterface;
 
 /**
