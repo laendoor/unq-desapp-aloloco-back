@@ -137,12 +137,11 @@ return [
 
     'providers' => [
         /*
-         * Go! Aspect Service Provider: Make sure that this service provider is the
-         * first item in this list. This is required for the AOP engine to work
-         * correctly.
+         * Go! Aspect Service Provider
+         *  Make sure that this service provider is the first item in this list.
+         *  This is required for the AOP engine to work correctly.
          */
-//        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
-//        \App\Providers\AopServiceProvider::class,
+        Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...
@@ -183,6 +182,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\AopServiceProvider::class,
 
         /*
          * Vendors Service Providers...

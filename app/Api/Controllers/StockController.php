@@ -51,7 +51,6 @@ class StockController extends ApiBaseController
         Excel::load($file->getPathname(), function ($reader) use ($repo) {
 
             collect($reader->toArray())->each(function ($product) use ($repo) {
-                \Log::info($product);
                 $product_db = $repo->findByNameAndBrand($product['nombre'], $product['marca']);
                 if ($product_db) {
                     $product_db->setImage($product['imagen']);
