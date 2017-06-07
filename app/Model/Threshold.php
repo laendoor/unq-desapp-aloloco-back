@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use App\Model\Threshold\ThresholdState;
 use App\Model\Threshold\ThresholdStateEnabled;
 use App\Model\Threshold\ThresholdStateDisabled;
@@ -8,9 +9,18 @@ use App\Model\Threshold\ThresholdStateDisabled;
 /**
  * Class Threshold
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 abstract class Threshold
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
     /**
      * @var Price
      */

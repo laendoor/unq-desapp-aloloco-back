@@ -1,14 +1,24 @@
 <?php
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Market
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 class Market
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
     /**
      * @var ArrayCollection<Box>
      */

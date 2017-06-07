@@ -1,15 +1,24 @@
 <?php
-
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Box
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 class Box
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
     /**
      * @var ArrayCollection<BoxTime>
      */

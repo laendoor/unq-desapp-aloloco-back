@@ -1,11 +1,14 @@
 <?php
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Admin
  * @package App\Model
+ *
+ * @ORM\Entity
  */
 class Admin extends User
 {
