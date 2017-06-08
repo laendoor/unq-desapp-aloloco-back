@@ -41,7 +41,7 @@ $ vendor/bin/phpunit tests/
 
 ### API REST Methods
 
-#### `GET /`: API info
+#### `GET /` _API info_
 
 ```json
 {
@@ -49,9 +49,9 @@ $ vendor/bin/phpunit tests/
 }
 ```
 
-#### `GET /client`: Retrieve auth user basic data
+#### `GET /client/{id}` _Retrieve auth user basic data_
 
-#### `GET /client/wishlists`: Show client wish lists
+#### `GET /client/{id}/wishlists` _Show client wish lists_
 
 ```json
 {
@@ -79,7 +79,7 @@ $ vendor/bin/phpunit tests/
 }
 ```
 
-#### `GET /stock`: List products in stock
+#### `GET /stock` _List products in stock_
 
 ```json
 {
@@ -95,7 +95,7 @@ $ vendor/bin/phpunit tests/
 }
 ```
 
-#### `POST|PUT /stock`: Store received csv file into stock
+#### `POST|PUT /stock` _Store received csv file into stock_
 
 ### Diagrama UML
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc49ba4b731d1736b1ef2b02c90030a9",
+    "content-hash": "18ab58aecde0a69a7c3c4d6c0855f9e5",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -911,6 +911,42 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2016-07-18T04:51:16+00:00"
+        },
+        {
+            "name": "garygreen/pretty-routes",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/garygreen/pretty-routes.git",
+                "reference": "110e60ca98124f536d0072a84dadae8d59bd39cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/garygreen/pretty-routes/zipball/110e60ca98124f536d0072a84dadae8d59bd39cf",
+                "reference": "110e60ca98124f536d0072a84dadae8d59bd39cf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.1.*|5.2.*|5.3.*|5.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PrettyRoutes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gary Green",
+                    "email": "holegary@gmail.com"
+                }
+            ],
+            "description": "Pretty routes for Laravel 5.",
+            "time": "2017-01-18T10:03:55+00:00"
         },
         {
             "name": "goaop/framework",

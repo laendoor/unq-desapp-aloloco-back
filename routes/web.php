@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Response;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,3 +14,14 @@
 */
 
 // No web routes :: only API
+Route::get('/routes', function () {
+
+    $middlewareClosure = function ($middleware) {
+        return $middleware instanceof Closure ? 'Closure' : $middleware;
+    };
+
+    return new Response(view('pretty-routes::routes', [
+        'routes' => Route::getRoutes(),
+        'middlewareClosure' => $middlewareClosure,
+    ]));
+});

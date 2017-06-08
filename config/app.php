@@ -191,6 +191,7 @@ return [
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
 
     ],
 

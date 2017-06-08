@@ -19,7 +19,7 @@ class ApiClientTest extends ApiTestCase
     public function it_get_client_info()
     {
         // Act
-        $response = $this->get(apiRoute('client.info'));
+        $response = $this->get(apiRoute('client.info', ['id' => 0]));
 
         // Assert
         $response->assertJson([
@@ -41,7 +41,7 @@ class ApiClientTest extends ApiTestCase
         ]);
 
         // Act
-        $response = $this->get(apiRoute('client.wishlists'));
+        $response = $this->get(apiRoute('client.wishlists', ['id' => 0]));
 
         // Assert
         $response->assertJsonFragment([
