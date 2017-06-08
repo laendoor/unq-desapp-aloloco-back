@@ -80,7 +80,7 @@ class ClientTest extends IntegrationsTestCase
             ->withQuantity(2)
             ->buildWished();
         $list = ShoppingListBuilder::new()->withName('Kingdoms to Conquer')->build();
-        $list->addWishedProduct($milk);
+        $list->addProduct($milk);
         $dany = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
 
         // Act
@@ -91,7 +91,7 @@ class ClientTest extends IntegrationsTestCase
         $dany_db = collect($this->repo->findAll())->first();
 
         // Assert
-        $list_db = $dany_db->getShoppingLists()->first()->getWishedProducts();
+        $list_db = $dany_db->getShoppingLists()->first()->getProducts();
         $this->assertEquals(1, $list_db->count());
         $this->assertContains('Leche', $list_db->first()->getName());
     }

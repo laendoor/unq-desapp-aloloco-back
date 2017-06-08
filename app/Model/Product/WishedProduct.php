@@ -38,7 +38,7 @@ class WishedProduct
 
     /**
      * Many Products have One ShoppingList
-     * @ORM\ManyToOne(targetEntity="\App\Model\ShoppingList", inversedBy="wishedProducts")
+     * @ORM\ManyToOne(targetEntity="\App\Model\ShoppingList", inversedBy="products")
      */
     protected $shoppingList;
 

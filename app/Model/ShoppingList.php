@@ -42,7 +42,7 @@ class ShoppingList
      * @var Collection|WishedProduct[]
      * @ORM\OneToMany(targetEntity="\App\Model\Product\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
      */
-    protected $wishedProducts;
+    protected $products;
 
     /**
      * Many ShoppingLists have One Client
@@ -58,7 +58,7 @@ class ShoppingList
     public function __construct(string $name) {
         $this->name     = $name;
         $this->state    = new WishList;
-        $this->wishedProducts = new ArrayCollection;
+        $this->products = new ArrayCollection;
     }
 
     /*
@@ -105,22 +105,22 @@ class ShoppingList
      * Products Manipulation
      */
 
-    public function getWishedProducts(): Collection {
-        return $this->wishedProducts ?? new ArrayCollection;
+    public function getProducts(): Collection {
+        return $this->products ?? new ArrayCollection;
     }
 
-    public function addWishedProduct(WishedProduct $product): void {
-        $this->wishedProducts->add($product);
+    public function addProduct(WishedProduct $product): void {
+        $this->products->add($product);
         $product->setShoppingList($this);
     }
 
-    public function removeWishedProduct(WishedProduct $product): void {
-        $this->getWishedProducts()->removeElement($product);
+    public function removeProduct(WishedProduct $product): void {
+        $this->getProducts()->removeElement($product);
     }
 
-    public function addWishedProducts(ArrayCollection $moreProducts): void {
+    public function addProducts(ArrayCollection $moreProducts): void {
         $moreProducts->forAll(function ($newProduct) {
-            $this->addWishedProduct($newProduct);
+            $this->addProduct($newProduct);
         });
     }
 

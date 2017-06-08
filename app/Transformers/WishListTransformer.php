@@ -19,7 +19,7 @@ class WishListTransformer extends Transformer
                 'id'   => $list->getClient()->getId(),
                 'email' => $list->getClient()->getEmail(),
             ],
-            'products' => $this->serializeCollection($list->getWishedProducts(), new WishedProductTransformer),
+            'products' => $this->serializeCollection($list->getProducts(), new WishedProductTransformer),
         ];
     }
 }

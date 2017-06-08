@@ -38,7 +38,7 @@ class ShoppingTest extends TestCase
         $list = ShoppingListBuilder::anyBuilt();
 
         // Assert
-        $this->assertTrue($list->getWishedProducts()->isEmpty());
+        $this->assertTrue($list->getProducts()->isEmpty());
     }
 
     /**
@@ -54,11 +54,11 @@ class ShoppingTest extends TestCase
         $coffee->shouldReceive('setShoppingList')->andReturnNull();
 
         // Act
-        $list->addWishedProduct($coffee);
+        $list->addProduct($coffee);
 
         // Assert
-        $this->assertEquals(1, $list->getWishedProducts()->count());
-        $this->assertEquals($coffee, $list->getWishedProducts()->first());
+        $this->assertEquals(1, $list->getProducts()->count());
+        $this->assertEquals($coffee, $list->getProducts()->first());
     }
 
     /**
@@ -76,13 +76,13 @@ class ShoppingTest extends TestCase
         $coffee->shouldReceive('setShoppingList')->andReturnNull();
 
         // Act
-        $list->addWishedProduct($sugar);
-        $list->addWishedProduct($coffee);
-        $list->removeWishedProduct($coffee);
+        $list->addProduct($sugar);
+        $list->addProduct($coffee);
+        $list->removeProduct($coffee);
 
         // Assert
-        $this->assertEquals(1, $list->getWishedProducts()->count());
-        $this->assertEquals($sugar, $list->getWishedProducts()->first());
+        $this->assertEquals(1, $list->getProducts()->count());
+        $this->assertEquals($sugar, $list->getProducts()->first());
     }
 
 }
