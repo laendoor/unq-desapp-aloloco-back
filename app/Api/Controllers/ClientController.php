@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Controllers;
 
+use App\Repository\UserRepository;
 use App\Repository\ShoppingListRepository;
 use App\Transformers\ShoppingListTransformer;
 use Dingo\Api\Http\Response;
@@ -20,10 +21,16 @@ class ClientController extends ApiBaseController
      *
      * @Get("/")
      *
+     * @param int $id
+     * @param UserRepository $repo
      * @return Response
      */
-    public function info(): Response {
-        return $this->response->array(['name' => 'Jon']);
+    public function info(int $id, UserRepository $repo): Response {
+        $id = $id == 0 ? 1 : intval($id);
+
+        $user = $repo->find($id);
+
+        return $this->response->array(['email' => $user->getEmail()]);
     }
 
     /**
@@ -31,13 +38,16 @@ class ClientController extends ApiBaseController
      *
      * @Get("/wishlists")
      *
+     * @param int $id
      * @param ShoppingListRepository $repo
      * @param ShoppingListTransformer $transformer
      * @return Response
      */
-    public function wishLists(ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
+    public function wishLists(int $id, ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
     {
-        $wishlists = $repo->findByClientId(1);
+        $id = $id == 0 ? 1 : intval($id);
+
+        $wishlists = $repo->findByClientId($id);
 
         return $this->response->collection(collect($wishlists), $transformer);
     }
@@ -47,12 +57,17 @@ class ClientController extends ApiBaseController
      *
      * @Get("/history")
      *
+     * @param int $id
      * @param ShoppingListRepository $repo
      * @param ShoppingListTransformer $transformer
      * @return Response
      */
-    public function shoppingHistory(ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
+    public function shoppingHistory(int $id, ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
     {
+        $id = $id == 0 ? 1 : intval($id);
 
+        $lists = $repo->findPurchasedByClientId($id);
+
+        return $this->response->collection(collect($lists), $transformer);
     }
 }

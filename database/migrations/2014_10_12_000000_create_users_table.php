@@ -21,6 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('discr');
             $table->timestamps();
         });
+
+        Schema::create('admins', function (Blueprint $table) {
+            $table->integer('id')->unique();
+            $table->timestamps();
+
+            $table->foreign('id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -30,6 +37,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admins');
         Schema::dropIfExists('users');
     }
 }

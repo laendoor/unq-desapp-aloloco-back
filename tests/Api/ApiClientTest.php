@@ -2,6 +2,7 @@
 
 namespace Tests\Api;
 
+use App\Model\User;
 use App\Model\Client;
 use App\Model\ShoppingList;
 
@@ -18,13 +19,14 @@ class ApiClientTest extends ApiTestCase
      */
     public function it_get_client_info()
     {
+        // Arrange
+        $jon = entity(User::class)->create();
+
         // Act
-        $response = $this->get(apiRoute('client.info', ['id' => 0]));
+        $response = $this->get(apiRoute('client.info', ['id' => $jon->getId()]));
 
         // Assert
-        $response->assertJson([
-            'name' => 'Jon',
-        ]);
+        $response->assertJsonFragment(['email' => $jon->getEmail()]);
     }
 
     /**
@@ -47,5 +49,28 @@ class ApiClientTest extends ApiTestCase
         $response->assertJsonFragment([
             'id' => $list->getId()
         ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_client_shopping_history()
+    {
+        // Arrange
+        $arya = entity(Client::class)->create(['email' => 'nobody@nowhere']);
+        $list = entity(ShoppingList::class, 'wish-list')->create([
+            'client' => $arya,
+            'name'   => 'Offers to Many-Faced God'
+        ]);
+        $list->markAsPurchased();
+
+        // Act
+        $response = $this->get(apiRoute('client.history', ['id' => $arya->getId()]));
+
+        // Assert
+        $response->assertJsonFragment(['email' => 'nobody@nowhere']);
+        $response->assertJsonFragment(['name'  => 'Offers to Many-Faced God']);
     }
 }

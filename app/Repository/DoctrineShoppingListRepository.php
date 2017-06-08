@@ -16,4 +16,11 @@ class DoctrineShoppingListRepository
 
         return $query->getResult();
     }
+
+    public function findPurchasedByClientId($id): array
+    {
+        $query = $this->_em->createQuery('SELECT wl FROM App\Model\ShoppingList wl');
+
+        return $query->getResult();
+    }
 }
