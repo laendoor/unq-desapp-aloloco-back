@@ -2,7 +2,7 @@
 namespace App\Api\Controllers;
 
 use App\Repository\ShoppingListRepository;
-use App\Transformers\WishListTransformer;
+use App\Transformers\ShoppingListTransformer;
 use Dingo\Api\Http\Response;
 use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
@@ -32,10 +32,10 @@ class ClientController extends ApiBaseController
      * @Get("/wishlists")
      *
      * @param ShoppingListRepository $repo
-     * @param WishListTransformer $transformer
+     * @param ShoppingListTransformer $transformer
      * @return Response
      */
-    public function wishLists(ShoppingListRepository $repo, WishListTransformer $transformer): Response
+    public function wishLists(ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
     {
         $wishlists = $repo->findByClientId(1);
 
@@ -48,10 +48,10 @@ class ClientController extends ApiBaseController
      * @Get("/history")
      *
      * @param ShoppingListRepository $repo
-     * @param WishListTransformer $transformer
+     * @param ShoppingListTransformer $transformer
      * @return Response
      */
-    public function shoppingHistory(ShoppingListRepository $repo, WishListTransformer $transformer): Response
+    public function shoppingHistory(ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
     {
 
     }

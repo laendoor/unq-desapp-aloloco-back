@@ -5,10 +5,10 @@ use App\Model\ShoppingList;
 
 
 /**
- * Class WishListTransformer
+ * Class ShoppingListTransformer
  * @package App\Tranformers
  */
-class WishListTransformer extends Transformer
+class ShoppingListTransformer extends Transformer
 {
     public function transform(ShoppingList $list): array
     {
