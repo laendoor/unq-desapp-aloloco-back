@@ -2,37 +2,35 @@
 
 namespace App\Providers;
 
-use App\Model\Admin;
 use App\Model\Box;
-use App\Model\BoxTime;
+use App\Model\User;
+use App\Model\Admin;
 use App\Model\Client;
 use App\Model\Market;
-use App\Model\Threshold;
-use App\Model\User;
-use App\Model\ShoppingList;
+use App\Model\BoxTime;
 use App\Model\Product;
+use App\Model\Threshold;
+use App\Model\ShoppingList;
 use App\Model\Product\StockedProduct;
-use App\Repository\AdminRepository;
 use App\Repository\BoxRepository;
-use App\Repository\BoxTimeRepository;
+use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
 use App\Repository\ClientRepository;
-use App\Repository\DoctrineAdminRepository;
+use App\Repository\MarketRepository;
+use App\Repository\BoxTimeRepository;
+use App\Repository\ProductRepository;
+use App\Repository\ThresholdRepository;
 use App\Repository\DoctrineBoxRepository;
-use App\Repository\DoctrineBoxTimeRepository;
+use App\Repository\ShoppingListRepository;
+use App\Repository\DoctrineUserRepository;
+use App\Repository\DoctrineAdminRepository;
 use App\Repository\DoctrineClientRepository;
 use App\Repository\DoctrineMarketRepository;
-use App\Repository\DoctrineShoppingListRepository;
-use App\Repository\DoctrineThresholdRepository;
-use App\Repository\MarketRepository;
-use App\Repository\ShoppingListRepository;
-use App\Repository\ThresholdRepository;
-use App\Repository\UserRepository;
-use App\Repository\ProductRepository;
-use App\Repository\WishListRepository;
 use App\Repository\StockedProductRepository;
-use App\Repository\DoctrineUserRepository;
+use App\Repository\DoctrineBoxTimeRepository;
 use App\Repository\DoctrineProductRepository;
-use App\Repository\DoctrineWishListRepository;
+use App\Repository\DoctrineThresholdRepository;
+use App\Repository\DoctrineShoppingListRepository;
 use App\Repository\DoctrineStockedProductRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -92,13 +90,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ShoppingListRepository::class, function ($app) {
             return new DoctrineShoppingListRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(ShoppingList::class)
-            );
-        });
-
-        $this->app->bind(WishListRepository::class, function ($app) {
-            return new DoctrineWishListRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(ShoppingList::class)
             );
