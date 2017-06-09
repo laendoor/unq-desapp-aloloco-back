@@ -49,9 +49,9 @@ $ vendor/bin/phpunit tests/
 }
 ```
 
-#### `GET /client/{id}` _Retrieve auth user basic data_
+#### `GET /user/{id}` _Retrieve auth user basic data_
 
-#### `GET /client/{id}/wishlists` _Show client wish lists_
+#### `GET /user/{id}/wishlists` _Show user wish lists_
 
 ```json
 {
@@ -59,7 +59,7 @@ $ vendor/bin/phpunit tests/
     {
       "id": 1,
       "name": "Asado del Domingo",
-      "client": {
+      "user": {
         "id": 1,
         "email": "the.king.in.the.north@seven-kingdoms.org"
       },
@@ -78,6 +78,10 @@ $ vendor/bin/phpunit tests/
   ]
 }
 ```
+
+#### `GET /user/{id}/history` _Show user shopping history_
+
+Response is similar to `/user/{id}/wishlists` but with different lists
 
 #### `GET /stock` _List products in stock_
 
