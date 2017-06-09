@@ -86,16 +86,15 @@ class WishedProduct
     }
 
     /**
-     * @param Product $product
+     * @return string
      */
-    public function setProduct(Product $product) {
-        $this->product = $product;
-    }
-
     public function getName(): string {
         return $this->getProduct()->getName();
     }
 
+    /**
+     * @return string
+     */
     public function getBrand(): string {
         return $this->getProduct()->getBrand();
     }
