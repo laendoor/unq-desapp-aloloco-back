@@ -31,7 +31,7 @@ class User
     /**
      * @ORM\Column(type="string")
      */
-    private $google_id;
+    private $googleId;
     /**
      * @ORM\Column(type="string")
      */
@@ -58,14 +58,12 @@ class User
      * User constructor.
      * @param Market $market
      * @param string $email
-     * @param string $username
-     * @param string $google_id
      */
-    public function __construct(Market $market, string $email, string $username, string $google_id = '') {
+    public function __construct(Market $market, string $email) {
         $this->email  = $email;
         $this->market = $market;
-        $this->username = $username;
-        $this->google_id = $google_id;
+        $this->username = '';
+        $this->googleId = '';
         $this->thresholds = new ArrayCollection;
         $this->shoppingLists = new ArrayCollection;
     }
@@ -211,9 +209,30 @@ class User
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getGoogleId(): string {
-        return $this->google_id ?? '';
+    public function getGoogleId(): int {
+        return $this->googleId ?? 0;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address): void {
+        $this->address = $address;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void {
+        $this->username = $username;
+    }
+
+    /**
+     * @param int $googleId
+     */
+    public function setGoogleId(int $googleId): void {
+        $this->googleId = $googleId;
     }
 }

@@ -22,7 +22,9 @@ class DoctrineUserRepository
 
     public function create($google_id, $email)
     {
-        $user = new User(new Market, $email, $google_id);
+        $user = new User(new Market, $email);
+
+        $user->setGoogleId($google_id);
 
         $this->_em->persist($user);
         $this->_em->flush();

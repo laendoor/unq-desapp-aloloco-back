@@ -25,12 +25,24 @@ class UserTest extends TestCase
      */
     public function it_is_initialized_with_a_market_and_an_email(): void {
         // Arrange
-        $email  = 'user@mail.com';
+        $email    = 'user@mail.com';
+        $username = 'username';
+        $address  = 'Calle Falsa 123';
+        $googleId = 111222333;
         $market = Mockery::mock(Market::class);
-        $jon = UserBuilder::new()->withMarket($market)->withEmail($email)->build();
+        $jon = UserBuilder::new()
+            ->withMarket($market)
+            ->withEmail($email)
+            ->withUsername($username)
+            ->withAddress($address)
+            ->withGoogleId($googleId)
+            ->build();
 
         // Assert
         $this->assertEquals($email, $jon->getEmail());
+        $this->assertEquals($username, $jon->getUsername());
+        $this->assertEquals($address, $jon->getAddress());
+        $this->assertEquals($googleId, $jon->getGoogleId());
         $this->assertEquals($market, $jon->getMarket());
     }
 
