@@ -7,7 +7,7 @@ use Tests\Builders\UserBuilder;
 use App\Model\Box;
 use App\Model\Market;
 use App\Model\ShoppingList;
-use App\Model\Product\WishedProduct;
+use App\Model\WishedProduct;
 use App\Model\Threshold\GeneralThreshold;
 use App\Model\Threshold\CategoryThreshold;
 use Doctrine\Common\Collections\ArrayCollection;

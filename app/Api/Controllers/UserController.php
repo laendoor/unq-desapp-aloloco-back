@@ -12,7 +12,7 @@ use App\Transformers\ShoppingListTransformer;
 use App\Repository\ShoppingListRepository;
 
 /**
- * Class ClientController
+ * Class UserController
  * @package App\Api\Controllers
  *
  * @Resource("User", uri="/user")
@@ -20,7 +20,7 @@ use App\Repository\ShoppingListRepository;
 class UserController extends ApiBaseController
 {
     /**
-     * Client information
+     * User information
      *
      * @Get("/")
      *
@@ -37,7 +37,7 @@ class UserController extends ApiBaseController
     }
 
     /**
-     * Client Wish Lists
+     * User Wish Lists
      *
      * @Get("/wishlists")
      *
@@ -50,13 +50,13 @@ class UserController extends ApiBaseController
     {
         $id = $id == 0 ? 1 : intval($id);
 
-        $wishlists = $repo->findByClientId($id);
+        $wishlists = $repo->findByUserId($id);
 
         return $this->response->collection(collect($wishlists), $transformer);
     }
 
     /**
-     * Client Shopping History
+     * User Shopping History
      *
      * @Get("/history")
      *
@@ -69,7 +69,7 @@ class UserController extends ApiBaseController
     {
         $id = $id == 0 ? 1 : intval($id);
 
-        $lists = $repo->findPurchasedByClientId($id);
+        $lists = $repo->findPurchasedByUserId($id);
 
         return $this->response->collection(collect($lists), $transformer);
     }

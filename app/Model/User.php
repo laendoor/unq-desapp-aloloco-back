@@ -1,10 +1,9 @@
 <?php
 namespace App\Model;
 
-use App\Model\Product\WishedProduct;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class User
@@ -40,7 +39,7 @@ class User
     protected $market;
 
     /**
-     * One Client has Many ShoppingLists
+     * One User has Many ShoppingLists
      * @var Collection|ShoppingList[]
      * @ORM\OneToMany(targetEntity="ShoppingList", mappedBy="user", cascade={"persist"})
      */
@@ -52,7 +51,7 @@ class User
     protected $thresholds;
 
     /**
-     * Client constructor.
+     * User constructor.
      * @param Market $market
      * @param string $email
      * @param string $username

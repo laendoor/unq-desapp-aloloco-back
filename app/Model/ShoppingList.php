@@ -4,7 +4,6 @@ namespace App\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
 use App\Model\ShoppingList\State\DeliveryList;
@@ -40,7 +39,7 @@ class ShoppingList
     /**
      * One ShoppingList has Many WishedProducts
      * @var Collection|WishedProduct[]
-     * @ORM\OneToMany(targetEntity="\App\Model\Product\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\App\Model\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
      */
     protected $products;
 

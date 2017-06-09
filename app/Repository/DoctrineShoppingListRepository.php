@@ -10,14 +10,14 @@ use Doctrine\ORM\EntityRepository;
 class DoctrineShoppingListRepository
     extends EntityRepository implements ShoppingListRepository {
 
-    public function findByClientId($id): array
+    public function findByUserId($id): array
     {
         $query = $this->_em->createQuery('SELECT wl FROM App\Model\ShoppingList wl');
 
         return $query->getResult();
     }
 
-    public function findPurchasedByClientId($id): array
+    public function findPurchasedByUserId($id): array
     {
         $query = $this->_em->createQuery('SELECT wl FROM App\Model\ShoppingList wl');
 

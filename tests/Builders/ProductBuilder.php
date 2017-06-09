@@ -4,9 +4,9 @@ namespace Tests\Builders;
 
 use Mockery;
 use App\Model\Product;
+use App\Model\WishedProduct;
 use App\Model\Product\Price;
 use App\Model\Product\StockedProduct;
-use App\Model\Product\WishedProduct;
 
 class ProductBuilder
 {

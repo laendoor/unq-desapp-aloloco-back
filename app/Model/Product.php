@@ -49,7 +49,7 @@ class Product
     /**
      * One Product has Many WishedProducts
      * @var Collection|WishedProduct[]
-     * @ORM\OneToMany(targetEntity="\App\Model\Product\WishedProduct", mappedBy="product", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\App\Model\WishedProduct", mappedBy="product", cascade={"persist"})
      */
     protected $wishedProducts;
 

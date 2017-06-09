@@ -10,7 +10,7 @@ use App\Model\BoxTime;
 use App\Model\Product;
 use App\Model\Threshold;
 use App\Model\ShoppingList;
-use App\Model\Product\StockedProduct;
+use App\Model\WishedProduct;
 use App\Repository\BoxRepository;
 use App\Repository\UserRepository;
 use App\Repository\AdminRepository;
@@ -20,15 +20,15 @@ use App\Repository\ProductRepository;
 use App\Repository\ThresholdRepository;
 use App\Repository\DoctrineBoxRepository;
 use App\Repository\ShoppingListRepository;
+use App\Repository\WishedProductRepository;
 use App\Repository\DoctrineUserRepository;
 use App\Repository\DoctrineAdminRepository;
 use App\Repository\DoctrineMarketRepository;
-use App\Repository\StockedProductRepository;
 use App\Repository\DoctrineBoxTimeRepository;
 use App\Repository\DoctrineProductRepository;
 use App\Repository\DoctrineThresholdRepository;
 use App\Repository\DoctrineShoppingListRepository;
-use App\Repository\DoctrineStockedProductRepository;
+use App\Repository\DoctrineWishedProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -89,6 +89,13 @@ class AppServiceProvider extends ServiceProvider
             return new DoctrineProductRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(Product::class)
+            );
+        });
+
+        $this->app->bind(WishedProductRepository::class, function ($app) {
+            return new DoctrineWishedProductRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(WishedProduct::class)
             );
         });
 

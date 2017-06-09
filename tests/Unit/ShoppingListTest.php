@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Mockery;
 use Tests\TestCase;
-use App\Model\Product\WishedProduct;
+use App\Model\WishedProduct;
 use Tests\Builders\ShoppingListBuilder;
 
 class ShoppingTest extends TestCase
