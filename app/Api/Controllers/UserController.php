@@ -8,8 +8,9 @@ use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
 use Dingo\Blueprint\Annotation\Method\Post;
 use App\Repository\UserRepository;
-use App\Transformers\ShoppingListTransformer;
 use App\Repository\ShoppingListRepository;
+use App\Transformers\UserTransformer;
+use App\Transformers\ShoppingListTransformer;
 
 /**
  * Class UserController
@@ -26,14 +27,15 @@ class UserController extends ApiBaseController
      *
      * @param int $id
      * @param UserRepository $repo
+     * @param UserTransformer $transformer
      * @return Response
      */
-    public function info(int $id, UserRepository $repo): Response {
+    public function info(int $id, UserRepository $repo, UserTransformer $transformer): Response {
         $id = $id == 0 ? 1 : intval($id);
 
         $user = $repo->find($id);
 
-        return $this->response->array(['email' => $user->getEmail()]);
+        return $this->response->item($user, $transformer);
     }
 
     /**

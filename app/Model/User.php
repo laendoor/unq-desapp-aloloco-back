@@ -32,6 +32,10 @@ class User
      * @ORM\Column(type="string")
      */
     private $google_id;
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $address;
 
     /**
      * @var Market
@@ -190,5 +194,26 @@ class User
      */
     public function getEmail(): string {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string {
+        return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleId(): string {
+        return $this->google_id ?? '';
     }
 }
