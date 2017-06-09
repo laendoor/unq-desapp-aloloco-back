@@ -10,8 +10,23 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Entity
  */
-class Admin extends User
+class Admin
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /**
+     * @var Market
+     */
+    private $market;
+    /**
+     * @var string
+     */
+    private $email;
 
     /**
      * Admin constructor.
@@ -19,7 +34,8 @@ class Admin extends User
      * @param string $email
      */
     public function __construct(Market $market, string $email) {
-        parent::__construct($market, $email);
+        $this->email  = $email;
+        $this->market = $market;
     }
 
     public function updateStock(ArrayCollection $stock): void {
@@ -31,5 +47,19 @@ class Admin extends User
 
     public function getStock(): ArrayCollection {
         return $this->market->getStock();
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string {
+        return $this->email;
+    }
+
+    /**
+     * @return Market
+     */
+    public function getMarket(): Market {
+        return $this->market;
     }
 }

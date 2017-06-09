@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::transaction(function () {
             $this->call(ProductsTableSeeder::class);
-            $this->call(ClientSeeder::class);
+            $this->call(UserSeeder::class);
         });
     }
 }

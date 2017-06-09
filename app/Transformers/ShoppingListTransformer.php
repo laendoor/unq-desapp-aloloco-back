@@ -16,8 +16,8 @@ class ShoppingListTransformer extends Transformer
             'id' => $list->getId(),
             'name' => $list->getName(),
             'client' => [
-                'id'   => $list->getClient()->getId(),
-                'email' => $list->getClient()->getEmail(),
+                'id'   => $list->getUser()->getId(),
+                'email' => $list->getUser()->getEmail(),
             ],
             'products' => $this->serializeCollection($list->getProducts(), new WishedProductTransformer),
         ];

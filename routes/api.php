@@ -28,16 +28,15 @@ $api->group($params, function(Router $api) {
 
     $api->get('', ['as' => 'info', 'uses' => 'HomeController@info']);
 
-    $api->post('user/auth', ['as' => 'user.auth', 'uses' => 'UserController@checkToken']);
-
     /*
-     * Client
+     * User
      */
-    $api->group(['prefix' => 'client/{id}', 'as' => 'client'], function (Router $api) {
+    $api->group(['prefix' => 'user', 'as' => 'user'], function (Router $api) {
 
-        $api->get('',          ['as' => 'info',      'uses' => 'ClientController@info']);
-        $api->get('wishlists', ['as' => 'wishlists', 'uses' => 'ClientController@wishLists']);
-        $api->get('history',   ['as' => 'history',   'uses' => 'ClientController@shoppingHistory']);
+        $api->post('auth',          ['as' => 'auth',      'uses' => 'UserController@checkToken']);
+        $api->get('{id}',           ['as' => 'info',      'uses' => 'UserController@info']);
+        $api->get('{id}/wishlists', ['as' => 'wishlists', 'uses' => 'UserController@wishLists']);
+        $api->get('{id}/history',   ['as' => 'history',   'uses' => 'UserController@shoppingHistory']);
 
     });
 

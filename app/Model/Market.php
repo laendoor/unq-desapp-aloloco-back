@@ -82,12 +82,12 @@ class Market
         return array_sum($box_times) / count($box_times);
     }
 
-    public function goingToBox(Box $box, Client $client, ShoppingList $list): void {
+    public function goingToBox(Box $box, User $user, ShoppingList $list): void {
     }
 
-    public function purchaseMade(Box $box, Client $client, ShoppingList $list): void {
+    public function purchaseMade(Box $box, User $user, ShoppingList $list): void {
     }
 
-    public function deliveryRequest(Box $box, Client $client, ShoppingList $list): void {
+    public function deliveryRequest(Box $box, User $user, ShoppingList $list): void {
     }
 }

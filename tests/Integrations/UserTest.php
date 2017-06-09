@@ -1,14 +1,14 @@
 <?php
 namespace Tests\Integrations;
 
-use App\Model\Client;
+use App\Model\User;
 use Tests\Builders\ProductBuilder;
 use Tests\Builders\ShoppingListBuilder;
 use Tests\Builders\UserBuilder;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
-class ClientTest extends IntegrationsTestCase
+class UserTest extends IntegrationsTestCase
 {
     /**
      * @var ObjectRepository
@@ -19,7 +19,7 @@ class ClientTest extends IntegrationsTestCase
     {
         parent::setUp();
 
-        $this->repo = EntityManager::getRepository(Client::class);
+        $this->repo = EntityManager::getRepository(User::class);
     }
 
     /**
@@ -32,7 +32,7 @@ class ClientTest extends IntegrationsTestCase
         // Arrange
         $dany = UserBuilder::newWithMocks()
             ->withEmail('mother.of.dragons@seven-kingdoms.org')
-            ->buildClient();
+            ->build();
 
         // Act
         EntityManager::persist($dany);
@@ -53,7 +53,7 @@ class ClientTest extends IntegrationsTestCase
     {
         // Arrange
         $list = ShoppingListBuilder::new()->withName('Kingdoms to Conquer')->build();
-        $dany = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $dany = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         EntityManager::persist($dany);
@@ -81,7 +81,7 @@ class ClientTest extends IntegrationsTestCase
             ->buildWished();
         $list = ShoppingListBuilder::new()->withName('Kingdoms to Conquer')->build();
         $list->addProduct($milk);
-        $dany = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $dany = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         EntityManager::persist($milk->getProduct());

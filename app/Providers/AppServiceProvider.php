@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Model\Box;
 use App\Model\User;
 use App\Model\Admin;
-use App\Model\Client;
 use App\Model\Market;
 use App\Model\BoxTime;
 use App\Model\Product;
@@ -15,7 +14,6 @@ use App\Model\Product\StockedProduct;
 use App\Repository\BoxRepository;
 use App\Repository\UserRepository;
 use App\Repository\AdminRepository;
-use App\Repository\ClientRepository;
 use App\Repository\MarketRepository;
 use App\Repository\BoxTimeRepository;
 use App\Repository\ProductRepository;
@@ -24,7 +22,6 @@ use App\Repository\DoctrineBoxRepository;
 use App\Repository\ShoppingListRepository;
 use App\Repository\DoctrineUserRepository;
 use App\Repository\DoctrineAdminRepository;
-use App\Repository\DoctrineClientRepository;
 use App\Repository\DoctrineMarketRepository;
 use App\Repository\StockedProductRepository;
 use App\Repository\DoctrineBoxTimeRepository;
@@ -71,13 +68,6 @@ class AppServiceProvider extends ServiceProvider
             return new DoctrineBoxTimeRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(BoxTime::class)
-            );
-        });
-
-        $this->app->bind(ClientRepository::class, function ($app) {
-            return new DoctrineClientRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(Client::class)
             );
         });
 

@@ -13,10 +13,10 @@ use App\Model\Threshold\CategoryThreshold;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class ClientTest
+ * Class UserTest
  * @package Tests\Unit
  */
-class ClientTest extends TestCase
+class UserTest extends TestCase
 {
     /**
      * @test
@@ -25,9 +25,9 @@ class ClientTest extends TestCase
      */
     public function it_is_initialized_with_a_market_and_an_email(): void {
         // Arrange
-        $email  = 'client@mail.com';
+        $email  = 'user@mail.com';
         $market = Mockery::mock(Market::class);
-        $jon = UserBuilder::new()->withMarket($market)->withEmail($email)->buildClient();
+        $jon = UserBuilder::new()->withMarket($market)->withEmail($email)->build();
 
         // Assert
         $this->assertEquals($email, $jon->getEmail());
@@ -41,9 +41,9 @@ class ClientTest extends TestCase
      */
     public function it_can_add_a_new_shopping_list(): void {
         // Arrange
-        $jon = UserBuilder::anyClientBuiltWithMocks();
+        $jon = UserBuilder::anyUserBuiltWithMocks();
         $list = Mockery::mock(ShoppingList::class);
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
 
         // Act
         $jon->addShoppingList($list);
@@ -62,17 +62,17 @@ class ClientTest extends TestCase
         $listToKeep   = Mockery::mock(ShoppingList::class)
             ->shouldReceive([
                 'equals'    => true,
-                'setClient' => null
+                'setUser' => null
             ])->getMock();
         $listToRemove = Mockery::mock(ShoppingList::class)
             ->shouldReceive([
                 'equals'    => true,
-                'setClient' => null
+                'setUser' => null
             ])->getMock();
         $jon = UserBuilder::newWithMocks()
             ->withShoppingList($listToKeep)
             ->withShoppingList($listToRemove)
-            ->buildClient();
+            ->build();
 
         // Act
         $jon->removeList($listToRemove);
@@ -91,10 +91,10 @@ class ClientTest extends TestCase
         // Arrange
         $sugar = Mockery::mock(WishedProduct::class);
         $list  = Mockery::mock(ShoppingList::class);
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('addProduct')->with($sugar)->once();
         $list->shouldReceive('getProducts')->andReturn(new ArrayCollection([$sugar]))->once();
-        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         $jon->addProduct($sugar, $list);
@@ -113,12 +113,12 @@ class ClientTest extends TestCase
         $sugar  = Mockery::mock(WishedProduct::class);
         $coffee = Mockery::mock(WishedProduct::class);
         $list = Mockery::mock(ShoppingList::class);
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('addProduct')->with($sugar)->once();
         $list->shouldReceive('addProduct')->with($coffee)->once();
         $list->shouldReceive('removeProduct')->with($sugar)->once();
         $list->shouldReceive('getProducts')->andReturn(new ArrayCollection([$coffee]))->twice();
-        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         $jon->addProduct($sugar, $list);
@@ -138,7 +138,7 @@ class ClientTest extends TestCase
     public function it_can_add_a_threshold(): void {
         // Arrange
         $threshold = Mockery::mock(GeneralThreshold::class);
-        $jon = UserBuilder::anyClientBuiltWithMocks();
+        $jon = UserBuilder::anyUserBuiltWithMocks();
 
         // Act
         $jon->addThreshold($threshold);
@@ -159,7 +159,7 @@ class ClientTest extends TestCase
         $jon = UserBuilder::newWithMocks()
             ->withThreshold($thresholdToKeep)
             ->withThreshold($thresholdToRemove)
-            ->buildClient();
+            ->build();
 
         // Act
         $jon->removeThreshold($thresholdToRemove);
@@ -178,9 +178,9 @@ class ClientTest extends TestCase
         // Arrange
         $list = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('markAsMarket')->once();
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('isMarketList')->once()->andReturn(true);
-        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         $jon->goToTheMarket($list);
@@ -200,11 +200,11 @@ class ClientTest extends TestCase
         $coffee->shouldReceive('isOnCart')->andReturn(true)->once();
         $list = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('markAsMarket')->once();
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('addProduct')->with($coffee)->once();
         $list->shouldReceive('addToCart')->with($coffee)->once();
         $list->shouldReceive('getWishProducts')->andReturn(new ArrayCollection([$coffee]))->once();
-        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         $jon->addProduct($coffee, $list);
@@ -226,12 +226,12 @@ class ClientTest extends TestCase
         $coffee->shouldReceive('isWished')->andReturn(true)->once();
         $list = Mockery::mock(ShoppingList::class);
         $list->shouldReceive('markAsMarket')->once();
-        $list->shouldReceive('setClient')->andReturnNull();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('addProduct')->with($coffee)->once();
         $list->shouldReceive('addToCart')->with($coffee)->once();
         $list->shouldReceive('removeFromCart')->with($coffee)->once();
         $list->shouldReceive('getWishProducts')->andReturn(new ArrayCollection([$coffee]))->once();
-        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withShoppingList($list)->build();
 
         // Act
         $jon->addProduct($coffee, $list);
@@ -253,7 +253,7 @@ class ClientTest extends TestCase
         $list   = Mockery::mock(ShoppingList::class);
         $market = Mockery::mock(Market::class);
         $market->shouldReceive('estimatedWaitingTime')->with($list)->andReturn(5);
-        $jon = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+        $jon = UserBuilder::newWithMocks()->withMarket($market)->build();
 
         // Act
         $time = $jon->requestBox($list);
@@ -272,7 +272,7 @@ class ClientTest extends TestCase
         $box    = Mockery::mock(Box::class);
         $market = Mockery::mock(Market::class);
         $list   = Mockery::mock(ShoppingList::class);
-        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->build();
         $market->shouldReceive('goingToBox')->once()->withArgs([$box, $jon, $list]);
 
         // Act
@@ -292,8 +292,8 @@ class ClientTest extends TestCase
         $box    = Mockery::mock(Box::class);
         $market = Mockery::mock(Market::class);
         $list   = Mockery::mock(ShoppingList::class);
-        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
-        $list->shouldReceive('setClient')->andReturnNull();
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->build();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('markAsPurchased')->once()->withNoArgs();
         $market->shouldReceive('purchaseMade')->once()->withArgs([$box, $jon, $list]);
 
@@ -314,8 +314,8 @@ class ClientTest extends TestCase
         $box    = Mockery::mock(Box::class);
         $market = Mockery::mock(Market::class);
         $list   = Mockery::mock(ShoppingList::class);
-        $jon    = UserBuilder::newWithMocks()->withMarket($market)->buildClient();
-        $list->shouldReceive('setClient')->andReturnNull();
+        $jon    = UserBuilder::newWithMocks()->withMarket($market)->build();
+        $list->shouldReceive('setUser')->andReturnNull();
         $list->shouldReceive('markAsDelivery')->once()->withNoArgs();
         $market->shouldReceive('deliveryRequest')->once()->withArgs([$box, $jon, $list]);
 

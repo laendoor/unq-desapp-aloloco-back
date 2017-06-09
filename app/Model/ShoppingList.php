@@ -1,14 +1,14 @@
 <?php
 namespace App\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\Product\WishedProduct;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
 use App\Model\ShoppingList\State\DeliveryList;
 use App\Model\ShoppingList\State\PurchasedList;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ShoppingList
@@ -45,11 +45,11 @@ class ShoppingList
     protected $products;
 
     /**
-     * Many ShoppingLists have One Client
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="shoppingLists")
-     * @var Client
+     * Many ShoppingLists have One User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="shoppingLists")
+     * @var User
      */
-    protected $client;
+    protected $user;
 
     /**
      * ShoppingList constructor.
@@ -151,17 +151,17 @@ class ShoppingList
     }
 
     /**
-     * @return Client
+     * @return User
      */
-    public function getClient(): Client {
-        return $this->client;
+    public function getUser(): User {
+        return $this->user;
     }
 
     /**
-     * @param Client $client
+     * @param User $user
      */
-    public function setClient(Client $client): void {
-        $this->client = $client;
+    public function setUser(User $user): void {
+        $this->user = $user;
     }
 
     /*

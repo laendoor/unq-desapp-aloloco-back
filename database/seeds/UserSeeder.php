@@ -9,7 +9,7 @@ use App\Repository\ProductRepository;
 use Illuminate\Database\Seeder;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
-class ClientSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        $jon = entity(Client::class)->create([
+        $jon = entity(User::class)->create([
             'username' => 'jon.snow',
             'email' => 'the.king.in.the.north@seven-kingdoms.org'
         ]);

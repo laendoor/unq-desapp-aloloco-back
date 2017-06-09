@@ -2,10 +2,8 @@
 
 namespace Tests\Api;
 
-use App\Model\Client;
+use App\Model\User;
 use App\Model\ShoppingList;
-use Tests\Api\ApiTestCase;
-use LaravelDoctrine\ORM\Facades\EntityManager;
 
 /**
  * Class ApiUserTest
@@ -13,6 +11,68 @@ use LaravelDoctrine\ORM\Facades\EntityManager;
  */
 class ApiUserTest extends ApiTestCase
 {
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_user_info()
+    {
+        // Arrange
+        $jon = entity(User::class)->create();
+
+        // Act
+        $response = $this->get(apiRoute('user.info', ['id' => $jon->getId()]));
+
+        // Assert
+        $response->assertJsonFragment(['email' => $jon->getEmail()]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_user_wish_lists()
+    {
+        // Arrange
+        $jon  = entity(User::class)->create();
+        $list = entity(ShoppingList::class, 'wish-list')->create([
+            'user' => $jon
+        ]);
+
+        // Act
+        $response = $this->get(apiRoute('user.wishlists', ['id' => $jon->getId()]));
+
+        // Assert
+        $response->assertJsonFragment([
+            'id' => $list->getId()
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_user_shopping_history()
+    {
+        // Arrange
+        $arya = entity(User::class)->create(['email' => 'nobody@nowhere']);
+        $list = entity(ShoppingList::class, 'wish-list')->create([
+            'user' => $arya,
+            'name' => 'Offers to Many-Faced God'
+        ]);
+        $list->markAsPurchased();
+
+        // Act
+        $response = $this->get(apiRoute('user.history', ['id' => $arya->getId()]));
+
+        // Assert
+        $response->assertJsonFragment(['email' => 'nobody@nowhere']);
+        $response->assertJsonFragment(['name'  => 'Offers to Many-Faced God']);
+    }
+
     /**
      * @test
      *
