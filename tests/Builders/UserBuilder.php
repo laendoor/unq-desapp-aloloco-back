@@ -2,9 +2,9 @@
 namespace Tests\Builders;
 
 use Mockery;
+use App\Model\User;
 use App\Model\Admin;
 use App\Model\Market;
-use App\Model\Client;
 use App\Model\Threshold;
 use App\Model\ShoppingList;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,11 +13,13 @@ class UserBuilder
 {
     protected $email;
     protected $market;
+    protected $username;
     protected $setOfLists;
     protected $thresholds;
 
     public function __construct() {
         $this->email = 'none';
+        $this->username = 'none';
         $this->setOfLists = new ArrayCollection;
         $this->thresholds = new ArrayCollection;
     }
@@ -31,22 +33,22 @@ class UserBuilder
             ->withMarket(Mockery::mock(Market::class));
     }
 
-    public static function anyClientBuiltWithMocks(): Client {
-        return self::newWithMocks()->buildClient();
+    public static function anyUserBuiltWithMocks(): User {
+        return self::newWithMocks()->build();
     }
 
-    public function buildClient(): Client {
-        $client = new Client($this->market, $this->email);
+    public function build(): User {
+        $user = new User($this->market, $this->email, $this->username);
 
-        $this->setOfLists->forAll(function ($key, $list) use ($client) {
-            $client->addShoppingList($list);
+        $this->setOfLists->forAll(function ($key, $list) use ($user) {
+            $user->addShoppingList($list);
         });
 
-        $this->thresholds->forAll(function ($key, $th) use ($client) {
-            $client->addThreshold($th);
+        $this->thresholds->forAll(function ($key, $th) use ($user) {
+            $user->addThreshold($th);
         });
 
-        return $client;
+        return $user;
     }
 
     public function buildAdmin(): Admin {

@@ -1,15 +1,15 @@
 <?php
 
-use App\Model\Client;
+use App\Model\User;
 use App\Model\Product\Price;
-use App\Model\Product\WishedProduct;
+use App\Model\WishedProduct;
 use App\Model\ShoppingList;
 use App\Repository\DoctrineProductRepository;
 use App\Repository\ProductRepository;
 use Illuminate\Database\Seeder;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
-class ClientSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        $jon = entity(Client::class)->create([
+        $jon = entity(User::class)->create([
             'username' => 'jon.snow',
             'email' => 'the.king.in.the.north@seven-kingdoms.org'
         ]);
@@ -26,22 +26,22 @@ class ClientSeeder extends Seeder
 
         // Wish Lists
         $cumple = entity(ShoppingList::class, 'wish-list')->make([
-            'client' => $jon,
+            'user' => $jon,
             'name'   => 'Cumpleaños'
         ]);
 
         $navidad = entity(ShoppingList::class, 'wish-list')->make([
-            'client' => $jon,
+            'user' => $jon,
             'name'   => 'Navidad'
         ]);
 
         $despedida = entity(ShoppingList::class, 'wish-list')->make([
-            'client' => $jon,
+            'user' => $jon,
             'name'   => 'Despedida de Soltero'
         ]);
 
         $asado = entity(ShoppingList::class, 'wish-list')->create([
-            'client' => $jon,
+            'user' => $jon,
             'name'   => 'Asado del Domingo'
         ]);
 
@@ -79,7 +79,7 @@ class ClientSeeder extends Seeder
         $product = $repo->findByNameAndBrand($name, $brand);
         $product = new WishedProduct($product, $quantity);
 
-        $list->addWishedProduct($product);
+        $list->addProduct($product);
 
         EntityManager::persist($list);
         EntityManager::flush();

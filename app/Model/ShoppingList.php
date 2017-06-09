@@ -1,14 +1,13 @@
 <?php
 namespace App\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\Product\WishedProduct;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Model\ShoppingList\State\WishList;
 use App\Model\ShoppingList\State\MarketList;
 use App\Model\ShoppingList\State\DeliveryList;
 use App\Model\ShoppingList\State\PurchasedList;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ShoppingList
@@ -40,16 +39,16 @@ class ShoppingList
     /**
      * One ShoppingList has Many WishedProducts
      * @var Collection|WishedProduct[]
-     * @ORM\OneToMany(targetEntity="\App\Model\Product\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\App\Model\WishedProduct", mappedBy="shoppingList", cascade={"persist"})
      */
-    protected $wishedProducts;
+    protected $products;
 
     /**
-     * Many ShoppingLists have One Client
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="shoppingLists")
-     * @var Client
+     * Many ShoppingLists have One User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="shoppingLists")
+     * @var User
      */
-    protected $client;
+    protected $user;
 
     /**
      * ShoppingList constructor.
@@ -58,7 +57,7 @@ class ShoppingList
     public function __construct(string $name) {
         $this->name     = $name;
         $this->state    = new WishList;
-        $this->wishedProducts = new ArrayCollection;
+        $this->products = new ArrayCollection;
     }
 
     /*
@@ -105,22 +104,22 @@ class ShoppingList
      * Products Manipulation
      */
 
-    public function getWishedProducts(): Collection {
-        return $this->wishedProducts ?? new ArrayCollection;
+    public function getProducts(): Collection {
+        return $this->products ?? new ArrayCollection;
     }
 
-    public function addWishedProduct(WishedProduct $product): void {
-        $this->wishedProducts->add($product);
+    public function addProduct(WishedProduct $product): void {
+        $this->products->add($product);
         $product->setShoppingList($this);
     }
 
-    public function removeWishedProduct(WishedProduct $product): void {
-        $this->getWishedProducts()->removeElement($product);
+    public function removeProduct(WishedProduct $product): void {
+        $this->getProducts()->removeElement($product);
     }
 
-    public function addWishedProducts(ArrayCollection $moreProducts): void {
+    public function addProducts(ArrayCollection $moreProducts): void {
         $moreProducts->forAll(function ($newProduct) {
-            $this->addWishedProduct($newProduct);
+            $this->addProduct($newProduct);
         });
     }
 
@@ -151,17 +150,17 @@ class ShoppingList
     }
 
     /**
-     * @return Client
+     * @return User
      */
-    public function getClient(): Client {
-        return $this->client;
+    public function getUser(): User {
+        return $this->user;
     }
 
     /**
-     * @param Client $client
+     * @param User $user
      */
-    public function setClient(Client $client): void {
-        $this->client = $client;
+    public function setUser(User $user): void {
+        $this->user = $user;
     }
 
     /*

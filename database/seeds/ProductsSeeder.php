@@ -3,7 +3,7 @@
 use App\Model\Product;
 use Illuminate\Database\Seeder;
 
-class ProductsTableSeeder extends Seeder
+class ProductsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -84,7 +84,6 @@ class ProductsTableSeeder extends Seeder
             'brand' => 'Uvita',
             'stock' => 55,
         ]);
-
 
     }
 }

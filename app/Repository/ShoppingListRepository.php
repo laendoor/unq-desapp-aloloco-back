@@ -7,4 +7,7 @@ namespace App\Repository;
  */
 interface ShoppingListRepository
 {
+    public function find($id);
+    public function findByUserId($id): array;
+    public function findPurchasedByUserId($id): array;
 }

@@ -5,10 +5,10 @@ use App\Model\ShoppingList;
 
 
 /**
- * Class WishListTransformer
+ * Class ShoppingListTransformer
  * @package App\Tranformers
  */
-class WishListTransformer extends Transformer
+class ShoppingListTransformer extends Transformer
 {
     public function transform(ShoppingList $list): array
     {
@@ -16,10 +16,10 @@ class WishListTransformer extends Transformer
             'id' => $list->getId(),
             'name' => $list->getName(),
             'client' => [
-                'id'   => $list->getClient()->getId(),
-                'email' => $list->getClient()->getEmail(),
+                'id'   => $list->getUser()->getId(),
+                'email' => $list->getUser()->getEmail(),
             ],
-            'products' => $this->serializeCollection($list->getWishedProducts(), new WishedProductTransformer),
+            'products' => $this->serializeCollection($list->getProducts(), new WishedProductTransformer),
         ];
     }
 }

@@ -1,15 +1,13 @@
 <?php
-namespace App\Model\Product;
+namespace App\Model;
 
-use App\Model\Product;
-use App\Model\ShoppingList;
 use App\Model\Product\State\Wished;
 use App\Model\Product\State\ProductStateBehavior;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class WishedProduct
- * @package App\Model\Product
+ * @package App\Model
  *
  * @ORM\Entity
  */
@@ -38,7 +36,7 @@ class WishedProduct
 
     /**
      * Many Products have One ShoppingList
-     * @ORM\ManyToOne(targetEntity="\App\Model\ShoppingList", inversedBy="wishedProducts")
+     * @ORM\ManyToOne(targetEntity="\App\Model\ShoppingList", inversedBy="products")
      */
     protected $shoppingList;
 

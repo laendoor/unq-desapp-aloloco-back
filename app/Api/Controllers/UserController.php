@@ -2,11 +2,14 @@
 namespace App\Api\Controllers;
 
 use Google_Client;
-use App\Repository\UserRepository;
 use Dingo\Api\Http\Request;
 use Dingo\Api\Http\Response;
-use Dingo\Blueprint\Annotation\Method\Post;
 use Dingo\Blueprint\Annotation\Resource;
+use Dingo\Blueprint\Annotation\Method\Get;
+use Dingo\Blueprint\Annotation\Method\Post;
+use App\Repository\UserRepository;
+use App\Transformers\ShoppingListTransformer;
+use App\Repository\ShoppingListRepository;
 
 /**
  * Class UserController
@@ -16,6 +19,61 @@ use Dingo\Blueprint\Annotation\Resource;
  */
 class UserController extends ApiBaseController
 {
+    /**
+     * User information
+     *
+     * @Get("/")
+     *
+     * @param int $id
+     * @param UserRepository $repo
+     * @return Response
+     */
+    public function info(int $id, UserRepository $repo): Response {
+        $id = $id == 0 ? 1 : intval($id);
+
+        $user = $repo->find($id);
+
+        return $this->response->array(['email' => $user->getEmail()]);
+    }
+
+    /**
+     * User Wish Lists
+     *
+     * @Get("/wishlists")
+     *
+     * @param int $id
+     * @param ShoppingListRepository $repo
+     * @param ShoppingListTransformer $transformer
+     * @return Response
+     */
+    public function wishLists(int $id, ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
+    {
+        $id = $id == 0 ? 1 : intval($id);
+
+        $wishlists = $repo->findByUserId($id);
+
+        return $this->response->collection(collect($wishlists), $transformer);
+    }
+
+    /**
+     * User Shopping History
+     *
+     * @Get("/history")
+     *
+     * @param int $id
+     * @param ShoppingListRepository $repo
+     * @param ShoppingListTransformer $transformer
+     * @return Response
+     */
+    public function shoppingHistory(int $id, ShoppingListRepository $repo, ShoppingListTransformer $transformer): Response
+    {
+        $id = $id == 0 ? 1 : intval($id);
+
+        $lists = $repo->findPurchasedByUserId($id);
+
+        return $this->response->collection(collect($lists), $transformer);
+    }
+
     /**
      * Auth user
      *

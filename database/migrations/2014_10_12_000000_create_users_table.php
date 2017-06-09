@@ -15,10 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('google_id')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique()->nullable();
-            $table->string('discr');
+            $table->string('google_id')->unique()->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('username')->unique()->nullable();
+            $table->string('google_id')->unique()->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +37,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admins');
         Schema::dropIfExists('users');
     }
 }

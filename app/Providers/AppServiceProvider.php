@@ -2,38 +2,33 @@
 
 namespace App\Providers;
 
-use App\Model\Admin;
 use App\Model\Box;
-use App\Model\BoxTime;
-use App\Model\Client;
-use App\Model\Market;
-use App\Model\Threshold;
 use App\Model\User;
-use App\Model\ShoppingList;
+use App\Model\Admin;
+use App\Model\Market;
+use App\Model\BoxTime;
 use App\Model\Product;
-use App\Model\Product\StockedProduct;
-use App\Repository\AdminRepository;
+use App\Model\Threshold;
+use App\Model\ShoppingList;
+use App\Model\WishedProduct;
 use App\Repository\BoxRepository;
-use App\Repository\BoxTimeRepository;
-use App\Repository\ClientRepository;
-use App\Repository\DoctrineAdminRepository;
-use App\Repository\DoctrineBoxRepository;
-use App\Repository\DoctrineBoxTimeRepository;
-use App\Repository\DoctrineClientRepository;
-use App\Repository\DoctrineMarketRepository;
-use App\Repository\DoctrineShoppingListRepository;
-use App\Repository\DoctrineThresholdRepository;
-use App\Repository\MarketRepository;
-use App\Repository\ShoppingListRepository;
-use App\Repository\ThresholdRepository;
 use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
+use App\Repository\MarketRepository;
+use App\Repository\BoxTimeRepository;
 use App\Repository\ProductRepository;
-use App\Repository\WishListRepository;
-use App\Repository\StockedProductRepository;
+use App\Repository\ThresholdRepository;
+use App\Repository\DoctrineBoxRepository;
+use App\Repository\ShoppingListRepository;
+use App\Repository\WishedProductRepository;
 use App\Repository\DoctrineUserRepository;
+use App\Repository\DoctrineAdminRepository;
+use App\Repository\DoctrineMarketRepository;
+use App\Repository\DoctrineBoxTimeRepository;
 use App\Repository\DoctrineProductRepository;
-use App\Repository\DoctrineWishListRepository;
-use App\Repository\DoctrineStockedProductRepository;
+use App\Repository\DoctrineThresholdRepository;
+use App\Repository\DoctrineShoppingListRepository;
+use App\Repository\DoctrineWishedProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -76,13 +71,6 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind(ClientRepository::class, function ($app) {
-            return new DoctrineClientRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(Client::class)
-            );
-        });
-
         $this->app->bind(UserRepository::class, function ($app) {
             return new DoctrineUserRepository(
                 $app['em'],
@@ -97,17 +85,17 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind(WishListRepository::class, function ($app) {
-            return new DoctrineWishListRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(ShoppingList::class)
-            );
-        });
-
         $this->app->bind(ProductRepository::class, function ($app) {
             return new DoctrineProductRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(Product::class)
+            );
+        });
+
+        $this->app->bind(WishedProductRepository::class, function ($app) {
+            return new DoctrineWishedProductRepository(
+                $app['em'],
+                $app['em']->getClassMetaData(WishedProduct::class)
             );
         });
 

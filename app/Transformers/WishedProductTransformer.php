@@ -1,7 +1,7 @@
 <?php
 namespace App\Transformers;
 
-use App\Model\Product\WishedProduct;
+use App\Model\WishedProduct;
 
 /**
  * Class ProductTransformer
