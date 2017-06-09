@@ -15,7 +15,7 @@ class ShoppingListTransformer extends Transformer
         return [
             'id' => $list->getId(),
             'name' => $list->getName(),
-            'client' => [
+            'user' => [
                 'id'   => $list->getUser()->getId(),
                 'email' => $list->getUser()->getEmail(),
             ],
