@@ -112,4 +112,9 @@ class Product
         return $this->getName() == $another->getName()
             && $this->getBrand() == $another->getBrand();
     }
+
+    public function __toString()
+    {
+        return self::class . "({$this->id},{$this->name},{$this->brand})";
+    }
 }

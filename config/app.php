@@ -141,7 +141,7 @@ return [
          *  Make sure that this service provider is the first item in this list.
          *  This is required for the AOP engine to work correctly.
          */
-        // Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
+         Go\Laravel\GoAopBridge\GoAopServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...
@@ -184,7 +184,7 @@ return [
          */
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        // App\Providers\AopServiceProvider::class,
+        App\Providers\AopServiceProvider::class,
 
     ],
 
