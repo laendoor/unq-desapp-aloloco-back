@@ -31,7 +31,7 @@ use App\Repository\DoctrineShoppingListRepository;
 use App\Repository\DoctrineWishedProductRepository;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
