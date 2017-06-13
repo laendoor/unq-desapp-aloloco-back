@@ -119,6 +119,26 @@ Inputs:
  - **valid_from**
  - **valid_to**
 
+#### `GET /products/categories/offers` _List Product Category Offers_
+
+```json
+{
+  "data": [
+    {
+        "id": 1,
+        "category": {
+          "id": 1,
+          "slug": "cervezas",
+          "name": "Cervezas",
+        },
+        "percentage": "25",
+        "valid_from": "2017-01-01 12:00:00",
+        "valid_to": "2017-01-31 23:59:59"
+    }
+  ]
+}
+```
+
 #### `POST|PUT /stock` _Store received csv file into stock_
 
 ### Diagrama UML
