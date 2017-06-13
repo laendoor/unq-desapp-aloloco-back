@@ -16,7 +16,7 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string")
@@ -33,18 +33,18 @@ class Product
     /**
      * @var Price
      */
-    private $price;
+    protected $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $stock;
+    protected $stock;
 
     /**
      * @ORM\Column(type="string")
      * @var string
      */
-    private $image;
+    protected $image;
 
     /**
      * One Product has Many WishedProducts
@@ -116,5 +116,12 @@ class Product
     public function __toString()
     {
         return self::class . "({$this->id},{$this->name},{$this->brand})";
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string $image) {
+        $this->image = $image;
     }
 }
