@@ -70,10 +70,8 @@ $ vendor/bin/phpunit tests/
           "brand": "Quilmes",
           "image": "http://lorempixel.com/400/400/food/?15065",
           "quantity": 10
-        },
-        "..."
-      ],
-      "..."
+        }
+      ]
     }
   ]
 }
@@ -93,8 +91,21 @@ Response is similar to `/user/{id}/wishlists` but with different lists
       "name": "Dicta iusto fuga.",
       "brand": "Dolores soluta dolor.",
       "image": "http://lorempixel.com/300/400/food/?76408"
-    },
-    "..."
+    }
+  ]
+}
+```
+
+#### `GET /products/categories` _List Product Categories_
+
+```json
+{
+  "data": [
+    {
+        "id": 1,
+        "slug": "cervezas",
+        "name": "Cervezas"
+    }
   ]
 }
 ```
