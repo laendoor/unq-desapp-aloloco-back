@@ -1,10 +1,8 @@
 <?php
 namespace Tests\Integrations;
 
-use Tests\TestCase;
-use Tests\DatabaseMigrations;
+use Tests\DatabaseTestCase;
 
-abstract class IntegrationsTestCase extends TestCase
+abstract class IntegrationsTestCase extends DatabaseTestCase
 {
-    use DatabaseMigrations;
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\Product;
+use App\Model\ProductCategory;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function(Faker $faker, array $attributes = []) {
@@ -33,5 +34,17 @@ $factory->define(WishedProduct::class, function (Faker $faker, array $attributes
     $quantity = $attributes['quantity'] ?? $faker->numberBetween(1, 10);
 
     return compact('product', 'quantity');
+});
+
+
+/*
+ * Product Category
+ */
+
+$factory->define(ProductCategory::class, function (Faker $faker, array $attributes = [])  {
+    $name = $attributes['name'] ?? $faker->name;
+    $slug = str_slug($name);
+
+    return compact('slug', 'name');
 });
 

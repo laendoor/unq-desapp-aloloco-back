@@ -41,6 +41,21 @@ $api->group($params, function(Router $api) {
     });
 
     /*
+     * Products
+     */
+    $api->group(['prefix' => 'products', 'as' => 'products'], function (Router $api) {
+        /*
+         * Categories
+         */
+        $api->group(['prefix' => 'categories', 'as' => 'categories'], function (Router $api) {
+
+            $api->get('',             ['as' => 'all',          'uses' => 'ProductCategoriesController@index']);
+            $api->post('{id}/offers', ['as' => 'offers.store', 'uses' => 'ProductCategoriesController@storeOffer']);
+
+        });
+    });
+
+    /*
      * Admin
      */
     $api->group(['prefix' => 'stock', 'as' => 'stock'], function (Router $api) {

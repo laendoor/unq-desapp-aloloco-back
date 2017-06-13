@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityRepository;
  * @package App\Repository
  */
 class DoctrineBoxRepository
-    extends EntityRepository
-    implements BoxRepository {
+    extends EntityRepository implements BoxRepository {
 
 }
