@@ -2,11 +2,11 @@
 
 namespace Tests\Api;
 
+use App\Model\Offer;
 use Carbon\Carbon;
 use App\Model\ProductCategory;
 use App\Model\Product\StockedProduct;
 use App\Repository\StockedProductRepository;
-use Dingo\Api\Exception\StoreResourceFailedException;
 
 /**
  * Class ApiProductsCategoriesTest
@@ -35,6 +35,29 @@ class ApiProductsCategoriesTest extends ApiTestCase
         $this->assertEquals(2, $categories->count());
         $this->assertContains('Gaseosas', $categories);
         $this->assertContains('Snacks', $categories);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_all_offers()
+    {
+        // Arrange
+        $soda   = entity(ProductCategory::class)->create(['name'  => 'Gaseosas']);
+        $snacks = entity(ProductCategory::class)->create(['name'  => 'Snacks']);
+
+        $offer1 = entity(Offer::class)->create(['category' => $soda]);
+        $offer2 = entity(Offer::class)->create(['category' => $snacks]);
+
+        // Act
+        $offers = $this->api->get('products/categories/offers');
+
+        // Assert
+        $this->assertEquals(2, $offers->count());
+        $this->assertContains($offer1, $offers);
+        $this->assertContains($offer2, $offers);
     }
 
     /**

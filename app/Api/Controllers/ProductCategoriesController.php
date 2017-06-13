@@ -5,6 +5,7 @@ use App\Model\Offer;
 use App\Model\Product\StockedProduct;
 use App\Repository\OfferRepository;
 use App\Repository\ProductCategoryRepository;
+use App\Transformers\OfferTransformer;
 use App\Transformers\ProductCategoryTransformer;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Http\Request;
@@ -35,6 +36,21 @@ class ProductCategoriesController extends ApiBaseController
         $categories = $repo->findAll();
 
         return $this->response->collection(collect($categories), $transformer);
+    }
+
+    /**
+     * List product category offers
+     *
+     * @Get("/offers")
+     *
+     * @param ProductCategoryRepository $repo
+     * @param ProductCategoryTransformer $transformer
+     * @return Response
+     */
+    public function offers(OfferRepository $repo, OfferTransformer $transformer): Response {
+        $offers = $repo->findAll();
+
+        return $this->response->collection(collect($offers), $transformer);
     }
 
     /**

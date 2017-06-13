@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Offer;
 use App\Model\Product;
 use App\Model\ProductCategory;
 use Faker\Generator as Faker;
@@ -46,5 +47,18 @@ $factory->define(ProductCategory::class, function (Faker $faker, array $attribut
     $slug = str_slug($name);
 
     return compact('slug', 'name');
+});
+
+/*
+ * Offer
+ */
+
+$factory->define(Offer::class, function (Faker $faker, array $attributes = [])  {
+    $category   = $attributes['category']   ?? null; // required
+    $percentage = $attributes['percentage'] ?? $faker->numberBetween(1, 100);
+    $validFrom  = $attributes['valid_from'] ?? $faker->dateTimeInInterval('-10 days', '+5 days');
+    $validTo    = $attributes['valid_to']   ?? $faker->dateTimeInInterval('+10 days', '+5 days');
+
+    return compact('category', 'percentage', 'validFrom', 'validTo');
 });
 
