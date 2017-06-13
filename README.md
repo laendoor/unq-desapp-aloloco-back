@@ -110,6 +110,15 @@ Response is similar to `/user/{id}/wishlists` but with different lists
 }
 ```
 
+#### `POST /products/categories/offers` _Store a new Offer_
+
+Inputs:
+
+ - **category_id**
+ - **percentage**
+ - **valid_from**
+ - **valid_to**
+
 #### `POST|PUT /stock` _Store received csv file into stock_
 
 ### Diagrama UML
