@@ -33,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'WishedProduct',
             'ProductCategory',
             'Market',
+            'Offer',
             'Threshold',
         ];
 

@@ -49,8 +49,8 @@ $api->group($params, function(Router $api) {
          */
         $api->group(['prefix' => 'categories', 'as' => 'categories'], function (Router $api) {
 
-            $api->get('',             ['as' => 'all',          'uses' => 'ProductCategoriesController@index']);
-            $api->post('{id}/offers', ['as' => 'offers.store', 'uses' => 'ProductCategoriesController@storeOffer']);
+            $api->get('',        ['as' => 'all',          'uses' => 'ProductCategoriesController@index']);
+            $api->post('offers', ['as' => 'offers.store', 'uses' => 'ProductCategoriesController@storeOffer']);
 
         });
     });

@@ -1,12 +1,18 @@
 <?php
 namespace App\Api\Controllers;
 
+use App\Model\Offer;
 use App\Model\Product\StockedProduct;
+use App\Repository\OfferRepository;
 use App\Repository\ProductCategoryRepository;
 use App\Transformers\ProductCategoryTransformer;
+use Dingo\Api\Exception\StoreResourceFailedException;
+use Dingo\Api\Http\Request;
 use Dingo\Api\Http\Response;
+use Dingo\Blueprint\Annotation\Method\Post;
 use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class ProductCategoriesController
@@ -29,6 +35,46 @@ class ProductCategoriesController extends ApiBaseController
         $categories = $repo->findAll();
 
         return $this->response->collection(collect($categories), $transformer);
+    }
+
+    /**
+     * Store product category offer
+     *
+     * @Post("/{id}/offers")
+     *
+     * @param Request $request
+     * @param OfferRepository $repoOffer
+     * @param ProductCategoryRepository $repoCat
+     * @return Response
+     */
+    public function storeOffer(Request $request, OfferRepository $repoOffer,
+                               ProductCategoryRepository $repoCat): Response {
+
+        $validator = Validator::make($request->all(), [
+            'category_id' => 'required|exists:product_categories,id',
+            'percentage'  => 'required|integer|min:1|max:100',
+            'valid_from'  => 'required|date',
+            'valid_to'    => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            throw new StoreResourceFailedException(
+                trans('repo.store.error', ['resource' => trans('repo.resources.offer')]),
+                $validator->errors()
+            );
+        }
+
+        $category_id = $request->input('category_id');
+        $percentage  = $request->input('percentage');
+        $validFrom   = $request->input('valid_from');
+        $validTo     = $request->input('valid_to');
+
+        $category = $repoCat->find($category_id);
+        $offer    = new Offer($category, $percentage, $validFrom, $validTo);
+
+        $repoOffer->save($offer);
+
+        return $this->response->created($offer);
     }
 
 }
