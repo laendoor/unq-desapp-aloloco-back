@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use Carbon\Carbon;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,12 +44,12 @@ class Offer
      */
     private $validTo;
 
-    public function __construct(ProductCategory $category, int $percentage, DateTime $validFrom, DateTime $validTo)
+    public function __construct(ProductCategory $category, int $percentage, $validFrom, $validTo)
     {
         $this->category = $category;
         $this->percentage = $percentage;
-        $this->validFrom = $validFrom;
-        $this->validTo = $validTo;
+        $this->validFrom = Carbon::parse($validFrom);
+        $this->validTo = Carbon::parse($validTo);
     }
 
     public function __toString()

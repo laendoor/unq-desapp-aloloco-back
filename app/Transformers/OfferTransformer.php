@@ -2,7 +2,6 @@
 namespace App\Transformers;
 
 use App\Model\Offer;
-use League\Fractal\Resource\Item;
 
 /**
  * Class ProductCategoryTransformer
@@ -13,7 +12,7 @@ class OfferTransformer extends Transformer
     public function transform(Offer $offer): array {
         return [
             'id'       => $offer->getId(),
-            'category' => new Item($offer->getCategory(), new ProductCategoryTransformer),
+            'category' => $this->item($offer->getCategory(), new ProductCategoryTransformer),
             'percentage' => $offer->getPercentage(),
             'valid_from' => $offer->getValidFrom(),
             'valid_to'   => $offer->getValidTo(),

@@ -43,8 +43,8 @@ class ProductCategoriesController extends ApiBaseController
      *
      * @Get("/offers")
      *
-     * @param ProductCategoryRepository $repo
-     * @param ProductCategoryTransformer $transformer
+     * @param OfferRepository $repo
+     * @param OfferTransformer $transformer
      * @return Response
      */
     public function offers(OfferRepository $repo, OfferTransformer $transformer): Response {

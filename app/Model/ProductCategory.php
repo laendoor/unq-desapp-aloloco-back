@@ -51,4 +51,9 @@ class ProductCategory
     {
         return $this->slug;
     }
+
+    public function __toString()
+    {
+        return self::class . "({$this->id},{$this->slug})";
+    }
 }
