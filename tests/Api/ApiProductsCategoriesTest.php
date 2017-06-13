@@ -3,6 +3,7 @@
 namespace Tests\Api;
 
 use App\Model\Product\StockedProduct;
+use App\Model\ProductCategory;
 use App\Repository\StockedProductRepository;
 use App\Model\Product;
 
@@ -19,27 +20,19 @@ class ApiProductsCategoriesTest extends ApiTestCase
      */
     public function it_get_all_products()
     {
-        $this->assertTrue(true);
-//        $categories = $this->api->get('products/categories');
-//
-//        dump($categories);
-//        // Arrange
-//        entity(Product::class)->create([
-//            'name'  => 'Papas Fritas',
-//            'brand' => 'Lays',
-//            'image' => 'lays.jpg',
-//            'stock' => 10,
-//        ]);
-//
-//        // Act
-//        $response = $this->get(apiRoute('stock.get'));
-//
-//        // Assert
-//        $response->assertJsonFragment([
-//            'name'  => 'Papas Fritas',
-//            'brand' => 'Lays',
-//            'image' => 'lays.jpg',
-//            'stock' => 10
-//        ]);
+        // Arrange
+        $soda   = entity(ProductCategory::class)->create(['name'  => 'Gaseosas']);
+        $snacks = entity(ProductCategory::class)->create(['name'  => 'Snacks']);
+
+        // Act
+        $categories = $this->api->get('products/categories');
+        $categories = $categories->map(function ($category) {
+            return $category->getName();
+        });
+
+        // Assert
+        $this->assertEquals(2, $categories->count());
+        $this->assertContains('Gaseosas', $categories);
+        $this->assertContains('Snacks', $categories);
     }
 }

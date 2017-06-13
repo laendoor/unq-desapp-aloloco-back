@@ -1,17 +1,12 @@
 <?php
 namespace App\Api\Controllers;
 
-use Dingo\Api\Http\Request;
-use Dingo\Api\Http\Response;
-use App\Model\Product;
-use App\Model\Product\Price;
 use App\Model\Product\StockedProduct;
-use App\Repository\ProductRepository;
-use App\Transformers\StockTransformer;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Repository\ProductCategoryRepository;
+use App\Transformers\ProductCategoryTransformer;
+use Dingo\Api\Http\Response;
 use Dingo\Blueprint\Annotation\Resource;
 use Dingo\Blueprint\Annotation\Method\Get;
-use Dingo\Blueprint\Annotation\Method\Put;
 
 /**
  * Class ProductCategoriesController
@@ -26,14 +21,14 @@ class ProductCategoriesController extends ApiBaseController
      *
      * @Get("/")
      *
-     * @param ProductRepository $repoProduct
-     * @param StockTransformer $transformer
+     * @param ProductCategoryRepository $repo
+     * @param ProductCategoryTransformer $transformer
      * @return Response
      */
-    public function get(ProductRepository $repoProduct, StockTransformer $transformer): Response {
-        $products = $repoProduct->findAll();
+    public function index(ProductCategoryRepository $repo, ProductCategoryTransformer $transformer): Response {
+        $categories = $repo->findAll();
 
-        return $this->response->collection(collect($products), $transformer);
+        return $this->response->collection(collect($categories), $transformer);
     }
 
 }
