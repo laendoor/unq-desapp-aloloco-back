@@ -4,7 +4,7 @@ namespace Tests;
 
 use Artisan;
 
-trait DatabaseMigrations
+abstract class DatabaseTestCase extends TestCase
 {
     protected function setUp()
     {

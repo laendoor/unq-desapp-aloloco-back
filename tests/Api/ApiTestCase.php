@@ -2,10 +2,17 @@
 
 namespace Tests\Api;
 
-use Tests\TestCase;
-use Tests\DatabaseMigrations;
+use Dingo\Api\Dispatcher;
+use Tests\DatabaseTestCase;
 
-abstract class ApiTestCase extends TestCase
+abstract class ApiTestCase extends DatabaseTestCase
 {
-    use DatabaseMigrations;
+    protected $api;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->api = app(Dispatcher::class);
+    }
 }
