@@ -19,7 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('brand');
             $table->string('image');
             $table->integer('stock');
+            $table->integer('price_id');
             $table->timestamps();
+
+            $table->foreign('price_id')->references('id')->on('prices');
         });
 
         Schema::create('wished_products', function (Blueprint $table) {

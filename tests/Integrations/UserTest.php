@@ -78,6 +78,7 @@ class UserTest extends IntegrationsTestCase
             ->withBrand('La Serenísima')
             ->withImage('milk.jpg')
             ->withQuantity(2)
+            ->withPrice(20,66)
             ->buildWished();
         $list = ShoppingListBuilder::new()->withName('Kingdoms to Conquer')->build();
         $list->addProduct($milk);

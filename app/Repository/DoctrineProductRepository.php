@@ -25,4 +25,12 @@ class DoctrineProductRepository
         $this->_em->persist($product);
         $this->_em->flush();
     }
+
+    public function trySaveWithErrors(Product $product)
+    {
+        $product->setStock(null);
+
+        $this->_em->persist($product);
+        $this->_em->flush();
+    }
 }

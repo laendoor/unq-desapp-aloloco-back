@@ -1,10 +1,8 @@
 <?php
 
 use App\Model\User;
-use App\Model\Product\Price;
 use App\Model\WishedProduct;
 use App\Model\ShoppingList;
-use App\Repository\DoctrineProductRepository;
 use App\Repository\ProductRepository;
 use Illuminate\Database\Seeder;
 use LaravelDoctrine\ORM\Facades\EntityManager;

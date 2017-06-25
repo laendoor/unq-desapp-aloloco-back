@@ -5,7 +5,7 @@ namespace Tests\Builders;
 use Mockery;
 use App\Model\Product;
 use App\Model\WishedProduct;
-use App\Model\Product\Price;
+use App\Model\Price;
 use App\Model\Product\StockedProduct;
 
 class ProductBuilder
@@ -73,6 +73,13 @@ class ProductBuilder
     public function withQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function withPrice(float $value, int $digits): self
+    {
+        $this->price = new Price($value, $digits);
 
         return $this;
     }

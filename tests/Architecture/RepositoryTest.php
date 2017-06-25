@@ -2,9 +2,8 @@
 
 namespace Tests\Repository;
 
-use App\Repository\ClientRepository;
-use App\Repository\UserRepository;
 use Tests\TestCase;
+use App\Repository\ClientRepository;
 
 /**
  * Class RepositoryTest

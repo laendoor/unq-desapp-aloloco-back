@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Model\Product\Price;
+use App\Model\Price;
 use Tests\TestCase;
 
 /**

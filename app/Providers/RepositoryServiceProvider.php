@@ -23,26 +23,27 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $map = [
+        $repos = collect([
             'Admin',
             'Box',
             'BoxTime',
             'User',
             'ShoppingList',
+            'Price',
             'Product',
             'WishedProduct',
             'ProductCategory',
             'Market',
             'Offer',
             'Threshold',
-        ];
+        ]);
 
-        collect($map)->each(function ($elem) {
-            $this->app->bind('App\\Repository\\'.$elem.'Repository', function ($app) use ($elem) {
-                $concrete = 'App\\Repository\\Doctrine'.$elem.'Repository';
-                return new $concrete(
+        $repos->each(function ($model) {
+            $this->app->bind('App\\Repository\\'.$model.'Repository', function ($app) use ($model) {
+                $repository = 'App\\Repository\\Doctrine'.$model.'Repository';
+                return new $repository(
                     $app['em'],
-                    $app['em']->getClassMetaData('App\\Model\\'.$elem)
+                    $app['em']->getClassMetaData('App\\Model\\'.$model)
                 );
             });
         });

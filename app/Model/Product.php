@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
 
-use App\Model\Product\Price;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -29,12 +28,6 @@ class Product
      * @var string
      */
     protected $brand;
-
-    /**
-     * @var Price
-     */
-    protected $price;
-
     /**
      * @ORM\Column(type="integer")
      */
@@ -45,7 +38,12 @@ class Product
      * @var string
      */
     protected $image;
-
+    /**
+     * @var Price
+     * Many Products have One Price
+     * @ORM\ManyToOne(targetEntity="\App\Model\Price", inversedBy="products", cascade={"persist"})
+     */
+    protected $price;
     /**
      * One Product has Many WishedProducts
      * @var Collection|WishedProduct[]
@@ -53,8 +51,8 @@ class Product
      */
     protected $wishedProducts;
 
-    public function __construct(string $name, string $brand,
-                                Price $price, int $stock, string $image = '')
+    public function __construct(string $name = '', string $brand = '',
+                                Price $price = null, int $stock = 0, string $image = '')
     {
         $this->name = $name;
         $this->brand = $brand;
@@ -98,7 +96,7 @@ class Product
     /**
      * @param int $stock
      */
-    public function setStock(int $stock)
+    public function setStock($stock)
     {
         $this->stock = $stock;
     }
@@ -123,5 +121,21 @@ class Product
      */
     public function setImage(string $image) {
         $this->image = $image;
+    }
+
+    /**
+     * @param string $brand
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @param Price $price
+     */
+    public function setPrice(Price $price)
+    {
+        $this->price = $price;
     }
 }

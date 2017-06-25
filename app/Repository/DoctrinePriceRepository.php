@@ -4,10 +4,10 @@ namespace App\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class DoctrineProductCategoryRepository
+ * Class DoctrinePriceRepository
  * @package App\Repository
  */
-class DoctrineProductCategoryRepository
+class DoctrinePriceRepository
     extends EntityRepository
-    implements ProductCategoryRepository {
+    implements PriceRepository {
 }
