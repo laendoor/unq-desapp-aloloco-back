@@ -117,3 +117,39 @@ se persiste y falta mejorar la UX.
  
  - Se logró configurar correctamente el servidor en Heroku, permitiendo la correcta comunicación entre
    el frontend y el backend.
+   
+## Tag Entrega-3
+
+### Checklist de la entrega
+
+#### Core
+
+ - [ ] Formatters de fecha, $ (moneda) y # (números) según LOCALE
+ - [x] Implementar una grilla con paginación Client Side
+ - [x] Adaptar la aplicación Responsive web design
+ - [x] Crear un test de arquitectura.
+ - [x] Auditoría de servicios. Loguear <timestamp, user, método, parámetros> de los servicios.
+ - [ ] Autenticar la aplicación con Google
+ - [x] TAG en GitHub
+ - [x] Confeccionar Release Notes de entrega 3
+
+#### Funcionalidad
+
+ - [x] Crear Ofertas por categorias de productos
+ - [x] Agregar envío a domicilio | Mostrar dirección en gmaps
+ - [ ] Notificación desde caja avisando que puede pasar a facturar el pedido
+ - [x] Ver historial de compras
+ 
+### Releases notes de la entrega
+
+ - Se generó un test de arquitectura que verifica que cada _Model_ tenga su respectivo _Repository_.
+ - Se programó un un _Aspect_ que Loguea servicios. Si bien por el momento el Logging se hace
+   sobre los servicios de _Repository_, gracias a las _annotations_ de los aspectos, es posible
+   agregar cualquier otro _Service_ con muy bajo costo.
+ - En varias secciones de productos se estableció paginación desde el lado del Cliente.
+ - Se contaba con una autenticación vía Google pero se deshabilitó temporalmente para mejorar
+   la interacción.
+ - Es posible crear ofertas según categoría con los datos:
+   <Categoría, Porcentaje de Descuento, Fecha inicio de oferta, Fecha fin de oferta>
+ - Es posible ver el el Mapa la dirección del cliente una vez realizada la compra
+ - Es posible ver el historial de las listas compradas por el cliente
