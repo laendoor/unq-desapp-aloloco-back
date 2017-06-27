@@ -138,4 +138,11 @@ class Product
     {
         $this->price = $price;
     }
+
+    /**
+     * @return Price
+     */
+    public function getPrice(): Price {
+        return $this->price;
+    }
 }

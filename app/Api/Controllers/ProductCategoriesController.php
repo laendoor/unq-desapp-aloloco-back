@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
  * Class ProductCategoriesController
  * @package App\Api\Controllers
  *
- * @Resource("Product Categories", uri="/product/categories")
+ * @Resource("Product Categories", uri="/products/categories")
  */
 class ProductCategoriesController extends ApiBaseController
 {

@@ -17,6 +17,7 @@ class StockTransformer extends Transformer
             'brand' => $product->getBrand(),
             'stock' => $product->getStock(),
             'image' => $product->getImage(),
+            'price' => $product->getPrice()->getValue(),
         ];
     }
 }
