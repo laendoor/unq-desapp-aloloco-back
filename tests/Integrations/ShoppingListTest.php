@@ -4,15 +4,9 @@ namespace Tests\Integrations;
 use App\Model\User;
 use App\Model\ShoppingList;
 use App\Repository\ShoppingListRepository;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class ShoppingListTest extends IntegrationsTestCase
 {
-    /**
-     * @var ObjectRepository
-     */
-    private $repo;
-
     protected function setUp()
     {
         parent::setUp();
@@ -26,7 +20,7 @@ class ShoppingListTest extends IntegrationsTestCase
      *
      * @return void
      */
-    public function it_has_no_wish_products_when_is_created()
+    public function it_stores_and_retrieves()
     {
         // Arrange
         $jon = entity(User::class)->create([
