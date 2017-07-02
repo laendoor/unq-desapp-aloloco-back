@@ -27,6 +27,12 @@ class ProductCategory
      * @var string
      */
     protected $slug;
+    /**
+     * One Category has Many Offers
+     * @var Collection|Offers[]
+     * @ORM\OneToMany(targetEntity="\App\Model\Offer", mappedBy="category", cascade={"persist"})
+     */
+    protected $offers;
 
     /**
      * @return mixed
