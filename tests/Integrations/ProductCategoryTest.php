@@ -1,11 +1,8 @@
 <?php
 namespace Tests\Integrations;
 
-use App\Repository\ProductCategoryRepository;
-use Carbon\Carbon;
-use App\Model\Offer;
 use App\Model\ProductCategory;
-use App\Repository\OfferRepository;
+use App\Repository\ProductCategoryRepository;
 
 class ProductCategoryTest extends IntegrationsTestCase
 {
