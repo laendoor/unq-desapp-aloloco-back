@@ -170,4 +170,9 @@ class ShoppingList
     public function equals(ShoppingList $another): bool {
         return $this->getName() == $another->getName();
     }
+
+    public function __toString()
+    {
+        return self::class . "({$this->id},{$this->name})";
+    }
 }

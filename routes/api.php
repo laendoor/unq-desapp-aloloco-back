@@ -44,6 +44,9 @@ $api->group($params, function(Router $api) {
      * Products
      */
     $api->group(['prefix' => 'products', 'as' => 'products'], function (Router $api) {
+
+        $api->get('{id}/related', ['as' => 'related', 'uses' => 'ProductsController@related']);
+
         /*
          * Categories
          */

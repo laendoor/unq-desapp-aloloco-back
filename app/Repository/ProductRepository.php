@@ -11,5 +11,6 @@ interface ProductRepository
 {
     public function find($id);
     public function findByNameAndBrand(string $name, string $brand);
+    public function findRelatedTo(int $id);
     public function save(Product $product);
 }

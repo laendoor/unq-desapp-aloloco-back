@@ -32,7 +32,7 @@ class Price
      * @var Collection|Products[]
      * @ORM\OneToMany(targetEntity="\App\Model\Product", mappedBy="price", cascade={"persist"})
      */
-    protected $wishedProducts;
+    protected $products;
 
     public function __construct(float $value, int $digits = 2) {
         $this->value  = floatval($value);

@@ -2,10 +2,14 @@
 
 namespace Tests\Api;
 
+use App\Model\User;
+use App\Model\Product;
+use App\Model\ShoppingList;
+use App\Model\WishedProduct;
 use App\Model\Product\StockedProduct;
+use App\Repository\ShoppingListRepository;
 use App\Repository\StockedProductRepository;
 use Illuminate\Http\UploadedFile;
-use App\Model\Product;
 
 /**
  * Class ApiStockTest
@@ -65,5 +69,46 @@ class ApiStockTest extends ApiTestCase
             'name' => 'Bizcochos',
             'brand' => 'Don Satur',
         ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function it_get_products_related_of_some_product()
+    {
+        // Arrange
+        $sword = entity(Product::class)->create(['name' => 'Espada']);
+        $fire  = entity(Product::class)->create(['name' => 'Fuego']);
+        $ice   = entity(Product::class)->create(['name' => 'Hielo']);
+
+        $jon  = entity(User::class)->create(['username' => 'jon.snow']);
+        $dany = entity(User::class)->create(['username' => 'daenerys']);
+
+        $jonList  = entity(ShoppingList::class, 'wish-list')->make(['user' => $jon]);
+        $danyList = entity(ShoppingList::class, 'wish-list')->make(['user' => $dany]);
+
+        $this->addTo($danyList,  $ice, 1);
+        $this->addTo($danyList, $fire, 1);
+        $this->addTo($jonList, $sword, 1);
+
+        // Act
+        $related = $this->api->get("products/{$ice->getId()}/related");
+
+        // Assert
+        $this->assertEquals(1, $related->count());
+        $this->assertEquals($fire->getName(), $related->first()->getName());
+    }
+
+    /*
+     * Internals
+     */
+
+    protected function addTo(ShoppingList $list, Product $product, $quantity)
+    {
+        $repo = resolve(ShoppingListRepository::class);
+        $list->addProduct(new WishedProduct($product, $quantity));
+        $repo->save($list);
     }
 }
