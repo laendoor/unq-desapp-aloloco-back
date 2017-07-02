@@ -16,7 +16,11 @@ class ProductTest extends IntegrationsTestCase
     {
         // Arrange
         $price = new Price(44, 50);
-        $lays_fries = new Product('Papas Fritas', 'Lays', $price, 10, 'lays.jpg');
+        $lays_fries = new Product('Papas Fritas');
+        $lays_fries->setBrand('Lays');
+        $lays_fries->setPrice($price);
+        $lays_fries->setStock(10);
+        $lays_fries->setImage('lays.jpg');
         $products_repository = EntityManager::getRepository(Product::class);
 
         // Act
@@ -28,6 +32,8 @@ class ProductTest extends IntegrationsTestCase
         $this->assertEquals(1, $database_products[0]->getId());
         $this->assertEquals('Lays', $database_products[0]->getBrand());
         $this->assertEquals('Papas Fritas', $database_products[0]->getName());
+        $this->assertEquals($price, $database_products[0]->getPrice());
+        $this->assertEquals(Product::class . "(1,Papas Fritas,Lays)", $database_products[0]->__toString());
     }
 
     /**
