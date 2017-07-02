@@ -77,6 +77,26 @@ $ vendor/bin/phpunit tests/
 }
 ```
 
+#### `GET /user/{id}/shopping-list/{listId}/box` _Get Box number or Waiting Time_
+
+```json
+{
+    "status": "wait",
+    "message": "Tiempo de espera: 22 minutos",
+    "time": 22
+}
+```
+
+or
+
+```json
+{
+    "status": "ok",
+    "message": "Pase por caja 5",
+    "time": 2
+}
+```
+
 #### `GET /user/{id}/history` _Show user shopping history_
 
 Response is similar to `/user/{id}/wishlists` but with different lists
