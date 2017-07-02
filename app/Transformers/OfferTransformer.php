@@ -14,8 +14,8 @@ class OfferTransformer extends Transformer
             'id'       => $offer->getId(),
             'category' => $this->item($offer->getCategory(), new ProductCategoryTransformer),
             'percentage' => $offer->getPercentage(),
-            'valid_from' => $offer->getValidFrom(),
-            'valid_to'   => $offer->getValidTo(),
+            'valid_from' => $offer->getValidFrom()->format('Y-m-d'),
+            'valid_to'   => $offer->getValidTo()->format('Y-m-d'),
         ];
     }
 }
