@@ -37,6 +37,7 @@ $api->group($params, function(Router $api) {
         $api->get('{id}',           ['as' => 'info',      'uses' => 'UserController@info']);
         $api->get('{id}/wishlists', ['as' => 'wishlists', 'uses' => 'UserController@wishLists']);
         $api->get('{id}/history',   ['as' => 'history',   'uses' => 'UserController@shoppingHistory']);
+        $api->get('{id}/shopping-list/{listId}/box', ['as' => 'get-box', 'uses' => 'UserController@getBox']);
 
     });
 

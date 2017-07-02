@@ -23,7 +23,7 @@ class UserController extends ApiBaseController
     /**
      * User information
      *
-     * @Get("/")
+     * @Get("/{id}")
      *
      * @param int $id
      * @param UserRepository $repo
@@ -41,7 +41,7 @@ class UserController extends ApiBaseController
     /**
      * User Wish Lists
      *
-     * @Get("/wishlists")
+     * @Get("/{id}/wishlists")
      *
      * @param int $id
      * @param ShoppingListRepository $repo
@@ -60,7 +60,7 @@ class UserController extends ApiBaseController
     /**
      * User Shopping History
      *
-     * @Get("/history")
+     * @Get("/{id}/history")
      *
      * @param int $id
      * @param ShoppingListRepository $repo
@@ -77,9 +77,34 @@ class UserController extends ApiBaseController
     }
 
     /**
+     * Get Box or Time Waiting
+     *
+     * @Get("/{id}/shopping-list/{listId}/box")
+     *
+     * @param int $id
+     * @param int $listId
+     * @return Response
+     */
+    public function getBox(int $id, int $listId): Response
+    {
+        $time = rand(0, 30);
+
+        if ($time > 5) {
+            $status = 'wait';
+            $message = "Tiempo de espera: {$time} minutos";
+        } else {
+            $box = rand(1, 10);
+            $status = 'ok';
+            $message = "Pase por caja {$box}";
+        }
+
+        return $this->response->array(compact('status', 'message', 'time'));
+    }
+
+    /**
      * Auth user
      *
-     * @Post("/AUTH")
+     * @Post("/auth")
      *
      * @param Request $request
      * @param UserRepository $repo
