@@ -65,7 +65,6 @@ class ProductCategoriesController extends ApiBaseController
      */
     public function storeOffer(Request $request, OfferRepository $repoOffer,
                                ProductCategoryRepository $repoCat): Response {
-
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:product_categories,id',
             'percentage'  => 'required|integer|min:1|max:100',
@@ -90,7 +89,7 @@ class ProductCategoriesController extends ApiBaseController
 
         $repoOffer->save($offer);
 
-        return $this->response->created($offer);
+        return $this->response->accepted();
     }
 
 }
