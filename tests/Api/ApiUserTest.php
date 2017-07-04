@@ -2,6 +2,7 @@
 
 namespace Tests\Api;
 
+use App\Model\Product;
 use App\Model\User;
 use App\Model\ShoppingList;
 
@@ -71,6 +72,35 @@ class ApiUserTest extends ApiTestCase
         // Assert
         $response->assertJsonFragment(['email' => 'nobody@nowhere']);
         $response->assertJsonFragment(['name'  => 'Offers to Many-Faced God']);
+    }
+    
+    /**
+     * @test
+     * 
+     * @return void
+     */
+    public function it_ask_for_box_and_can_get_box_or_waiting_time(): void {
+        // Arrange
+        $arya = entity(User::class)->create(['email' => 'nobody@nowhere']);
+        $list = entity(ShoppingList::class, 'wish-list')->create([
+            'user' => $arya,
+            'name' => 'Offers to Many-Faced God'
+        ]);
+        $sword = entity(Product::class)->create(['name' => 'Espada']);
+        $wine  = entity(Product::class)->create(['name' => 'Vino']);
+        $this->addProductToList($list, $sword, 2);
+        $this->addProductToList($list, $wine, 10);
+
+        // Act
+        $box = $this->api->get("user/{$arya->getId()}/shopping-list/{$list->getId()}/box");
+
+        // Assert
+        if ($box['status']== 'ok') {
+            $this->assertRegExp('/Pase por caja \d+/', $box['message']);
+        }
+        if ($box['status']== 'wait') {
+            $this->assertRegExp('/Tiempo de espera: \d+ minutos/', $box['message']);
+        }
     }
 
     /**

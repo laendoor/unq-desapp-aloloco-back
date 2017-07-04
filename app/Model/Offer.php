@@ -23,7 +23,7 @@ class Offer
 
     /**
      * Many Offers have One ProductCategory
-     * @ORM\ManyToOne(targetEntity="\App\Model\ProductCategory", inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity="\App\Model\ProductCategory", inversedBy="offers", fetch="EAGER")
      * @var ProductCategory
      */
     protected $category;

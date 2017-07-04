@@ -60,8 +60,8 @@ $factory->define(ProductCategory::class, function (Faker $faker, array $attribut
 $factory->define(Offer::class, function (Faker $faker, array $attributes = [])  {
     $category   = $attributes['category']   ?? null; // required
     $percentage = $attributes['percentage'] ?? $faker->numberBetween(1, 100);
-    $validFrom  = $attributes['valid_from'] ?? $faker->dateTimeInInterval('-10 days', '+5 days');
-    $validTo    = $attributes['valid_to']   ?? $faker->dateTimeInInterval('+10 days', '+5 days');
+    $validFrom  = $attributes['valid_from'] ?? $faker->dateTimeInInterval('-20 days', '+10 days');
+    $validTo    = $attributes['valid_to']   ?? $faker->dateTimeInInterval('+20 days', '+10 days');
 
     return compact('category', 'percentage', 'validFrom', 'validTo');
 });

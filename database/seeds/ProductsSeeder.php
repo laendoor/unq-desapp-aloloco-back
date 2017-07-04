@@ -1,6 +1,8 @@
 <?php
 
+use App\Model\Offer;
 use App\Model\Product;
+use App\Model\ProductCategory;
 use Illuminate\Database\Seeder;
 
 class ProductsSeeder extends Seeder
@@ -12,78 +14,61 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
-        // Custom
-        entity(Product::class)->create([
-            'name'  => 'Papas Fritas',
-            'brand' => 'Lays',
-            'stock' => 10,
-        ]);
+        $fries       = $this->createCategory('Papas Fritas');
+        $oil         = $this->createCategory('Aceite');
+        $washingSoap = $this->createCategory('Jabón en Polvo');
+        $bean        = $this->createCategory('Porotos');
+        $beer        = $this->createCategory('Cerveza');
+        $cakeTop     = $this->createCategory('Tapa de Tarta');
+        $sugar       = $this->createCategory('Azúcar');
+        $deodorant   = $this->createCategory('Desodorante');
+        $cotton      = $this->createCategory('Algodón');
+        $soap        = $this->createCategory('Jabón');
+        $milk        = $this->createCategory('Leche');
+        $wine        = $this->createCategory('Vino Tinto');
 
-        entity(Product::class)->create([
-            'name'  => 'Aceite',
-            'brand' => 'Natura',
-            'stock' => 10,
-        ]);
+        $this->createProduct($fries,       'Lays',       10);
+        $this->createProduct($oil,         'Natura',     10);
+        $this->createProduct($washingSoap, 'Zorro',       2);
+        $this->createProduct($bean,        'Arcor',       1);
+        $this->createProduct($beer,        'Quilmes',    50);
+        $this->createProduct($cakeTop,     'La Salteña', 12);
+        $this->createProduct($sugar,       'Chango',     14);
+        $this->createProduct($deodorant,   'Rexona',      3);
+        $this->createProduct($cotton,      'Estrella',   14);
+        $this->createProduct($soap,        'Suave',       1);
+        $this->createProduct($milk,        'Sancor',     50);
+        $this->createProduct($wine,        'Uvita',      55);
 
-        entity(Product::class)->create([
-            'name'  => 'Jabón en Polvo',
-            'brand' => 'Zorro',
-            'stock' => 2,
-        ]);
+        $this->createOffer($fries, 10);
+        $this->createOffer($bean,   5);
+        $this->createOffer($beer,  25);
+        $this->createOffer($sugar, 30);
+        $this->createOffer($milk,  10);
+        $this->createOffer($wine,  50);
+    }
 
-        entity(Product::class)->create([
-            'name'  => 'Porotos',
-            'brand' => 'Arcor',
-            'stock' => 1,
+    protected function createProduct($category, $brand, $stock)
+    {
+        return entity(Product::class)->create([
+            'name'  => $category->getName(),
+            'brand' => $brand,
+            'stock' => $stock,
         ]);
+    }
 
-        entity(Product::class)->create([
-            'name'  => 'Cerveza',
-            'brand' => 'Quilmes',
-            'stock' => 50,
+    protected function createCategory($name)
+    {
+        return entity(ProductCategory::class)->create([
+            'name' => $name
         ]);
+    }
 
-        entity(Product::class)->create([
-            'name'  => 'Tapa de Tarta',
-            'brand' => 'La Salteña',
-            'stock' => 12,
+    protected function createOffer($category, $percentage)
+    {
+        return entity(Offer::class)->create([
+            'category'   => $category,
+            'percentage' => $percentage
         ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Azúcar',
-            'brand' => 'Chango',
-            'stock' => 14,
-        ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Desodorante',
-            'brand' => 'Rexona',
-            'stock' => 3,
-        ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Algodón',
-            'brand' => 'Estrella',
-            'stock' => 14,
-        ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Jabón',
-            'brand' => 'Suave',
-            'stock' => 1,
-        ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Leche',
-            'brand' => 'Sancor',
-            'stock' => 50,
-        ]);
-
-        entity(Product::class)->create([
-            'name'  => 'Vino Tinto',
-            'brand' => 'Uvita',
-            'stock' => 55,
-        ]);
-
     }
 }

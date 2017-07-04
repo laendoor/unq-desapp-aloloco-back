@@ -2,19 +2,13 @@
 namespace Tests\Integrations;
 
 use App\Model\User;
+use Tests\Builders\UserBuilder;
 use Tests\Builders\ProductBuilder;
 use Tests\Builders\ShoppingListBuilder;
-use Tests\Builders\UserBuilder;
 use LaravelDoctrine\ORM\Facades\EntityManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class UserTest extends IntegrationsTestCase
 {
-    /**
-     * @var ObjectRepository
-     */
-    private $repo;
-
     protected function setUp()
     {
         parent::setUp();

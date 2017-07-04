@@ -5,9 +5,7 @@ namespace Tests\Api;
 use App\Model\User;
 use App\Model\Product;
 use App\Model\ShoppingList;
-use App\Model\WishedProduct;
 use App\Model\Product\StockedProduct;
-use App\Repository\ShoppingListRepository;
 use App\Repository\StockedProductRepository;
 use Illuminate\Http\UploadedFile;
 
@@ -89,9 +87,9 @@ class ApiStockTest extends ApiTestCase
         $jonList  = entity(ShoppingList::class, 'wish-list')->make(['user' => $jon]);
         $danyList = entity(ShoppingList::class, 'wish-list')->make(['user' => $dany]);
 
-        $this->addTo($danyList,  $ice, 1);
-        $this->addTo($danyList, $fire, 1);
-        $this->addTo($jonList, $sword, 1);
+        $this->addProductToList($danyList,  $ice, 1);
+        $this->addProductToList($danyList, $fire, 1);
+        $this->addProductToList($jonList, $sword, 1);
 
         // Act
         $related = $this->api->get("products/{$ice->getId()}/related");
@@ -99,16 +97,5 @@ class ApiStockTest extends ApiTestCase
         // Assert
         $this->assertEquals(1, $related->count());
         $this->assertEquals($fire->getName(), $related->first()->getName());
-    }
-
-    /*
-     * Internals
-     */
-
-    protected function addTo(ShoppingList $list, Product $product, $quantity)
-    {
-        $repo = resolve(ShoppingListRepository::class);
-        $list->addProduct(new WishedProduct($product, $quantity));
-        $repo->save($list);
     }
 }
